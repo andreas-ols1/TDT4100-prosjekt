@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch PokemonShowdownApp",
+            "request": "launch",
+            "mainClass": "TDT4100_project/PokemonShowdown.PokemonShowdownApp",
+            "projectName": "tdt4100_v2022_prosjekt_boilerplate"
+        },
+        {
+            "type": "java",
+            "name": "Launch PokemonShowdownApp",
+            "request": "launch",
+            "mainClass": "TDT4100_project/PokemonShowdown.PokemonShowdownApp",
+            "projectName": "TDT4100-prosjekt_95123b25"
+        },
+        {
+            "type": "java",
+            "name": "Launch PokemonShowdownApp",
+            "request": "launch",
+            "mainClass": "PokemonShowdown.PokemonShowdownApp",
+            "projectName": "TDT4100-prosjekt_95123b25"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
