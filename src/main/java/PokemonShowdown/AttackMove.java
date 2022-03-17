@@ -38,8 +38,8 @@ public class AttackMove extends Move {
     @Override
     public String toString() {
         return "Name: " + name + 
-        "Type: " + type.getName() + 
-        "Base damage: " + damage + "\n";
+        ", Type: " + type.getName() + 
+        ", Base damage: " + damage + "\n";
     }
 
 }

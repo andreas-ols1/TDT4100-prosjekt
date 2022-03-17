@@ -10,7 +10,8 @@
             "request": "launch",
             "mainClass": "PokemonShowdown.Pokemon",
             "projectName": "TDT4100-prosjekt_be52fe9b"
-
+        },
+      {
             "name": "Launch PokemonShowdownApp",
             "request": "launch",
             "mainClass": "TDT4100_project/PokemonShowdown.PokemonShowdownApp",
@@ -23,7 +24,6 @@
             "mainClass": "TDT4100_project/PokemonShowdown.PokemonShowdownApp",
             "projectName": "TDT4100-prosjekt_95123b25"
         },
-
         {
             "type": "java",
             "name": "Launch Current File",

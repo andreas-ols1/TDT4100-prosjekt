@@ -20,8 +20,8 @@ public class PassiveMove extends Move {
     @Override
     public String toString() {
         return "Name: " + name + 
-        "Type: " + type.getName() + 
-        "Stat boost: " + statBoost + 
-        "Heal: " + heal + "\n";
+        ", Type: " + type.getName() + 
+        ", Stat boost: " + statBoost + 
+        ", Heal: " + heal + "\n";
     }
 }

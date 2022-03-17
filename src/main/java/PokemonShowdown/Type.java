@@ -1,6 +1,7 @@
 package PokemonShowdown;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Type {
@@ -8,6 +9,7 @@ public class Type {
     private String name;
     private List<String> strongAgainst = new ArrayList<>();
     private List<String> weakAgainst = new ArrayList<>();
+    private List<String> validTypes = Arrays.asList("fire", "water", "grass", "ground", "normal", "ice");
 
     public Type(String type) {
         checkValidType(type);
@@ -32,14 +34,7 @@ public class Type {
     }
 
     private void checkValidType(String type) {
-        if (!(type.equals("fire")
-        || type.equals("water")
-        || type.equals("grass")
-        || type.equals("ground")
-        || type.equals("normal")
-        || type.equals("ice"))) {
-            throw new IllegalArgumentException("Not a valid type");
-        }
+        if (!(validTypes.contains(type))) throw new IllegalArgumentException("Not a valid type");
     }
 
     private void setFireType() {
@@ -112,6 +107,7 @@ public class Type {
         return "Name: " + name + 
         "\nStrong against: " + strongAgainst +
         "\nWeak against: " + weakAgainst;
-    }
-    
+
+    }   
+
 }
