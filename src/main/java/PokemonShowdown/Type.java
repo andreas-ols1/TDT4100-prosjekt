@@ -107,5 +107,7 @@ public class Type {
         return "Name: " + name + 
         "\nStrong against: " + strongAgainst +
         "\nWeak against: " + weakAgainst;
+
     }   
+
 }

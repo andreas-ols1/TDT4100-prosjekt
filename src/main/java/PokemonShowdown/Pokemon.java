@@ -71,7 +71,6 @@ public class Pokemon {
         speed = 80;
         hp = 79;
     }
-
     public String getName() {
         return name;
     }
