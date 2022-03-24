@@ -38,33 +38,19 @@ public class Type {
     }
 
     private void setFireType() {
-        this.name = "fire";
-        strongAgainst.add("grass");
-        strongAgainst.add("ice");
-        weakAgainst.add("water");
-        weakAgainst.add("fire");
+        setTypeAttributes("fire", Arrays.asList("grass","ice"), Arrays.asList("water","fire"));
     }
 
     private void setWaterType() {
-        this.name = "water";
-        strongAgainst.add("fire");
-        strongAgainst.add("ground");
-        weakAgainst.add("grass");
-        weakAgainst.add("water");
+        setTypeAttributes("water", Arrays.asList("fire","ground"), Arrays.asList("grass","water"));
     }
 
     private void setGrassType() {
-        this.name = "grass";
-        strongAgainst.add("water");
-        strongAgainst.add("ground");
-        weakAgainst.add("fire");
-        weakAgainst.add("grass");
+        setTypeAttributes("grass", Arrays.asList("water","ground"), Arrays.asList("fire","grass"));
     }
 
     private void setGroundType() {
-        this.name = "ground";
-        strongAgainst.add("fire");
-        weakAgainst.add("grass");
+        setTypeAttributes("ground", Arrays.asList("fire"), Arrays.asList("grass"));
     }
 
     private void setNormalType() {
@@ -72,34 +58,25 @@ public class Type {
     }
 
     private void setIceType() {
-        this.name = "ice";
-        strongAgainst.add("ground");
-        strongAgainst.add("grass");
-        weakAgainst.add("fire");
-        weakAgainst.add("water");
-        weakAgainst.add("ice");
+        setTypeAttributes("ice", Arrays.asList("ground","grass"), Arrays.asList("fire","water","ice"));
+    }
+
+    private void setTypeAttributes(String name, List<String> strongAgainst, List<String> weakAgainst) {
+        this.name = name;
+        this.strongAgainst = strongAgainst;
+        this.weakAgainst = weakAgainst;
     }
 
     public String getName() {
         return this.name;
     }
 
-    public boolean checkIfStrongAgainst(Type type1, Type type2) {
-        for (String typeName : type1.strongAgainst) {
-            if (typeName.equals(type2.getName())) {
-                return true;
-            }
-        }
-        return false;
+    public boolean checkIfStrongAgainst(Type type) {
+        return strongAgainst.contains(type.getName());
     }
 
-    public boolean checkIfWeakAgainst(Type type1, Type type2) {
-        for (String typeName : type1.weakAgainst) {
-            if (typeName.equals(type2.getName())) {
-                return true;
-            }
-        }
-        return false;
+    public boolean checkIfWeakAgainst(Type type) {
+        return weakAgainst.contains(type.getName());
     }
 
     @Override
@@ -109,5 +86,10 @@ public class Type {
         "\nWeak against: " + weakAgainst;
 
     }   
+
+    // public static void main(String[] args) {
+    //     Type fire = new Type("fire");
+    //     System.out.println(fire.che);
+    // }
 
 }

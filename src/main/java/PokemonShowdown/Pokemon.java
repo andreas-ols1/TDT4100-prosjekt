@@ -30,47 +30,35 @@ public class Pokemon {
     }
 
     public void checkValidPokemon(String name) {
-        if (!(validPokemon.contains(name))) throw new IllegalArgumentException("Not a valid pokémon");
+        if (!(validPokemon.contains(name))) {
+            throw new IllegalArgumentException("Not a valid pokémon");
+        }
     }
  
     public void setPokemonToCharizard() {
-        name = "charizard";
-        type = new Type("fire");
-        moves.add(new AttackMove("flamethrower"));
-        moves.add(new AttackMove("earthquake"));
-        moves.add(new PassiveMove("swords dance"));
-        moves.add(new AttackMove("slash"));
-        attack = 109;
-        defence = 80;
-        speed = 100;
-        hp = 78;
+        setPokemonDetails("charizard", "fire", 78, 109, 80, 100,Arrays.asList("flamethrower","earthquake","swords dance","slash"));
     }
 
     public void setPokemonToBlastoise() {
-        name = "blastoise";
-        type = new Type("water");
-        moves.add(new AttackMove("hydro pump"));
-        moves.add(new PassiveMove("recover"));
-        moves.add(new AttackMove("skull bash"));
-        moves.add(new AttackMove("ice beam"));
-        attack = 85;
-        defence = 105;
-        speed = 78;
-        hp = 80;
+        setPokemonDetails("blastoise", "water", 80, 85, 105, 78, Arrays.asList("hydro pump","recover","skull bash","ice beam"));  
     }
 
     public void setPokemonToVenusaur() {
-        name = "venusaur";
-        type = new Type("grass");
-        moves.add(new AttackMove("slash"));
-        moves.add(new AttackMove("earthquake"));
-        moves.add(new PassiveMove("swords dance"));
-        moves.add(new AttackMove("solar beam"));
-        attack = 100;
-        defence = 100;
-        speed = 80;
-        hp = 79;
+        setPokemonDetails("venusaur", "grass", 79, 100, 100, 80, Arrays.asList("slash","earthquake","swords dance","solar beam"));
     }
+
+    private void setPokemonDetails(String name, String type, int hp, int attack, int defence, int speed, List<String> moves) {
+        this.name = name;
+        this.type = new Type(type);
+        this.hp = hp;
+        this.attack = attack;
+        this.defence = defence;
+        this.speed = speed;
+        for (String move : moves) {
+            this.moves.add(new Move(move));
+        }
+    }
+
     public String getName() {
         return name;
     }
@@ -112,7 +100,12 @@ public class Pokemon {
 
     public static void main(String[] args) {
         Pokemon charizard = new Pokemon("charizard");
-        System.out.println(charizard);
-        System.out.println(charizard.getMoves());
+        Pokemon chadizard = new Pokemon("charizard");
+        Pokemon venusaur = new Pokemon("venusaur");
+        // System.out.println(charizard);
+        // System.out.println(charizard.getMoves());
+        // System.out.println(venusaur);
+        System.out.println(chadizard.getType().checkIfStrongAgainst(venusaur.getType()));
+        System.out.println(chadizard);
     }
 }
