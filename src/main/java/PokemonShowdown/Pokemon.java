@@ -1,62 +1,70 @@
 package PokemonShowdown;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
 import java.util.stream.Collectors;
 
 public class Pokemon {
     
     private String name;
     private Type type;
-    private List<Move> moves = new ArrayList<>();
+    private Collection<Move> moves = new ArrayList<>();
     private int attack;
     private int defence;
     private int speed;
     private int hp;
-    private List<String> validPokemon = Arrays.asList("charizard", "blastoise", "venusaur", "pikachu");
+    private Collection<String> validPokemon = Arrays.asList("charizard", "blastoise", "venusaur", "pikachu");
 
     public Pokemon(String name) {
         checkValidPokemon(name);
-        if (name.toLowerCase().equals("charizard")) {
-            setPokemonToCharizard();
-        }
-        if (name.toLowerCase().equals("venusaur")) {
-            setPokemonToVenusaur();
-        }
-        if (name.toLowerCase().equals("blastoise")) {
-            setPokemonToBlastoise();
+        switch (name.toLowerCase()) {
+            case "charizard":
+                setPokemonToCharizard();
+                break;
+            case "venusaur":
+                setPokemonToVenusaur();
+                break;
+            case "blastoise":
+                setPokemonToBlastoise();
+                break;
+            case "pikachu":
+                setPokemonToPikachu();
+                break;
         }
     }
 
-    public void checkValidPokemon(String name) {
+    private void checkValidPokemon(String name) {
         if (!(validPokemon.contains(name))) {
             throw new IllegalArgumentException("Not a valid pokémon");
         }
     }
  
-    public void setPokemonToCharizard() {
+    private void setPokemonToCharizard() {
         setPokemonDetails("charizard", "fire", 78, 109, 80, 100,Arrays.asList("flamethrower","earthquake","swords dance","slash"));
     }
 
-    public void setPokemonToBlastoise() {
+    private void setPokemonToBlastoise() {
         setPokemonDetails("blastoise", "water", 80, 85, 105, 78, Arrays.asList("hydro pump","recover","skull bash","ice beam"));  
     }
 
-    public void setPokemonToVenusaur() {
+    private void setPokemonToVenusaur() {
         setPokemonDetails("venusaur", "grass", 79, 100, 100, 80, Arrays.asList("slash","earthquake","swords dance","solar beam"));
     }
 
-    private void setPokemonDetails(String name, String type, int hp, int attack, int defence, int speed, List<String> moves) {
+    private void setPokemonToPikachu() {
+        setPokemonDetails("pikachu", "electric", 35, 100, 50, 90, Arrays.asList("slash","thunderbolt","swords dance","surf"));
+    }
+
+    private void setPokemonDetails(String name, String type, int hp, int attack, int defence, int speed, Collection<String> moves) {
         this.name = name;
         this.type = new Type(type);
         this.hp = hp;
         this.attack = attack;
         this.defence = defence;
         this.speed = speed;
-        for (String move : moves) {
-            this.moves.add(new Move(move));
-        }
+        moves.stream().forEach((move) -> this.moves.add(new Move(move)));
     }
 
     public String getName() {
@@ -67,7 +75,7 @@ public class Pokemon {
         return type;
     }
 
-    public List<Move> getMoves() {
+    public Collection<Move> getMoves() {
         return moves;
     }
 
@@ -102,10 +110,14 @@ public class Pokemon {
         Pokemon charizard = new Pokemon("charizard");
         Pokemon chadizard = new Pokemon("charizard");
         Pokemon venusaur = new Pokemon("venusaur");
+        Pokemon pikachu = new Pokemon("pikachu");
         // System.out.println(charizard);
         // System.out.println(charizard.getMoves());
         // System.out.println(venusaur);
         System.out.println(chadizard.getType().checkIfStrongAgainst(venusaur.getType()));
         System.out.println(chadizard);
+        System.out.println(pikachu);
+        System.out.println(new File("").getAbsolutePath());
     }
+
 }

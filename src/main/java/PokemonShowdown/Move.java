@@ -11,35 +11,41 @@ public class Move {
     private boolean heal;
     private boolean statBoost;
     private Collection<String> passiveMoves = Arrays.asList("swords dance", "recover");
-    private Collection<String> attackMoves = Arrays.asList("hydro pump", "slash", "flamethrower", "earthquake", "solar beam", "ice beam", "skull bash");
+    private Collection<String> attackMoves = Arrays.asList("hydro pump", "slash", "flamethrower", "earthquake", "solar beam", "ice beam", "skull bash", "thunderbolt", "surf");
 
     public Move(String name) {
-        if (name.equals("slash")) {
-            setMoveAttributes("slash", "normal",70,false, false);
-        }
-        if (name.equals("flamethrower")) {
-            setMoveAttributes("flamethrower", "fire",95, false, false);
-        }
-        if (name.equals("earthquake")) {
-            setMoveAttributes("earthquake", "ground",100, false, false);
-        }
-        if (name.equals("solar beam")) {
-            setMoveAttributes("solar beam", "grass",120, false, false);
-        }
-        if (name.equals("hydro pump")) {
-            setMoveAttributes("hydro pump", "water",120, false, false);
-        }
-        if (name.equals("skull bash")) {
-            setMoveAttributes("skull bash", "normal",100, false, false);
-        }
-        if (name.equals("ice beam")) {
-            setMoveAttributes("ice beam", "ice",90, false, false);
-        }
-        if (name.equals("swords dance")) {
-            setMoveAttributes("swords dance", "normal",0, false, true);
-        }
-        if (name.equals("recover")) {
-            setMoveAttributes("recover", "normal",0, true, false);
+        switch (name.toLowerCase()) {
+            case "slash":
+                setMoveAttributes("slash", "normal",70,false, false);
+                break;
+            case "flamethrower":
+                setMoveAttributes("flamethrower", "fire",95, false, false);
+                break;
+            case "earthquake":
+                setMoveAttributes("earthquake", "ground",100, false, false);
+                break;
+            case "solar beam":
+                setMoveAttributes("solar beam", "grass",120, false, false);
+                break;
+            case "hydro pump":
+                setMoveAttributes("hydro pump", "water",120, false, false);
+                break;
+            case "skull bash":
+                setMoveAttributes("skull bash", "normal",100, false, false);
+                break;
+            case "ice beam":
+                setMoveAttributes("ice beam", "ice",90, false, false);
+                break;
+            case "swords dance":
+                setMoveAttributes("swords dance", "normal",0, false, true);
+                break;
+            case "recover":
+                setMoveAttributes("recover", "normal",0, true, false);
+                break;
+            case "thunderbolt":
+                setMoveAttributes("thunderbolt", "electric", 95, false, false);
+            case "surf":
+                setMoveAttributes("surf", "water", 95, false, false);
         }
     }
 
