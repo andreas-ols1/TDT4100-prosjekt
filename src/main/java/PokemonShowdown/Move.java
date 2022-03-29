@@ -8,64 +8,85 @@ public class Move {
     private String name;
     private Type type;
     private int damage;
-    private boolean heal;
-    private boolean statBoost;
-    private Collection<String> passiveMoves = Arrays.asList("swords dance", "recover");
-    private Collection<String> attackMoves = Arrays.asList("hydro pump", "slash", "flamethrower", "earthquake", "solar beam", "ice beam", "skull bash", "thunderbolt", "surf");
+    private double heal;
+    private boolean attackBoost;
+    private Collection<String> validMoves = Arrays.asList("swords dance", "recover", "hydro pump", 
+    "slash", "flamethrower", "earthquake", "solar beam", "ice beam", "skull bash", "thunderbolt", "surf");
 
     public Move(String name) {
+        checkValidMove(name);
         switch (name.toLowerCase()) {
             case "slash":
-                setMoveAttributes("slash", "normal",70,false, false);
+                setMoveAttributes(name, "normal",70,0, false);
                 break;
             case "flamethrower":
-                setMoveAttributes("flamethrower", "fire",95, false, false);
+                setMoveAttributes(name, "fire",95, 0, false);
                 break;
             case "earthquake":
-                setMoveAttributes("earthquake", "ground",100, false, false);
+                setMoveAttributes(name, "ground",100, 0, false);
                 break;
             case "solar beam":
-                setMoveAttributes("solar beam", "grass",120, false, false);
+                setMoveAttributes(name, "grass",120, 0, false);
                 break;
             case "hydro pump":
-                setMoveAttributes("hydro pump", "water",120, false, false);
+                setMoveAttributes(name, "water",120, 0, false);
                 break;
             case "skull bash":
-                setMoveAttributes("skull bash", "normal",100, false, false);
+                setMoveAttributes(name, "normal",100, 0, false);
                 break;
             case "ice beam":
-                setMoveAttributes("ice beam", "ice",90, false, false);
+                setMoveAttributes(name, "ice",90, 0, false);
                 break;
             case "swords dance":
-                setMoveAttributes("swords dance", "normal",0, false, true);
+                setMoveAttributes(name, "normal",0, 0, true);
                 break;
             case "recover":
-                setMoveAttributes("recover", "normal",0, true, false);
+                setMoveAttributes(name, "normal",0, 0.5, false);
                 break;
             case "thunderbolt":
-                setMoveAttributes("thunderbolt", "electric", 95, false, false);
+                setMoveAttributes(name, "electric", 95, 0, false);
             case "surf":
-                setMoveAttributes("surf", "water", 95, false, false);
+                setMoveAttributes(name, "water", 95, 0, false);
         }
     }
 
-    private void setMoveAttributes(String name, String type, int damage, boolean heal, boolean statBoost) {
+    private void setMoveAttributes(String name, String type, int damage, double heal, boolean attackBoost) {
         this.name = name;
         this.type = new Type(type);
         this.damage = damage;
         this.heal = heal;
-        this.statBoost = statBoost;
+        this.attackBoost = attackBoost;
+    }
+
+    private void checkValidMove(String name) {
+        if (!validMoves.contains(name)) throw new IllegalArgumentException("Not a valid move");
     }
 
     public String getName() {
         return name;
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public double getHeal() {
+        return heal;
+    }
+
+    public boolean getAttackBoost() {
+        return attackBoost;
+    }
+
     public String toString() {
         return "Name: " + name + 
         ", Type: " + type.getName() + 
         ", Base damage: " + damage + "\n" +
-        ", Stat boost: " + statBoost + 
+        ", Attack boost: " + attackBoost + 
         ", Heal: " + heal + "\n";
     }
 

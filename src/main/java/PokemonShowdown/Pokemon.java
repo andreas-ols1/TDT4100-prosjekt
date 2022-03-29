@@ -1,20 +1,23 @@
 package PokemonShowdown;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Pokemon {
     
     private String name;
     private Type type;
-    private Collection<Move> moves = new ArrayList<>();
+    private List<Move> moves = new ArrayList<>();
     private int attack;
     private int defence;
     private int speed;
+    private int maxHp;
     private int hp;
+    private boolean isDead = false;
+    private int attackBoost = 1;
     private Collection<String> validPokemon = Arrays.asList("charizard", "blastoise", "venusaur", "pikachu");
 
     public Pokemon(String name) {
@@ -42,29 +45,70 @@ public class Pokemon {
     }
  
     private void setPokemonToCharizard() {
-        setPokemonDetails("charizard", "fire", 78, 109, 80, 100,Arrays.asList("flamethrower","earthquake","swords dance","slash"));
+        setPokemonDetails("charizard", "fire", 328, 285, 237, 267,Arrays.asList("flamethrower","earthquake","swords dance","slash"));
     }
 
     private void setPokemonToBlastoise() {
-        setPokemonDetails("blastoise", "water", 80, 85, 105, 78, Arrays.asList("hydro pump","recover","skull bash","ice beam"));  
+        setPokemonDetails("blastoise", "water", 330, 237, 277, 223, Arrays.asList("hydro pump","recover","skull bash","ice beam"));  
     }
 
     private void setPokemonToVenusaur() {
-        setPokemonDetails("venusaur", "grass", 79, 100, 100, 80, Arrays.asList("slash","earthquake","swords dance","solar beam"));
+        setPokemonDetails("venusaur", "grass", 332, 231, 267, 227, Arrays.asList("slash","earthquake","swords dance","solar beam"));
     }
 
     private void setPokemonToPikachu() {
-        setPokemonDetails("pikachu", "electric", 35, 100, 50, 90, Arrays.asList("slash","thunderbolt","swords dance","surf"));
+        setPokemonDetails("pikachu", "electric", 274, 299, 167, 247, Arrays.asList("slash","thunderbolt","swords dance","surf"));
     }
 
-    private void setPokemonDetails(String name, String type, int hp, int attack, int defence, int speed, Collection<String> moves) {
+    private void setPokemonDetails(String name, String type, int maxHp, int attack, int defence, int speed, Collection<String> moves) {
         this.name = name;
         this.type = new Type(type);
-        this.hp = hp;
+        this.maxHp = maxHp;
+        hp = maxHp;
         this.attack = attack;
         this.defence = defence;
         this.speed = speed;
         moves.stream().forEach((move) -> this.moves.add(new Move(move)));
+    }
+
+    public void attack(Pokemon mon, int moveIndex) {
+        double effectiveness = 1;
+        double stab = 1;
+
+        if (this.getMoves().get(moveIndex).getType().checkIfStrongAgainst(mon.getType())) {
+            effectiveness = 2;
+        }
+        if (this.getMoves().get(moveIndex).getType().checkIfWeakAgainst(mon.getType())) {
+            effectiveness = 0.5;
+        }
+        if (this.getMoves().get(moveIndex).getType().getName().equals(this.getType().getName())) {
+            stab = 1.5;
+        }
+        mon.takeDamage(calculateDamage(mon, moveIndex, effectiveness, stab));
+        heal(moveIndex);
+        if (getMoves().get(moveIndex).getAttackBoost() == true) attackBoost();
+    }
+
+    private int calculateDamage(Pokemon mon, int moveIndex, double effectiveness, double stab) {
+        double randomness = ThreadLocalRandom.current().nextDouble(0.85,1);
+        double moveBaseDamage = this.getMoves().get(moveIndex).getDamage();
+        double attackPerOpponentsDefence = (float)this.getAttack()/mon.getDefence();
+        return (int)Math.floor(((0.84*(moveBaseDamage*attackBoost)*attackPerOpponentsDefence)+2)*stab*effectiveness*randomness);
+    }
+
+    private void heal(int moveIndex) {
+        double healPercentage = getMoves().get(moveIndex).getHeal();
+        if (hp + healPercentage * maxHp < maxHp) {
+            hp += healPercentage * maxHp;
+        }
+        else hp = maxHp;
+    }
+
+    private void attackBoost() {
+        if (attackBoost + 1 <= 4) {
+            attackBoost += 1;
+        }
+        else throw new IllegalStateException("Attack boost maxes out at x4");
     }
 
     public String getName() {
@@ -75,7 +119,7 @@ public class Pokemon {
         return type;
     }
 
-    public Collection<Move> getMoves() {
+    public List<Move> getMoves() {
         return moves;
     }
 
@@ -94,30 +138,48 @@ public class Pokemon {
     public int getHp() {
         return hp;
     }
+
+    private void takeDamage(double damage) {
+        if (hp - damage > 0) {
+            hp -= damage;
+        }  
+        else {
+            hp = 0;
+            isDead = true;
+        }
+    }
+
+    public Collection<String> getValidPokemon() {
+        return validPokemon;
+    }
  
     @Override
     public String toString() {
-        return name + 
-        "\nType: " + type.getName() + 
-        "\nMoves: " + moves.stream().map(move -> move.getName()).collect(Collectors.toList()) + 
-        "\nHP: " + hp + 
-        "\nAttack: " + attack + 
-        "\nDefence: " + defence + 
-        "\nSpeed: " + speed;
+        return name;
     }
 
     public static void main(String[] args) {
         Pokemon charizard = new Pokemon("charizard");
-        Pokemon chadizard = new Pokemon("charizard");
+        Pokemon blastoise = new Pokemon("blastoise");
         Pokemon venusaur = new Pokemon("venusaur");
         Pokemon pikachu = new Pokemon("pikachu");
         // System.out.println(charizard);
         // System.out.println(charizard.getMoves());
         // System.out.println(venusaur);
-        System.out.println(chadizard.getType().checkIfStrongAgainst(venusaur.getType()));
-        System.out.println(chadizard);
-        System.out.println(pikachu);
-        System.out.println(new File("").getAbsolutePath());
+        // System.out.println(chadizard.getType().checkIfStrongAgainst(venusaur.getType()));
+        // System.out.println();
+        // System.out.println(pikachu);
+        // System.out.println(new File("").getAbsolutePath());
+        // System.out.println(blastoise.getHp());
+        // charizard.attack(blastoise, 0);
+        // System.out.println(blastoise.getHp());
+        // System.out.println(charizard.getHp());
+        // blastoise.attack(charizard, 0);
+        // System.out.println(charizard.getHp());
+        // blastoise.attack(charizard, 2);
+        System.out.println(charizard.getHp());
+        venusaur.attack(charizard,1);
+        System.out.println(charizard.getHp());
     }
 
 }
