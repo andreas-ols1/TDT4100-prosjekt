@@ -72,18 +72,8 @@ public class Pokemon {
     }
 
     public void attack(Pokemon mon, int moveIndex) {
-        double effectiveness = 1;
-        double stab = 1;
-
-        if (this.getMoves().get(moveIndex).getType().checkIfStrongAgainst(mon.getType())) {
-            effectiveness = 2;
-        }
-        if (this.getMoves().get(moveIndex).getType().checkIfWeakAgainst(mon.getType())) {
-            effectiveness = 0.5;
-        }
-        if (this.getMoves().get(moveIndex).getType().getName().equals(this.getType().getName())) {
-            stab = 1.5;
-        }
+        double effectiveness = getMoves().get(moveIndex).getType().getEffectiveness(mon.getType());
+        double stab = getStab(moveIndex);
         mon.takeDamage(calculateDamage(mon, moveIndex, effectiveness, stab));
         heal(moveIndex);
         if (getMoves().get(moveIndex).getAttackBoost() == true) attackBoost();
@@ -92,7 +82,7 @@ public class Pokemon {
     private int calculateDamage(Pokemon mon, int moveIndex, double effectiveness, double stab) {
         double randomness = ThreadLocalRandom.current().nextDouble(0.85,1);
         double moveBaseDamage = this.getMoves().get(moveIndex).getDamage();
-        double attackPerOpponentsDefence = (float)this.getAttack()/mon.getDefence();
+        double attackPerOpponentsDefence = (double)this.getAttack()/mon.getDefence();
         return (int)Math.floor(((0.84*(moveBaseDamage*attackBoost)*attackPerOpponentsDefence)+2)*stab*effectiveness*randomness);
     }
 
@@ -147,6 +137,11 @@ public class Pokemon {
             hp = 0;
             isDead = true;
         }
+    }
+
+    private double getStab(int moveIndex) {
+        if (this.getMoves().get(moveIndex).getType().getName().equals(this.getType().getName())) return 1.5;
+        return 1;
     }
 
     public Collection<String> getValidPokemon() {

@@ -83,12 +83,10 @@ public class Type {
         return this.name;
     }
 
-    public boolean checkIfStrongAgainst(Type type) {
-        return strongAgainst.contains(type.getName());
-    }
-
-    public boolean checkIfWeakAgainst(Type type) {
-        return weakAgainst.contains(type.getName());
+    public double getEffectiveness(Type type) {
+        if (strongAgainst.contains(type.getName())) return 2;
+        if (weakAgainst.contains(type.getName())) return 0.5;
+        return 1;
     }
 
     @Override
@@ -97,7 +95,6 @@ public class Type {
         "\nStrong against: " + strongAgainst +
         "\nWeak against: " + weakAgainst +
         "\nImmune: " + immune;
-
     }   
 
     public static void main(String[] args) {
