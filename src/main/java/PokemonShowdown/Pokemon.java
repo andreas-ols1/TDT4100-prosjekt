@@ -9,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Pokemon {
     
     private String name;
-    private Type type;
+    private List<Type> types = new ArrayList<>();
     private List<Move> moves = new ArrayList<>();
     private int attack;
     private int defence;
@@ -45,24 +45,24 @@ public class Pokemon {
     }
  
     private void setPokemonToCharizard() {
-        setPokemonDetails("charizard", "fire", 328, 285, 237, 267,Arrays.asList("flamethrower","earthquake","swords dance","slash"));
+        setPokemonDetails("charizard", Arrays.asList("fire","flying"), 328, 285, 237, 267,Arrays.asList("flamethrower","earthquake","swords dance","air slash"));
     }
 
     private void setPokemonToBlastoise() {
-        setPokemonDetails("blastoise", "water", 330, 237, 277, 223, Arrays.asList("hydro pump","recover","skull bash","ice beam"));  
+        setPokemonDetails("blastoise", Arrays.asList("water","none"), 330, 237, 277, 223, Arrays.asList("hydro pump","recover","skull bash","ice beam"));  
     }
 
     private void setPokemonToVenusaur() {
-        setPokemonDetails("venusaur", "grass", 332, 231, 267, 227, Arrays.asList("slash","earthquake","swords dance","solar beam"));
+        setPokemonDetails("venusaur", Arrays.asList("grass","poison"), 332, 231, 267, 227, Arrays.asList("sludge bomb","earthquake","swords dance","solar beam"));
     }
 
     private void setPokemonToPikachu() {
-        setPokemonDetails("pikachu", "electric", 274, 299, 167, 247, Arrays.asList("slash","thunderbolt","swords dance","surf"));
+        setPokemonDetails("pikachu", Arrays.asList("electric","none"), 274, 299, 167, 247, Arrays.asList("slash","thunderbolt","swords dance","surf"));
     }
 
-    private void setPokemonDetails(String name, String type, int maxHp, int attack, int defence, int speed, Collection<String> moves) {
+    private void setPokemonDetails(String name, List<String> types, int maxHp, int attack, int defence, int speed, Collection<String> moves) {
         this.name = name;
-        this.type = new Type(type);
+        types.stream().forEach((type) -> this.types.add(new Type(type)));
         this.maxHp = maxHp;
         hp = maxHp;
         this.attack = attack;
@@ -72,18 +72,23 @@ public class Pokemon {
     }
 
     public void attack(Pokemon mon, int moveIndex) {
-        double effectiveness = getMoves().get(moveIndex).getType().getEffectiveness(mon.getType());
+        double effectiveness = getEffectiveness(mon, moveIndex);
+        System.out.println(effectiveness);
         double stab = getStab(moveIndex);
-        mon.takeDamage(calculateDamage(mon, moveIndex, effectiveness, stab));
-        heal(moveIndex);
-        if (getMoves().get(moveIndex).getAttackBoost() == true) attackBoost();
+        System.out.println(stab);
+        if (checkIfHit(moveIndex)) {
+            mon.takeDamage(calculateDamage(mon, moveIndex, effectiveness, stab));
+            heal(moveIndex);
+            System.out.println(getName() + " used " + getMove(moveIndex).getName() + " on " + mon);
+            if (getMoves().get(moveIndex).getAttackBoost() == true) attackBoost();
+        } else System.out.println(getName() + " missed " + getMoves().get(moveIndex).getName());
     }
 
     private int calculateDamage(Pokemon mon, int moveIndex, double effectiveness, double stab) {
         double randomness = ThreadLocalRandom.current().nextDouble(0.85,1);
         double moveBaseDamage = this.getMoves().get(moveIndex).getDamage();
         double attackPerOpponentsDefence = (double)this.getAttack()/mon.getDefence();
-        return (int)Math.floor(((0.84*(moveBaseDamage*attackBoost)*attackPerOpponentsDefence)+2)*stab*effectiveness*randomness);
+        return (int)Math.floor(((0.84*(moveBaseDamage*attackBoost)*attackPerOpponentsDefence)+2)*stab*effectiveness*randomness*criticalHit());
     }
 
     private void heal(int moveIndex) {
@@ -105,8 +110,8 @@ public class Pokemon {
         return name;
     }
 
-    public Type getType() {
-        return type;
+    public List<Type> getTypes() {
+        return types;
     }
 
     public List<Move> getMoves() {
@@ -140,12 +145,60 @@ public class Pokemon {
     }
 
     private double getStab(int moveIndex) {
-        if (this.getMoves().get(moveIndex).getType().getName().equals(this.getType().getName())) return 1.5;
+        if ((getMoveType(moveIndex).getName().equals(getTypes().get(0).getName())) 
+        || getMoveType(moveIndex).getName().equals(getTypes().get(1).getName())) return 1.5;
+        return 1;
+    }
+
+    private boolean checkIfHit(int moveIndex) {
+        if (ThreadLocalRandom.current().nextDouble(0,1) > getMoves().get(moveIndex).getAccuracy()) return false;
+        return true;
+    }
+
+    private double criticalHit() {
+        if (ThreadLocalRandom.current().nextDouble(0,1) < 0.0625) {
+            System.out.println("Its a crit!");
+            return 1.95;
+        }
+        return 1;
+    }
+
+    private double getEffectiveness(Pokemon mon, int moveIndex) {
+        if (getMoveType(moveIndex).checkIfStrongAgainst(mon.getTypes().get(0)) 
+        && getMoveType(moveIndex).checkIfStrongAgainst(mon.getTypes().get(1))) {
+            return 4;
+        }
+        if (getMoveType(moveIndex).checkIfWeakAgainst(mon.getTypes().get(0)) 
+        && getMoveType(moveIndex).checkIfWeakAgainst(mon.getTypes().get(1))) {
+            return 0.25;
+        }
+        if ((getMoveType(moveIndex).checkIfStrongAgainst(mon.getTypes().get(0)) 
+        && getMoveType(moveIndex).checkIfWeakAgainst(mon.getTypes().get(1))) 
+        || ((getMoveType(moveIndex).checkIfStrongAgainst(mon.getTypes().get(1)) 
+        && getMoveType(moveIndex).checkIfWeakAgainst(mon.getTypes().get(0))))) {
+            return 1;
+        }
+        if (getMoves().get(moveIndex).getType().checkIfStrongAgainst(mon.getTypes().get(0)) 
+        || getMoves().get(moveIndex).getType().checkIfStrongAgainst(mon.getTypes().get(1))) {
+            return 2;
+        }
+        if (getMoves().get(moveIndex).getType().checkIfWeakAgainst(mon.getTypes().get(0)) 
+        || getMoves().get(moveIndex).getType().checkIfWeakAgainst(mon.getTypes().get(1))) {
+            return 0.5;
+        }
         return 1;
     }
 
     public Collection<String> getValidPokemon() {
         return validPokemon;
+    }
+
+    public Move getMove(int moveIndex) {
+        return moves.get(moveIndex);
+    }
+
+    public Type getMoveType(int moveIndex) {
+        return moves.get(moveIndex).getType();
     }
  
     @Override

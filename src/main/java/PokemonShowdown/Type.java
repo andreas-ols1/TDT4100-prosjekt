@@ -10,7 +10,7 @@ public class Type {
     private Collection<String> strongAgainst = new ArrayList<>();
     private Collection<String> weakAgainst = new ArrayList<>();
     private Collection<String> immune = new ArrayList<>();
-    private Collection<String> validTypes = Arrays.asList("fire", "water", "grass", "ground", "normal", "ice", "electric");
+    private Collection<String> validTypes = Arrays.asList("fire", "water", "grass", "ground", "normal", "ice", "electric", "poison", "flying", "none");
 
     public Type(String type) {
         checkValidType(type);
@@ -36,6 +36,14 @@ public class Type {
             case "electric":
                 setElectricType();
                 break;
+            case "none":
+                setTypeNone();
+                break;
+            case "poison":
+                setPoisonType();
+                break;
+            case "flying":
+                setFlyingType();
         }
 
     }
@@ -53,15 +61,15 @@ public class Type {
     }
 
     private void setGrassType() {
-        setTypeAttributes("grass", Arrays.asList("water","ground"), Arrays.asList("fire","grass"), Arrays.asList());
+        setTypeAttributes("grass", Arrays.asList("water","ground"), Arrays.asList("fire","grass","poison", "flying"), Arrays.asList());
     }
 
     private void setGroundType() {
-        setTypeAttributes("ground", Arrays.asList("fire", "electric"), Arrays.asList("grass"), Arrays.asList());
+        setTypeAttributes("ground", Arrays.asList("fire", "electric", "poison"), Arrays.asList("grass"), Arrays.asList("flying"));
     }
 
     private void setNormalType() {
-        this.name = "normal";
+        name = "normal";
     }
 
     private void setIceType() {
@@ -70,6 +78,18 @@ public class Type {
 
     private void setElectricType() {
         setTypeAttributes("electric", Arrays.asList("water"), Arrays.asList("grass", "electric"), Arrays.asList("ground"));
+    }
+
+    private void setPoisonType() {
+        setTypeAttributes("poison", Arrays.asList("grass"), Arrays.asList(), Arrays.asList());
+    }
+
+    private void setFlyingType() {
+        setTypeAttributes("flying", Arrays.asList("grass"), Arrays.asList("electric"), Arrays.asList());
+    }
+
+    private void setTypeNone() {
+        name = "none";
     }
 
     private void setTypeAttributes(String name, Collection<String> strongAgainst, Collection<String> weakAgainst, Collection<String> immune) {
@@ -81,6 +101,16 @@ public class Type {
 
     public String getName() {
         return this.name;
+    }
+
+    public boolean checkIfStrongAgainst(Type type) {
+        if (strongAgainst.contains(type.getName())) return true;
+        return false;
+    }
+
+    public boolean checkIfWeakAgainst(Type type) {
+        if (weakAgainst.contains(type.getName())) return true;
+        return false;
     }
 
     public double getEffectiveness(Type type) {

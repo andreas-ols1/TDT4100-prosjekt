@@ -8,6 +8,7 @@ public class Move {
     private String name;
     private Type type;
     private int damage;
+    private double accuracy;
     private double heal;
     private boolean attackBoost;
     private Collection<String> validMoves = Arrays.asList("swords dance", "recover", "hydro pump", 
@@ -17,43 +18,44 @@ public class Move {
         checkValidMove(name);
         switch (name.toLowerCase()) {
             case "slash":
-                setMoveAttributes(name, "normal",70,0, false);
+                setMoveAttributes(name, "normal",70, 1,0, false);
                 break;
             case "flamethrower":
-                setMoveAttributes(name, "fire",95, 0, false);
+                setMoveAttributes(name, "fire",95, 1, 0, false);
                 break;
             case "earthquake":
-                setMoveAttributes(name, "ground",100, 0, false);
+                setMoveAttributes(name, "ground",100, 1, 0, false);
                 break;
             case "solar beam":
-                setMoveAttributes(name, "grass",120, 0, false);
+                setMoveAttributes(name, "grass",120, 0.8, 0, false);
                 break;
             case "hydro pump":
-                setMoveAttributes(name, "water",120, 0, false);
+                setMoveAttributes(name, "water",120, 0.8, 0, false);
                 break;
             case "skull bash":
-                setMoveAttributes(name, "normal",100, 0, false);
+                setMoveAttributes(name, "normal",100, 1, 0, false);
                 break;
             case "ice beam":
-                setMoveAttributes(name, "ice",90, 0, false);
+                setMoveAttributes(name, "ice",90, 1, 0, false);
                 break;
             case "swords dance":
-                setMoveAttributes(name, "normal",0, 0, true);
+                setMoveAttributes(name, "normal",0, 1, 0, true);
                 break;
             case "recover":
-                setMoveAttributes(name, "normal",0, 0.5, false);
+                setMoveAttributes(name, "normal",0, 1, 0.5, false);
                 break;
             case "thunderbolt":
-                setMoveAttributes(name, "electric", 95, 0, false);
+                setMoveAttributes(name, "electric", 95, 1, 0, false);
             case "surf":
-                setMoveAttributes(name, "water", 95, 0, false);
+                setMoveAttributes(name, "water", 95, 1, 0, false);
         }
     }
 
-    private void setMoveAttributes(String name, String type, int damage, double heal, boolean attackBoost) {
+    private void setMoveAttributes(String name, String type, int damage, double accuracy, double heal, boolean attackBoost) {
         this.name = name;
         this.type = new Type(type);
         this.damage = damage;
+        this.accuracy = accuracy;
         this.heal = heal;
         this.attackBoost = attackBoost;
     }
@@ -80,6 +82,10 @@ public class Move {
 
     public boolean getAttackBoost() {
         return attackBoost;
+    }
+
+    public double getAccuracy() {
+        return accuracy;
     }
 
     public String toString() {
