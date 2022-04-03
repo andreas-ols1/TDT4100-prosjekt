@@ -10,7 +10,8 @@ public class Type {
     private Collection<String> strongAgainst = new ArrayList<>();
     private Collection<String> weakAgainst = new ArrayList<>();
     private Collection<String> immune = new ArrayList<>();
-    private Collection<String> validTypes = Arrays.asList("fire", "water", "grass", "ground", "normal", "ice", "electric", "poison", "flying", "none");
+    private Collection<String> validTypes = Arrays.asList("fire","water","grass","ground","normal","ice","electric","poison",
+    "flying","none","rock","fighting","psychic","ghost","dragon");
 
     public Type(String type) {
         checkValidType(type);
@@ -44,6 +45,22 @@ public class Type {
                 break;
             case "flying":
                 setFlyingType();
+                break;
+            case "rock":
+                setRockType();
+                break;
+            case "fighting":
+                setFightingType();
+                break;
+            case "psychic":
+                setPsychicType();
+                break;
+            case "ghost":
+                setGhostType();
+                break;
+            case "dragon":
+                setDragonType();
+                break;
         }
 
     }
@@ -53,39 +70,59 @@ public class Type {
     }
 
     private void setFireType() {
-        setTypeAttributes("fire", Arrays.asList("grass","ice"), Arrays.asList("water","fire"), Arrays.asList());
+        setTypeAttributes("fire", Arrays.asList("grass","ice"), Arrays.asList("water","fire","rock","dragon"), Arrays.asList());
     }
 
     private void setWaterType() {
-        setTypeAttributes("water", Arrays.asList("fire","ground"), Arrays.asList("grass","water"), Arrays.asList());
+        setTypeAttributes("water", Arrays.asList("fire","ground","rock"), Arrays.asList("grass","water","dragon"), Arrays.asList());
     }
 
     private void setGrassType() {
-        setTypeAttributes("grass", Arrays.asList("water","ground"), Arrays.asList("fire","grass","poison", "flying"), Arrays.asList());
+        setTypeAttributes("grass", Arrays.asList("water","ground","rock"), Arrays.asList("fire","grass","poison","flying","dragon"), Arrays.asList());
     }
 
     private void setGroundType() {
-        setTypeAttributes("ground", Arrays.asList("fire", "electric", "poison"), Arrays.asList("grass"), Arrays.asList("flying"));
+        setTypeAttributes("ground", Arrays.asList("fire","electric","poison","rock"), Arrays.asList("grass"), Arrays.asList("flying"));
     }
 
     private void setNormalType() {
-        name = "normal";
+        setTypeAttributes("normal", Arrays.asList(), Arrays.asList("rock"), Arrays.asList("ghost"));
     }
 
     private void setIceType() {
-        setTypeAttributes("ice", Arrays.asList("ground","grass"), Arrays.asList("fire","water","ice"), Arrays.asList());
+        setTypeAttributes("ice", Arrays.asList("ground","grass","flying","dragon"), Arrays.asList("fire","water","ice"), Arrays.asList());
     }
 
     private void setElectricType() {
-        setTypeAttributes("electric", Arrays.asList("water"), Arrays.asList("grass", "electric"), Arrays.asList("ground"));
+        setTypeAttributes("electric", Arrays.asList("water","flying"), Arrays.asList("grass", "electric","dragon"), Arrays.asList("ground"));
     }
 
     private void setPoisonType() {
-        setTypeAttributes("poison", Arrays.asList("grass"), Arrays.asList(), Arrays.asList());
+        setTypeAttributes("poison", Arrays.asList("grass"), Arrays.asList("poison","rock","ghost"), Arrays.asList());
     }
 
     private void setFlyingType() {
-        setTypeAttributes("flying", Arrays.asList("grass"), Arrays.asList("electric"), Arrays.asList());
+        setTypeAttributes("flying", Arrays.asList("grass","fighting"), Arrays.asList("electric","rock"), Arrays.asList());
+    }
+
+    private void setRockType() {
+        setTypeAttributes("rock", Arrays.asList("fire","ice","flying"), Arrays.asList("fighting","ground"), Arrays.asList());
+    }
+
+    private void setFightingType() {
+        setTypeAttributes("fighting", Arrays.asList("normal","ice","rock"), Arrays.asList("poison","flying","psychic"), Arrays.asList("ghost"));
+    }
+
+    private void setPsychicType() {
+        setTypeAttributes("psychic", Arrays.asList("fighting","poison"), Arrays.asList("psychic"), Arrays.asList());
+    }
+
+    private void setGhostType() {
+        setTypeAttributes("ghost", Arrays.asList("psychic","ghost"), Arrays.asList(), Arrays.asList("normal"));
+    }
+
+    private void setDragonType() {
+        setTypeAttributes("dragon", Arrays.asList("dragon"), Arrays.asList(), Arrays.asList());
     }
 
     private void setTypeNone() {
@@ -111,12 +148,6 @@ public class Type {
     public boolean checkIfWeakAgainst(Type type) {
         if (weakAgainst.contains(type.getName())) return true;
         return false;
-    }
-
-    public double getEffectiveness(Type type) {
-        if (strongAgainst.contains(type.getName())) return 2;
-        if (weakAgainst.contains(type.getName())) return 0.5;
-        return 1;
     }
 
     @Override
