@@ -263,11 +263,15 @@ public class Pokemon {
         double stab = getStab(moveIndex);
         System.out.println(stab);
         if (checkIfHit(moveIndex)) {
-            mon.takeDamage(calculateDamage(mon, moveIndex, effectiveness, stab));
-            heal(moveIndex);
-            System.out.println(getName() + " used " + getMove(moveIndex).getName() + " on " + mon);
-            if (getMoves().get(moveIndex).getAttackBoost() == true) attackBoost();
-        } else System.out.println(getName() + " missed " + getMoves().get(moveIndex).getName());
+            if (!checkImmunity(mon, moveIndex)) {
+                mon.takeDamage(calculateDamage(mon, moveIndex, effectiveness, stab));
+                heal(moveIndex);
+                System.out.println(getName() + " used " + getMove(moveIndex).getName() + " on " + mon);
+                if (getMoves().get(moveIndex).getAttackBoost() == true) attackBoost();
+            }
+            else System.out.println(mon.getName() + " is immune to " + getMove(moveIndex).getName());
+        } 
+        else System.out.println(getName() + " missed " + getMove(moveIndex).getName());
     }
 
     private int calculateDamage(Pokemon mon, int moveIndex, double effectiveness, double stab) {
@@ -349,6 +353,12 @@ public class Pokemon {
         return 1;
     }
 
+    private boolean checkImmunity(Pokemon mon, int moveIndex) {
+        if (getMoveType(moveIndex).checkIfImmune(mon.getTypes().get(0)) 
+        || getMoveType(moveIndex).checkIfImmune(mon.getTypes().get(1))) return true;
+        return false;
+    }
+
     private double getEffectiveness(Pokemon mon, int moveIndex) {
         if (getMoveType(moveIndex).checkIfStrongAgainst(mon.getTypes().get(0)) 
         && getMoveType(moveIndex).checkIfStrongAgainst(mon.getTypes().get(1))) {
@@ -393,31 +403,16 @@ public class Pokemon {
     }
 
     public static void main(String[] args) {
-        Pokemon charizard = new Pokemon("charizard");
-        Pokemon blastoise = new Pokemon("blastoise");
-        Pokemon venusaur = new Pokemon("venusaur");
-        Pokemon pikachu = new Pokemon("pikachu");
-        Pokemon mewtwo = new Pokemon("mewtwo");
-        // System.out.println(charizard);
-        // System.out.println(charizard.getMoves());
-        // System.out.println(venusaur);
-        // System.out.println(chadizard.getType().checkIfStrongAgainst(venusaur.getType()));
-        // System.out.println();
-        // System.out.println(pikachu);
-        // System.out.println(new File("").getAbsolutePath());
-        // System.out.println(blastoise.getHp());
-        // charizard.attack(blastoise, 0);
-        // System.out.println(blastoise.getHp());
-        // System.out.println(charizard.getHp());
-        // blastoise.attack(charizard, 0);
-        // System.out.println(charizard.getHp());
-        // blastoise.attack(charizard, 2);
-        // System.out.println(charizard.getHp());
-        // venusaur.attack(charizard,1);
-        // System.out.println(charizard.getHp());
-        System.out.println(venusaur.getHp());
-        mewtwo.attack(venusaur, 0);
-        System.out.println(venusaur.getHp());
+        // Pokemon charizard = new Pokemon("charizard");
+        // Pokemon blastoise = new Pokemon("blastoise");
+        // Pokemon venusaur = new Pokemon("venusaur");
+        // Pokemon pikachu = new Pokemon("pikachu");
+        // Pokemon mewtwo = new Pokemon("mewtwo");
+        // Pokemon golem = new Pokemon("golem");
+        // Pokemon machamp = new Pokemon("machamp");
+        // System.out.println(golem.getHp());
+        // machamp.attack(golem, 0);
+        // System.out.println(golem.getHp());
     }
 
 }
