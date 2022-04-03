@@ -11,8 +11,9 @@ public class Move {
     private double accuracy;
     private double heal;
     private boolean attackBoost;
-    private Collection<String> validMoves = Arrays.asList("swords dance", "recover", "hydro pump", 
-    "slash", "flamethrower", "earthquake", "solar beam", "ice beam", "skull bash", "thunderbolt", "surf");
+    private Collection<String> validMoves = Arrays.asList("swords dance","recover","hydro pump","slash","flamethrower",
+    "earthquake","solar beam","ice beam","skull bash","thunderbolt","surf","sludge bomb","air slash","cross chop","thunder punch",
+    "ice punch","fire punch","psychic","rock slide","shadow ball","dragon pulse","roost");
 
     public Move(String name) {
         checkValidMove(name);
@@ -46,8 +47,43 @@ public class Move {
                 break;
             case "thunderbolt":
                 setMoveAttributes(name, "electric", 95, 1, 0, false);
+                break;
             case "surf":
                 setMoveAttributes(name, "water", 95, 1, 0, false);
+                break;
+            case "sludge bomb":
+                setMoveAttributes(name, "poison", 90, 1, 0, false);
+                break;
+            case "air slash":
+                setMoveAttributes(name, "flying", 75, 0.95, 0, false);
+                break;
+            case "cross chop":
+                setMoveAttributes(name, "fighting", 100, 0.8, 0, false);
+                break;
+            case "thunder punch":
+                setMoveAttributes(name, "electric", 75, 1, 0, false);
+                break;
+            case "fire punch":
+                setMoveAttributes(name, "fire", 75, 1, 0, false);
+                break;
+            case "ice punch":
+                setMoveAttributes(name, "ice", 75, 1, 0, false);
+                break;
+            case "psychic":
+                setMoveAttributes(name, "psychic", 90, 1, 0, false);
+                break;
+            case "rock slide":
+                setMoveAttributes(name, "rock", 75, 0.9, 0, false);
+                break;
+            case "shadow ball":
+                setMoveAttributes(name, "ghost", 80, 1, 0, false);
+                break;
+            case "dragon pulse":
+                setMoveAttributes(name, "dragon", 85, 1, 0, false);
+                break;
+            case "roost":
+                setMoveAttributes(name, "flying", 0, 1, 0.5, false);
+                break;
         }
     }
 
