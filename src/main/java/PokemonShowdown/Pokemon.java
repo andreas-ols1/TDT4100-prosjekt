@@ -157,7 +157,7 @@ public class Pokemon {
     }
 
     private void setPokemonToPrimeape() {
-        setPokemonDetails("primeape", Arrays.asList("figthing", "none"), 302, 277, 207, 257, Arrays.asList("cross chop","swords dance","earthquake","thunder punch"));
+        setPokemonDetails("primeape", Arrays.asList("fighting", "none"), 302, 277, 207, 257, Arrays.asList("cross chop","swords dance","earthquake","thunder punch"));
     }
 
     private void setPokemonToArcanine() {
@@ -403,16 +403,16 @@ public class Pokemon {
     }
 
     public static void main(String[] args) {
-        // Pokemon charizard = new Pokemon("charizard");
-        // Pokemon blastoise = new Pokemon("blastoise");
-        // Pokemon venusaur = new Pokemon("venusaur");
-        // Pokemon pikachu = new Pokemon("pikachu");
-        // Pokemon mewtwo = new Pokemon("mewtwo");
-        // Pokemon golem = new Pokemon("golem");
-        // Pokemon machamp = new Pokemon("machamp");
-        // System.out.println(golem.getHp());
-        // machamp.attack(golem, 0);
-        // System.out.println(golem.getHp());
+        Pokemon charizard = new Pokemon("charizard");
+        Pokemon blastoise = new Pokemon("blastoise");
+        Pokemon venusaur = new Pokemon("venusaur");
+        Pokemon pikachu = new Pokemon("pikachu");
+        Pokemon mewtwo = new Pokemon("mewtwo");
+        Pokemon golem = new Pokemon("golem");
+        Pokemon machamp = new Pokemon("machamp");
+        System.out.println(golem.getHp());
+        machamp.attack(golem, 0);
+        System.out.println(golem.getHp());
     }
 
 }
