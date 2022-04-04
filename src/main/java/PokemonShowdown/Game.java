@@ -11,7 +11,9 @@ public class Game {
     private List<Pokemon> opponentTeam = new ArrayList<>();
     private Pokemon activeMon;
     private Pokemon activeOpponentMon;
-    private final List<String> validPokemon = Arrays.asList("charizard", "blastoise", "venusaur", "pikachu");
+    private final List<String> validPokemon = Arrays.asList("venusaur","charizard","blastoise","pikachu","sandslash","nidoqueen",
+    "nidoking","golduck","primeape","arcanine","poliwrath","alakazam","machamp","tentacruel","golem","slowbro","gengar","exeggutor",
+    "rhydon","starmie","gyarados","kabutops","aerodactyl","snorlax","articuno","zapdos","moltres","dragonite","mewtwo","mew");
 
     public Game(List<String> playerTeam) {
         playerTeam.stream().forEach((mon) -> this.playerTeam.add(new Pokemon(mon)));
@@ -26,7 +28,11 @@ public class Game {
     public List<String> getRandomTeam() {
         List<String> team = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            team.add(validPokemon.get(new Random().nextInt(validPokemon.size())));
+            String mon = validPokemon.get(new Random().nextInt(validPokemon.size()));
+            while (team.contains(mon)) {
+                mon = validPokemon.get(new Random().nextInt(validPokemon.size()));
+            }
+            team.add(mon);
         }
         return team;
     }
@@ -56,31 +62,31 @@ public class Game {
     }
 
     public static void main(String[] args) {
-        Game game = new Game(Arrays.asList("pikachu", "charizard", "charizard"));
-        game.setActiveMon(1);
-        // System.out.println(game);
-        // System.out.println(game.getActiveMon());
-        // System.out.println(game.getActiveMon().getHp());
-        // System.out.println("");
-        // System.out.println(game.getActiveOpponentMon());
-        // System.out.println(game.getActiveOpponentMon().getHp());
-        // System.out.println("");
-        // game.getActiveMon().attack(game.getActiveOpponentMon(), 3);
-        // System.out.println(game.getActiveMon() + " used " + game.getActiveMon().getMoves().get(3).getName());
-        // System.out.println(game.getActiveMon());
-        // System.out.println(game.getActiveMon().getHp());
-        // System.out.println("");
-        // System.out.println(game.getActiveOpponentMon());
-        // System.out.println(game.getActiveOpponentMon().getHp());
-        // System.out.println("");
-        // game.getActiveOpponentMon().attack(game.getActiveMon(), 1);
-        // System.out.println(game.getActiveOpponentMon() + " used " + game.getActiveOpponentMon().getMoves().get(1).getName());
-        // System.out.println(game.getActiveMon());
-        // System.out.println(game.getActiveMon().getHp());
-        // System.out.println("");
-        // System.out.println(game.getActiveOpponentMon());
-        // System.out.println(game.getActiveOpponentMon().getHp());
-        // System.out.println("");
+        Game game = new Game(Arrays.asList("blastoise", "golem", "arcanine"));
+        game.setActiveMon(2);
+        System.out.println(game);
+        System.out.println(game.getActiveMon());
+        System.out.println(game.getActiveMon().getHp());
+        System.out.println("");
+        System.out.println(game.getActiveOpponentMon());
+        System.out.println(game.getActiveOpponentMon().getHp());
+        System.out.println("");
+        game.getActiveMon().attack(game.getActiveOpponentMon(), 3);
+        System.out.println(game.getActiveMon() + " used " + game.getActiveMon().getMoves().get(3).getName());
+        System.out.println(game.getActiveMon());
+        System.out.println(game.getActiveMon().getHp());
+        System.out.println("");
+        System.out.println(game.getActiveOpponentMon());
+        System.out.println(game.getActiveOpponentMon().getHp());
+        System.out.println("");
+        game.getActiveOpponentMon().attack(game.getActiveMon(), 1);
+        System.out.println(game.getActiveOpponentMon() + " used " + game.getActiveOpponentMon().getMoves().get(1).getName());
+        System.out.println(game.getActiveMon());
+        System.out.println(game.getActiveMon().getHp());
+        System.out.println("");
+        System.out.println(game.getActiveOpponentMon());
+        System.out.println(game.getActiveOpponentMon().getHp());
+        System.out.println("");
     }
 
 }
