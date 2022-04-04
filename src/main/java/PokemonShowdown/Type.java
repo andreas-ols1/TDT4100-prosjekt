@@ -150,6 +150,11 @@ public class Type {
         return false;
     }
 
+    public boolean checkIfImmune(Type type) {
+        if (immune.contains(type.getName())) return true;
+        return false;
+    }
+
     @Override
     public String toString() {
         return "Name: " + name + 
