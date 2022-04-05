@@ -23,7 +23,7 @@ public class Pokemon {
     private int speedBoost = 2;
     private Collection<String> validPokemon = Arrays.asList("venusaur","charizard","blastoise","pikachu","sandslash","nidoqueen",
     "nidoking","golduck","primeape","arcanine","poliwrath","alakazam","machamp","tentacruel","golem","slowbro","gengar","exeggutor",
-    "rhydon","starmie","gyarados","kabutops","aerodactyl","snorlax","articuno","zapdos","moltres","dragonite","mewtwo","mew","mega-rayquaza");
+    "rhydon","starmie","gyarados","kabutops","aerodactyl","snorlax","articuno","zapdos","moltres","dragonite","mewtwo","mew","mega-rayquaza","sussy baka");
 
     public Pokemon(String name) {
         checkValidPokemon(name);
@@ -32,24 +32,14 @@ public class Pokemon {
             case "venusaur" -> setPokemonToVenusaur();
             case "blastoise" -> setPokemonToBlastoise();
             case "pikachu" -> setPokemonToPikachu();
-            case "sandslash" -> setPokemonToSandslash();
-            case "nidoqueen" -> setPokemonToNidoqueen();
             case "nidoking" -> setPokemonToNidoking();
-            case "golduck" -> setPokemonToGolduck();
-            case "primeape" -> setPokemonToPrimeape();
             case "arcanine" -> setPokemonToArcanine();
-            case "poliwrath" -> setPokemonToPoliwrath();
             case "alakazam" -> setPokemonToAlakazam();
             case "machamp" -> setPokemonToMachamp();
-            case "tentacruel" -> setPokemonToTentacruel();
             case "golem" -> setPokemonToGolem();
             case "slowbro" -> setPokemonToSlowbro();
             case "gengar" -> setPokemonToGengar();
-            case "exeggutor" -> setPokemonToExeggutor();
-            case "rhydon" -> setPokemonToRhydon();
-            case "starmie" -> setPokemonToStarmie();
             case "gyarados" -> setPokemonToGyarados();
-            case "kabutops" -> setPokemonToKabutops();
             case "aerodactyl" -> setPokemonToAerodactyl();
             case "snorlax" -> setPokemonToSnorlax();
             case "articuno" -> setPokemonToArticuno();
@@ -59,6 +49,7 @@ public class Pokemon {
             case "mewtwo" -> setPokemonToMewtwo();
             case "mew" -> setPokemonToMew();
             case "mega-rayquaza" -> setPokemonToMegaRayquaza();
+            case "Sussy baka" -> setPokemonToSussyBaka();
         }
     }
 
@@ -191,6 +182,10 @@ public class Pokemon {
 
     private void setPokemonToMegaRayquaza() {
         setPokemonDetails("mega-rayquaza", Arrays.asList("dragon","flying"), 382, 427, 267, 297, Arrays.asList("dragon pulse","dragons ascent","v-create","dragon dance"));
+    }
+
+    private void setPokemonToSussyBaka() {
+        setPokemonDetails("sussy baka", Arrays.asList("normal","none"), 412, 307, 307, 307, Arrays.asList("skull bash","dragon dance","recover","earthquake"));
     }
 
     private void setPokemonDetails(String name, List<String> types, int maxHp, int attack, int defence, int speed, Collection<String> moves) {
