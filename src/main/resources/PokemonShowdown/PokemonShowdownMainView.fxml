@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="754.3999633789062" minWidth="10.0" prefWidth="754.3999633789062" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="492.79998779296875" minWidth="10.0" prefWidth="245.60003662109375" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="574.4000305175781" minHeight="10.0" prefHeight="465.599951171875" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="344.0000061035156" minHeight="10.0" prefHeight="235.20004882812498" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <SplitPane dividerPositions="0.14723661485319517" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" GridPane.columnIndex="1">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Text layoutX="40.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your team" underline="true">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="245.0">
+               <children>
+                  <VBox prefHeight="98.0" prefWidth="244.8">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="98.0" prefWidth="244.8" text="Button" />
+                     </children>
+                  </VBox>
+                  <VBox layoutY="98.0" prefHeight="98.0" prefWidth="244.8">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="98.0" prefWidth="244.8" text="Button" />
+                     </children>
+                  </VBox>
+                  <VBox layoutY="194.0" prefHeight="98.0" prefWidth="244.8">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="98.0" prefWidth="244.8" text="Button" />
+                     </children>
+                  </VBox>
+                  <VBox layoutY="293.0" prefHeight="98.0" prefWidth="244.8">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="98.0" prefWidth="244.8" text="Button" />
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <SplitPane dividerPositions="0.21061643835616442" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" GridPane.rowIndex="1">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Text layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Attacks">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <ButtonBar prefHeight="40.0" prefWidth="753.6">
+                    <buttons>
+                      <Button mnemonicParsing="false" prefWidth="188.4" text="Button" />
+                        <Button mnemonicParsing="false" prefWidth="185.0" text="Button" />
+                        <Button mnemonicParsing="false" prefWidth="185.0" text="Button" />
+                        <Button mnemonicParsing="false" prefWidth="185.0" text="Button" />
+                    </buttons>
+                  </ButtonBar>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</GridPane>
