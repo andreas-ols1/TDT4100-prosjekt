@@ -6,8 +6,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import javafx.scene.control.SplitPane;
-
 public class Pokemon {
     
     private String name;
@@ -21,8 +19,8 @@ public class Pokemon {
     private int maxHp;
     private int hp;
     private boolean isDead = false;
-    private double attackBoost = 1;
-    private double speedBoost = 1;
+    private double attackBoost = 2;
+    private int speedBoost = 2;
     private Collection<String> validPokemon = Arrays.asList("venusaur","charizard","blastoise","pikachu","sandslash","nidoqueen",
     "nidoking","golduck","primeape","arcanine","poliwrath","alakazam","machamp","tentacruel","golem","slowbro","gengar","exeggutor",
     "rhydon","starmie","gyarados","kabutops","aerodactyl","snorlax","articuno","zapdos","moltres","dragonite","mewtwo","mew","mega-rayquaza");
@@ -30,99 +28,37 @@ public class Pokemon {
     public Pokemon(String name) {
         checkValidPokemon(name);
         switch (name.toLowerCase()) {
-            case "charizard":
-                setPokemonToCharizard();
-                break;
-            case "venusaur":
-                setPokemonToVenusaur();
-                break;
-            case "blastoise":
-                setPokemonToBlastoise();
-                break;
-            case "pikachu":
-                setPokemonToPikachu();
-                break;
-            case "sandslash":
-                setPokemonToSandslash();
-                break;
-            case "nidoqueen":
-                setPokemonToNidoqueen();
-                break;
-            case "nidoking":
-                setPokemonToNidoking();
-                break;
-            case "golduck":
-                setPokemonToGolduck();
-                break;
-            case "primeape":
-                setPokemonToPrimeape();
-                break;
-            case "arcanine":
-                setPokemonToArcanine();
-                break;
-            case "poliwrath":
-                setPokemonToPoliwrath();
-                break;
-            case "alakazam":
-                setPokemonToAlakazam();
-                break;
-            case "machamp":
-                setPokemonToMachamp();
-                break;
-            case "tentacruel":
-                setPokemonToTentacruel();
-                break;
-            case "golem":
-                setPokemonToGolem();
-                break;
-            case "slowbro":
-                setPokemonToSlowbro();
-                break;
-            case "gengar":
-                setPokemonToGengar();
-                break;
-            case "exeggutor":
-                setPokemonToExeggutor();
-                break;
-            case "rhydon":
-                setPokemonToRhydon();
-                break;
-            case "starmie":
-                setPokemonToStarmie();
-                break;
-            case "gyarados":
-                setPokemonToGyarados();
-                break;
-            case "kabutops":
-                setPokemonToKabutops();
-                break;
-            case "aerodactyl":
-                setPokemonToAerodactyl();
-                break;
-            case "snorlax":
-                setPokemonToSnorlax();
-                break;
-            case "articuno":
-                setPokemonToArticuno();
-                break;
-            case "zapdos":
-                setPokemonToZapdos();
-                break;
-            case "moltres":
-                setPokemonToMoltres();
-                break;
-            case "dragonite":
-                setPokemonToDragonite();
-                break;
-            case "mewtwo":
-                setPokemonToMewtwo();
-                break;
-            case "mew":
-                setPokemonToMew();
-                break;
-            case "mega-rayquaza":
-                setPokemonToMegaRayquaza();
-                break;
+            case "charizard" -> setPokemonToCharizard();
+            case "venusaur" -> setPokemonToVenusaur();
+            case "blastoise" -> setPokemonToBlastoise();
+            case "pikachu" -> setPokemonToPikachu();
+            case "sandslash" -> setPokemonToSandslash();
+            case "nidoqueen" -> setPokemonToNidoqueen();
+            case "nidoking" -> setPokemonToNidoking();
+            case "golduck" -> setPokemonToGolduck();
+            case "primeape" -> setPokemonToPrimeape();
+            case "arcanine" -> setPokemonToArcanine();
+            case "poliwrath" -> setPokemonToPoliwrath();
+            case "alakazam" -> setPokemonToAlakazam();
+            case "machamp" -> setPokemonToMachamp();
+            case "tentacruel" -> setPokemonToTentacruel();
+            case "golem" -> setPokemonToGolem();
+            case "slowbro" -> setPokemonToSlowbro();
+            case "gengar" -> setPokemonToGengar();
+            case "exeggutor" -> setPokemonToExeggutor();
+            case "rhydon" -> setPokemonToRhydon();
+            case "starmie" -> setPokemonToStarmie();
+            case "gyarados" -> setPokemonToGyarados();
+            case "kabutops" -> setPokemonToKabutops();
+            case "aerodactyl" -> setPokemonToAerodactyl();
+            case "snorlax" -> setPokemonToSnorlax();
+            case "articuno" -> setPokemonToArticuno();
+            case "zapdos" -> setPokemonToZapdos();
+            case "moltres" -> setPokemonToMoltres();
+            case "dragonite" -> setPokemonToDragonite();
+            case "mewtwo" -> setPokemonToMewtwo();
+            case "mew" -> setPokemonToMew();
+            case "mega-rayquaza" -> setPokemonToMegaRayquaza();
         }
     }
 
@@ -151,7 +87,7 @@ public class Pokemon {
     private void setPokemonToSandslash() {
         setPokemonDetails("sandslash", Arrays.asList("ground", "none"), 322, 267, 287, 197, Arrays.asList("slash","earthquake","swords dance","skull bash"));
     }
-    // name, types, hp, attack, defence, speed, moves
+
     private void setPokemonToNidoqueen() {
         setPokemonDetails("nidoqueen", Arrays.asList("poison", "ground"), 352, 251, 241, 219, Arrays.asList("earthquake","thunderbolt","sludge bomb","surf"));
     }
@@ -219,7 +155,6 @@ public class Pokemon {
 
     private void setPokemonToKabutops() {
         setPokemonDetails("kabutops", Arrays.asList("water", "rock"), 292, 297, 277, 227, Arrays.asList("hydro pump", "rock slide", "agility", "swords dance"));
-        // Add agility ??
     }
 
     private void setPokemonToAerodactyl() {
@@ -255,8 +190,7 @@ public class Pokemon {
     }
 
     private void setPokemonToMegaRayquaza() {
-        setPokemonDetails("mega-rayquaza", Arrays.asList("dragon","flying"), 382, 427, 267, 297, Arrays.asList("dragon pulse","earthquake","v-create","dragon dance"));
-        // Add dragon dance, v-create and dragons ascent ??
+        setPokemonDetails("mega-rayquaza", Arrays.asList("dragon","flying"), 382, 427, 267, 297, Arrays.asList("dragon pulse","dragons ascent","v-create","dragon dance"));
     }
 
     private void setPokemonDetails(String name, List<String> types, int maxHp, int attack, int defence, int speed, Collection<String> moves) {
@@ -356,7 +290,7 @@ public class Pokemon {
     }
 
     public double getSpeedBoost() {
-        return speedBoost;
+        return speedBoost / 2;
     }
 
     public double getAttackBoost() {
@@ -466,37 +400,37 @@ public class Pokemon {
         // System.out.println(kabutops.getSpeed() + " " + kabutops.getSpeedBoost());
         // System.out.println(golem.getHp());
         // kabutops.attack(golem, 0);
-        System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        ray.attack(golem, 3);
-        System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        System.out.println(golem.getHp());
-        ray.attack(golem, 3);
-        System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        ray.attack(golem, 3);
-        System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        System.out.println(golem.getHp());
-        ray.attack(golem, 3);
-        System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        ray.attack(golem, 3);
-        System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        System.out.println(golem.getHp());
-        ray.attack(golem, 3);
-        System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        ray.attack(golem, 3);
-        System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        System.out.println(golem.getHp());
-        ray.attack(golem, 3);
-        System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+        // ray.attack(golem, 3);
+        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+        // System.out.println(golem.getHp());
+        // ray.attack(golem, 3);
+        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+        // ray.attack(golem, 3);
+        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+        // System.out.println(golem.getHp());
+        // ray.attack(golem, 3);
+        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+        // ray.attack(golem, 3);
+        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+        // System.out.println(golem.getHp());
+        // ray.attack(golem, 3);
+        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+        // ray.attack(golem, 3);
+        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+        // System.out.println(golem.getHp());
+        // ray.attack(golem, 3);
+        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
         // System.out.println(golem.getHp());
         // ray.attack(golem, 2);
         // System.out.println(golem.getHp());
