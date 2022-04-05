@@ -16,51 +16,21 @@ public class Type {
     public Type(String type) {
         checkValidType(type);
         switch (type.toLowerCase()) {
-            case "fire":
-                setFireType();
-                break;
-            case "water":
-                setWaterType();
-                break;
-            case "grass":
-                setGrassType();
-                break;
-            case "normal":
-                setNormalType();
-                break;
-            case "ground":
-                setGroundType();
-                break;
-            case "ice":
-                setIceType();
-                break;
-            case "electric":
-                setElectricType();
-                break;
-            case "none":
-                setTypeNone();
-                break;
-            case "poison":
-                setPoisonType();
-                break;
-            case "flying":
-                setFlyingType();
-                break;
-            case "rock":
-                setRockType();
-                break;
-            case "fighting":
-                setFightingType();
-                break;
-            case "psychic":
-                setPsychicType();
-                break;
-            case "ghost":
-                setGhostType();
-                break;
-            case "dragon":
-                setDragonType();
-                break;
+            case "fire" -> setFireType();
+            case "water" -> setWaterType();
+            case "grass" -> setGrassType();
+            case "normal" -> setNormalType();
+            case "ground" -> setGroundType();
+            case "ice" -> setIceType();
+            case "electric" -> setElectricType();
+            case "none" -> setTypeNone();
+            case "poison" -> setPoisonType();
+            case "flying" -> setFlyingType();
+            case "rock" -> setRockType();
+            case "fighting" -> setFightingType();
+            case "psychic" -> setPsychicType();
+            case "ghost" -> setGhostType();
+            case "dragon" -> setDragonType();
         }
 
     }
