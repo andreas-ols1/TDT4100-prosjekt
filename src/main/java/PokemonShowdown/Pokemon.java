@@ -6,21 +6,26 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import javafx.scene.control.SplitPane;
+
 public class Pokemon {
     
     private String name;
     private List<Type> types = new ArrayList<>();
     private List<Move> moves = new ArrayList<>();
     private int attack;
+    private int orgAttack;
     private int defence;
     private int speed;
+    private int orgSpeed;
     private int maxHp;
     private int hp;
     private boolean isDead = false;
-    private int attackBoost = 1;
+    private double attackBoost = 1;
+    private double speedBoost = 1;
     private Collection<String> validPokemon = Arrays.asList("venusaur","charizard","blastoise","pikachu","sandslash","nidoqueen",
     "nidoking","golduck","primeape","arcanine","poliwrath","alakazam","machamp","tentacruel","golem","slowbro","gengar","exeggutor",
-    "rhydon","starmie","gyarados","kabutops","aerodactyl","snorlax","articuno","zapdos","moltres","dragonite","mewtwo","mew");
+    "rhydon","starmie","gyarados","kabutops","aerodactyl","snorlax","articuno","zapdos","moltres","dragonite","mewtwo","mew","mega-rayquaza");
 
     public Pokemon(String name) {
         checkValidPokemon(name);
@@ -114,6 +119,9 @@ public class Pokemon {
                 break;
             case "mew":
                 setPokemonToMew();
+                break;
+            case "mega-rayquaza":
+                setPokemonToMegaRayquaza();
                 break;
         }
     }
@@ -210,7 +218,7 @@ public class Pokemon {
     }
 
     private void setPokemonToKabutops() {
-        setPokemonDetails("kabutops", Arrays.asList("water", "rock"), 292, 297, 277, 227, Arrays.asList("hydro pump", "rock slide", "ice beam", "swords dance"));
+        setPokemonDetails("kabutops", Arrays.asList("water", "rock"), 292, 297, 277, 227, Arrays.asList("hydro pump", "rock slide", "agility", "swords dance"));
         // Add agility ??
     }
 
@@ -246,30 +254,44 @@ public class Pokemon {
         setPokemonDetails("mew", Arrays.asList("psychic", "none"), 372, 267, 267, 267, Arrays.asList("psychic", "earthquake", "recover", "swords dance"));
     }
 
+    private void setPokemonToMegaRayquaza() {
+        setPokemonDetails("mega-rayquaza", Arrays.asList("dragon","flying"), 382, 427, 267, 297, Arrays.asList("dragon pulse","earthquake","v-create","dragon dance"));
+        // Add dragon dance, v-create and dragons ascent ??
+    }
+
     private void setPokemonDetails(String name, List<String> types, int maxHp, int attack, int defence, int speed, Collection<String> moves) {
         this.name = name;
         types.stream().forEach((type) -> this.types.add(new Type(type)));
         this.maxHp = maxHp;
         hp = maxHp;
         this.attack = attack;
+        orgAttack = attack;
         this.defence = defence;
         this.speed = speed;
+        orgSpeed = speed;
         moves.stream().forEach((move) -> this.moves.add(new Move(move)));
     }
 
     public void attack(Pokemon mon, int moveIndex) {
         double effectiveness = getEffectiveness(mon, moveIndex);
-        System.out.println(effectiveness);
         double stab = getStab(moveIndex);
-        System.out.println(stab);
         if (checkIfHit(moveIndex)) {
-            if (!checkImmunity(mon, moveIndex)) {
-                mon.takeDamage(calculateDamage(mon, moveIndex, effectiveness, stab));
-                heal(moveIndex);
-                System.out.println(getName() + " used " + getMove(moveIndex).getName() + " on " + mon);
-                if (getMoves().get(moveIndex).getAttackBoost() == true) attackBoost();
+            if (!(getMove(moveIndex).getDamage() == 0)) {
+                if (!checkImmunity(mon, moveIndex)) {
+                    mon.takeDamage(calculateDamage(mon, moveIndex, effectiveness, stab));
+                    heal(moveIndex);
+                    speedBoost(moveIndex);
+                    attackBoost(moveIndex);
+                    System.out.println(getName() + " used " + getMove(moveIndex).getName() + " on " + mon);
+                }
+                else System.out.println(mon.getName() + " is immune to " + getMove(moveIndex).getName());
             }
-            else System.out.println(mon.getName() + " is immune to " + getMove(moveIndex).getName());
+            else {
+                heal(moveIndex);
+                speedBoost(moveIndex);
+                attackBoost(moveIndex);
+                System.out.println(getName() + " used " + getMove(moveIndex).getName());
+            }
         } 
         else System.out.println(getName() + " missed " + getMove(moveIndex).getName());
     }
@@ -278,7 +300,7 @@ public class Pokemon {
         double randomness = ThreadLocalRandom.current().nextDouble(0.85,1);
         double moveBaseDamage = this.getMoves().get(moveIndex).getDamage();
         double attackPerOpponentsDefence = (double)this.getAttack()/mon.getDefence();
-        return (int)Math.floor(((0.84*(moveBaseDamage*attackBoost)*attackPerOpponentsDefence)+2)*stab*effectiveness*randomness*criticalHit());
+        return (int)Math.floor(((0.84*moveBaseDamage*attackPerOpponentsDefence)+2)*stab*effectiveness*randomness*criticalHit());
     }
 
     private void heal(int moveIndex) {
@@ -289,11 +311,20 @@ public class Pokemon {
         else hp = maxHp;
     }
 
-    private void attackBoost() {
-        if (attackBoost + 1 <= 4) {
-            attackBoost += 1;
+    private void attackBoost(int moveIndex) {
+        if ((attackBoost + getMove(moveIndex).getAttackBoost() <= 4) && (attackBoost + getMove(moveIndex).getAttackBoost() > 0)) {
+            attackBoost += getMove(moveIndex).getAttackBoost();
+            attack = (int)(orgAttack * attackBoost);
         }
-        else throw new IllegalStateException("Attack boost maxes out at x4");
+        else System.out.println("Attack boost maxes out at x4, and can't go below 0.5");
+    }
+
+    private void speedBoost(int moveIndex) {
+        if ((speedBoost + getMove(moveIndex).getSpeedBoost() <= 4) && (speedBoost + getMove(moveIndex).getSpeedBoost() > 0)) {
+            speedBoost += getMove(moveIndex).getSpeedBoost();
+            speed = (int)(orgSpeed * speedBoost);
+        }
+        else System.out.println("Speed boost maxes out at x4, and can't go below 0.5");
     }
 
     public String getName() {
@@ -324,6 +355,14 @@ public class Pokemon {
         return hp;
     }
 
+    public double getSpeedBoost() {
+        return speedBoost;
+    }
+
+    public double getAttackBoost() {
+        return attackBoost;
+    }
+ 
     private void takeDamage(double damage) {
         if (hp - damage > 0) {
             hp -= damage;
@@ -410,9 +449,74 @@ public class Pokemon {
         Pokemon mewtwo = new Pokemon("mewtwo");
         Pokemon golem = new Pokemon("golem");
         Pokemon machamp = new Pokemon("machamp");
+        Pokemon kabutops = new Pokemon("kabutops");
+        Pokemon ray = new Pokemon("mega-rayquaza");
+        // System.out.println(kabutops.getSpeed() + " " + kabutops.getSpeedBoost());
+        // kabutops.attack(golem, 2);
+        // System.out.println(kabutops.getSpeed() + " " + kabutops.getSpeedBoost());
+        // System.out.println(golem.getHp());
+        // kabutops.attack(golem, 2);
+        // System.out.println(kabutops.getSpeed() + " " + kabutops.getSpeedBoost());
+        // System.out.println(golem.getHp());
+        // kabutops.attack(golem, 0);
+        // System.out.println(golem.getHp());
+        // System.out.println(kabutops.getSpeed() + " " + kabutops.getSpeedBoost());
+        // System.out.println(golem.getHp());
+        // kabutops.attack(golem, 0);
+        // System.out.println(kabutops.getSpeed() + " " + kabutops.getSpeedBoost());
+        // System.out.println(golem.getHp());
+        // kabutops.attack(golem, 0);
+        System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+        ray.attack(golem, 3);
+        System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
         System.out.println(golem.getHp());
-        machamp.attack(golem, 0);
+        ray.attack(golem, 3);
+        System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+        System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+        ray.attack(golem, 3);
+        System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
         System.out.println(golem.getHp());
+        ray.attack(golem, 3);
+        System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+        ray.attack(golem, 3);
+        System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+        System.out.println(golem.getHp());
+        ray.attack(golem, 3);
+        System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+        ray.attack(golem, 3);
+        System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+        System.out.println(golem.getHp());
+        ray.attack(golem, 3);
+        System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+        // System.out.println(golem.getHp());
+        // ray.attack(golem, 2);
+        // System.out.println(golem.getHp());
+        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+        // System.out.println(golem.getHp());
+        // ray.attack(golem, 2);
+        // System.out.println(golem.getHp());
+        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+        // System.out.println(golem.getHp());
+        // ray.attack(golem, 2);
+        // System.out.println(golem.getHp());
+        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+        // System.out.println(golem.getHp());
+        // ray.attack(golem, 2);
+        // System.out.println(golem.getHp());
+        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
+        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
     }
 
 }
