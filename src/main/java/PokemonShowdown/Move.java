@@ -14,7 +14,8 @@ public class Move {
     private double speedBoost;
     private Collection<String> validMoves = Arrays.asList("swords dance","recover","hydro pump","slash","flamethrower",
     "earthquake","solar beam","ice beam","skull bash","thunderbolt","surf","sludge bomb","air slash","cross chop","thunder punch",
-    "ice punch","fire punch","psychic","rock slide","shadow ball","dragon pulse","roost","agility","dragon dance","v-create","dragons ascent");
+    "ice punch","fire punch","psychic","rock slide","shadow ball","dragon pulse","roost","agility","dragon dance","v-create",
+    "dragons ascent","synthesis","giga drain");
 
     public Move(String name) {
         checkValidMove(name);
@@ -45,6 +46,8 @@ public class Move {
             case "dragon dance" -> setMoveAttributes(name, "dragon", 0, 1, 0, 0.5, 0.5);
             case "v-create" -> setMoveAttributes(name, "fire", 180, 0.95, 0, -0.5, -0.5);
             case "dragons ascent" -> setMoveAttributes(name, "flying", 120, 1, 0, 0, 0);
+            case "synthesis" -> setMoveAttributes(name, "grass", 0, 1, 0.5, 0, 0);
+            case "giga drain" -> setMoveAttributes(name, "grass", 75, 1, 0.1, 0, 0);
         }
     }
 
@@ -99,8 +102,7 @@ public class Move {
     }
 
     public static void main(String[] args) {
-        Move flammekaster = new Move("flamethrower");
-        System.out.println(flammekaster);
+
     }
 
 }

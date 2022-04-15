@@ -19,11 +19,11 @@ public class Pokemon {
     private int maxHp;
     private int hp;
     private boolean isDead = false;
-    private double attackBoost = 2;
-    private int speedBoost = 2;
-    private Collection<String> validPokemon = Arrays.asList("venusaur","charizard","blastoise","pikachu","sandslash","nidoqueen",
-    "nidoking","golduck","primeape","arcanine","poliwrath","alakazam","machamp","tentacruel","golem","slowbro","gengar","exeggutor",
-    "rhydon","starmie","gyarados","kabutops","aerodactyl","snorlax","articuno","zapdos","moltres","dragonite","mewtwo","mew","mega-rayquaza","sussy baka");
+    private double attackBoost = 1;
+    private double speedBoost = 1;
+    private Collection<String> validPokemon = Arrays.asList("venusaur","charizard","blastoise","pikachu",
+    "nidoking","arcanine","alakazam","machamp","golem","slowbro","gengar","gyarados","aerodactyl","snorlax",
+    "articuno","zapdos","moltres","dragonite","mewtwo","mew","mega-rayquaza","amoonguss");
 
     public Pokemon(String name) {
         checkValidPokemon(name);
@@ -49,7 +49,7 @@ public class Pokemon {
             case "mewtwo" -> setPokemonToMewtwo();
             case "mew" -> setPokemonToMew();
             case "mega-rayquaza" -> setPokemonToMegaRayquaza();
-            case "Sussy baka" -> setPokemonToSussyBaka();
+            case "amoonguss" -> setPokemonToAmoonguss();
         }
     }
 
@@ -75,34 +75,14 @@ public class Pokemon {
         setPokemonDetails("pikachu", Arrays.asList("electric","none"), 274, 299, 167, 247, Arrays.asList("slash","thunderbolt","swords dance","surf"));
     }
 
-    private void setPokemonToSandslash() {
-        setPokemonDetails("sandslash", Arrays.asList("ground", "none"), 322, 267, 287, 197, Arrays.asList("slash","earthquake","swords dance","skull bash"));
-    }
-
-    private void setPokemonToNidoqueen() {
-        setPokemonDetails("nidoqueen", Arrays.asList("poison", "ground"), 352, 251, 241, 219, Arrays.asList("earthquake","thunderbolt","sludge bomb","surf"));
-    }
-
     private void setPokemonToNidoking() {
         setPokemonDetails("nidoking", Arrays.asList("poison", "ground"), 334, 271, 221, 237, Arrays.asList("earthquake","sludge bomb","surf","swords dance"));
-    }
-
-    private void setPokemonToGolduck() {
-        setPokemonDetails("golduck", Arrays.asList("water", "none"), 332, 257, 227, 237, Arrays.asList("hydro pump","slash","ice beam","surf"));
-    }
-
-    private void setPokemonToPrimeape() {
-        setPokemonDetails("primeape", Arrays.asList("fighting", "none"), 302, 277, 207, 257, Arrays.asList("cross chop","swords dance","earthquake","thunder punch"));
     }
 
     private void setPokemonToArcanine() {
         setPokemonDetails("arcanine", Arrays.asList("fire", "none"), 352, 287, 227, 257, Arrays.asList("flamethrower","recover","earthquake","skull bash"));
     }
-
-    private void setPokemonToPoliwrath() {
-        setPokemonDetails("poliwrath", Arrays.asList("water", "fighting"), 352, 257, 257, 207, Arrays.asList("hydro pump","cross chop","ice beam","swords dance"));
-    }
-
+    
     private void setPokemonToAlakazam() {
         setPokemonDetails("alakazam", Arrays.asList("psychic", "none"), 282, 337, 257, 307, Arrays.asList("psychic","thunderbolt","ice beam","recover"));
     }
@@ -111,13 +91,8 @@ public class Pokemon {
         setPokemonDetails("machamp", Arrays.asList("fighting", "none"), 352, 327, 237, 177, Arrays.asList("cross chop","thunder punch","ice punch","fire punch"));
     }
 
-    private void setPokemonToTentacruel() {
-        setPokemonDetails("tentacruel", Arrays.asList("water", "poison"), 332, 227, 307, 267, Arrays.asList("surf","sludge bomb","recover","ice beam"));
-    }
-
     private void setPokemonToGolem() {
         setPokemonDetails("golem", Arrays.asList("rock", "ground"), 332, 307, 327, 157, Arrays.asList("earthquake","rock slide","skull bash","swords dance")); 
-        // Add explosion ??
     }
 
     private void setPokemonToSlowbro() {
@@ -128,24 +103,8 @@ public class Pokemon {
         setPokemonDetails("gengar", Arrays.asList("ghost", "poison"), 292, 327, 217, 287, Arrays.asList("shadow ball", "psychic", "sludge bomb", "thunderbolt"));
     }
 
-    private void setPokemonToExeggutor() {
-        setPokemonDetails("exeggutor", Arrays.asList("grass", "psychic"), 362, 237, 317, 177, Arrays.asList("solar beam", "psychic", "recover", "slash"));
-    }
-
-    private void setPokemonToRhydon() {
-        setPokemonDetails("rhydon", Arrays.asList("ground", "rock"), 382, 327, 307, 147, Arrays.asList("earthquake", "rock slide", "swords dance", "surf"));
-    }
-
-    private void setPokemonToStarmie() {
-        setPokemonDetails("starmie", Arrays.asList("water", "psychic"), 292, 267, 237, 297, Arrays.asList("hydro pump", "psychic", "ice beam", "thunderbolt"));
-    }
-
     private void setPokemonToGyarados() {
         setPokemonDetails("gyarados", Arrays.asList("water", "flying"), 362, 317, 267, 229, Arrays.asList("hydro pump", "dragon pulse", "ice beam", "thunderbolt"));
-    }
-
-    private void setPokemonToKabutops() {
-        setPokemonDetails("kabutops", Arrays.asList("water", "rock"), 292, 297, 277, 227, Arrays.asList("hydro pump", "rock slide", "agility", "swords dance"));
     }
 
     private void setPokemonToAerodactyl() {
@@ -184,8 +143,8 @@ public class Pokemon {
         setPokemonDetails("mega-rayquaza", Arrays.asList("dragon","flying"), 382, 427, 267, 297, Arrays.asList("dragon pulse","dragons ascent","v-create","dragon dance"));
     }
 
-    private void setPokemonToSussyBaka() {
-        setPokemonDetails("sussy baka", Arrays.asList("normal","none"), 412, 307, 307, 307, Arrays.asList("skull bash","dragon dance","recover","earthquake"));
+    private void setPokemonToAmoonguss() {
+        setPokemonDetails("amoonguss", Arrays.asList("grass","poison"), 400, 327, 227, 127, Arrays.asList("giga drain","sludge bomb","synthesis","solar beam"));
     }
 
     private void setPokemonDetails(String name, List<String> types, int maxHp, int attack, int defence, int speed, Collection<String> moves) {
@@ -285,7 +244,7 @@ public class Pokemon {
     }
 
     public double getSpeedBoost() {
-        return speedBoost / 2;
+        return speedBoost;
     }
 
     public double getAttackBoost() {
@@ -371,81 +330,7 @@ public class Pokemon {
     }
 
     public static void main(String[] args) {
-        Pokemon charizard = new Pokemon("charizard");
-        Pokemon blastoise = new Pokemon("blastoise");
-        Pokemon venusaur = new Pokemon("venusaur");
-        Pokemon pikachu = new Pokemon("pikachu");
-        Pokemon mewtwo = new Pokemon("mewtwo");
-        Pokemon golem = new Pokemon("golem");
-        Pokemon machamp = new Pokemon("machamp");
-        Pokemon kabutops = new Pokemon("kabutops");
-        Pokemon ray = new Pokemon("mega-rayquaza");
-        // System.out.println(kabutops.getSpeed() + " " + kabutops.getSpeedBoost());
-        // kabutops.attack(golem, 2);
-        // System.out.println(kabutops.getSpeed() + " " + kabutops.getSpeedBoost());
-        // System.out.println(golem.getHp());
-        // kabutops.attack(golem, 2);
-        // System.out.println(kabutops.getSpeed() + " " + kabutops.getSpeedBoost());
-        // System.out.println(golem.getHp());
-        // kabutops.attack(golem, 0);
-        // System.out.println(golem.getHp());
-        // System.out.println(kabutops.getSpeed() + " " + kabutops.getSpeedBoost());
-        // System.out.println(golem.getHp());
-        // kabutops.attack(golem, 0);
-        // System.out.println(kabutops.getSpeed() + " " + kabutops.getSpeedBoost());
-        // System.out.println(golem.getHp());
-        // kabutops.attack(golem, 0);
-        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        // ray.attack(golem, 3);
-        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        // System.out.println(golem.getHp());
-        // ray.attack(golem, 3);
-        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        // ray.attack(golem, 3);
-        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        // System.out.println(golem.getHp());
-        // ray.attack(golem, 3);
-        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        // ray.attack(golem, 3);
-        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        // System.out.println(golem.getHp());
-        // ray.attack(golem, 3);
-        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        // ray.attack(golem, 3);
-        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        // System.out.println(golem.getHp());
-        // ray.attack(golem, 3);
-        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        // System.out.println(golem.getHp());
-        // ray.attack(golem, 2);
-        // System.out.println(golem.getHp());
-        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        // System.out.println(golem.getHp());
-        // ray.attack(golem, 2);
-        // System.out.println(golem.getHp());
-        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        // System.out.println(golem.getHp());
-        // ray.attack(golem, 2);
-        // System.out.println(golem.getHp());
-        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
-        // System.out.println(golem.getHp());
-        // ray.attack(golem, 2);
-        // System.out.println(golem.getHp());
-        // System.out.println(ray.getAttack() + " " + ray.getAttackBoost());
-        // System.out.println(ray.getSpeed() + " " + ray.getSpeedBoost());
+
     }
 
 }
