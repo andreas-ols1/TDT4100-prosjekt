@@ -11,9 +11,9 @@ public class Game {
     private List<Pokemon> opponentTeam = new ArrayList<>();
     private Pokemon activeMon;
     private Pokemon activeOpponentMon;
-    private final List<String> validPokemon = Arrays.asList("venusaur","charizard","blastoise","pikachu","sandslash","nidoqueen",
-    "nidoking","golduck","primeape","arcanine","poliwrath","alakazam","machamp","tentacruel","golem","slowbro","gengar","exeggutor",
-    "rhydon","starmie","gyarados","kabutops","aerodactyl","snorlax","articuno","zapdos","moltres","dragonite","mewtwo","mew");
+    private final List<String> validPokemon = Arrays.asList("venusaur","charizard","blastoise","pikachu",
+    "nidoking","arcanine","alakazam","machamp","golem","slowbro","gengar","gyarados","aerodactyl","snorlax",
+    "articuno","zapdos","moltres","dragonite","mewtwo","mew","mega-rayquaza","amoonguss");
 
     public Game(List<String> playerTeam) {
         playerTeam.stream().forEach((mon) -> this.playerTeam.add(new Pokemon(mon)));
@@ -62,31 +62,7 @@ public class Game {
     }
 
     public static void main(String[] args) {
-        Game game = new Game(Arrays.asList("blastoise", "golem", "arcanine"));
-        game.setActiveMon(2);
-        System.out.println(game);
-        System.out.println(game.getActiveMon());
-        System.out.println(game.getActiveMon().getHp());
-        System.out.println("");
-        System.out.println(game.getActiveOpponentMon());
-        System.out.println(game.getActiveOpponentMon().getHp());
-        System.out.println("");
-        game.getActiveMon().attack(game.getActiveOpponentMon(), 3);
-        System.out.println(game.getActiveMon() + " used " + game.getActiveMon().getMoves().get(3).getName());
-        System.out.println(game.getActiveMon());
-        System.out.println(game.getActiveMon().getHp());
-        System.out.println("");
-        System.out.println(game.getActiveOpponentMon());
-        System.out.println(game.getActiveOpponentMon().getHp());
-        System.out.println("");
-        game.getActiveOpponentMon().attack(game.getActiveMon(), 1);
-        System.out.println(game.getActiveOpponentMon() + " used " + game.getActiveOpponentMon().getMoves().get(1).getName());
-        System.out.println(game.getActiveMon());
-        System.out.println(game.getActiveMon().getHp());
-        System.out.println("");
-        System.out.println(game.getActiveOpponentMon());
-        System.out.println(game.getActiveOpponentMon().getHp());
-        System.out.println("");
+
     }
 
 }
