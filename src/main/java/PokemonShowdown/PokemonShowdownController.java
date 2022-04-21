@@ -8,14 +8,21 @@ import java.util.stream.IntStream;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.Node;
+import javafx.stage.Stage;
+
 import java.io.File;
 
 public class PokemonShowdownController {
@@ -24,10 +31,12 @@ public class PokemonShowdownController {
     private List<Button> selectedPokemonButtons = new ArrayList<>();
     private final static String filePath = "./src/main/resources/PokemonShowdown/teams";
     private final static int teamSize = 4;
+    private Team selectedTeam;
+    private Game game;
 
     @FXML
     private Button charizard,venusaur,blastoise,pikachu,nidoking,arcanine,alakazam,machamp,golem,slowbro,gengar,gyarados,aerodactyl,
-    snorlax,articuno,zapdos,moltres,dragonite,mewtwo,mew,megarayquaza,amoonguss,deselectlast,createteam;
+    snorlax,articuno,zapdos,moltres,dragonite,mewtwo,mew,megarayquaza,amoonguss,deselectlast,createteam, playRandomTeam, playSelectedTeam;
 
     @FXML
     private TextField teamName;
@@ -36,14 +45,26 @@ public class PokemonShowdownController {
     private GridPane teamList;
 
     @FXML
+    private TextArea teamViewer;
+
+    @FXML
+    private Stage stage;
+    
+    @FXML
+    private Scene scene;
+
+    @FXML
+    private Parent root;
+
+    @FXML
     private void initialize() {
         getTeamsFromFile();
     }
     
     @FXML
-    private void addTeamMember(ActionEvent event){
+    private void addTeamMember(ActionEvent ae){
         if (team.size() < teamSize) {
-            Button button = (Button) event.getSource();
+            Button button = (Button) ae.getSource();
             team.add(new Pokemon(button.getText().toLowerCase()));
             selectedPokemonButtons.add(button);
             button.setDisable(true);
@@ -77,7 +98,7 @@ public class PokemonShowdownController {
             tmp.write();
         } else if (teamName.getLength() == 0) {
             showWarning("name");
-        } else if (team.size() < 4) {
+        } else if (team.size() < teamSize) {
             showWarning("pokemon");
         } 
     }
@@ -89,12 +110,57 @@ public class PokemonShowdownController {
         }
     }
 
+    @FXML
+    public void switchToStartScreen(ActionEvent ae) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("PokemonShowdownStartGUI.fxml"));
+        stage = (Stage)((Node) ae.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void switchToMainScreen(ActionEvent ae) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("PokemonShowdownMainView.fxml"));
+        stage = (Stage)((Node) ae.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void handleNewGame(ActionEvent ae) throws IOException {
+        game = new Game(selectedTeam.getMons());
+        switchToMainScreen(ae);
+    }
+
+    @FXML
+    private void handleRandomGame(ActionEvent ae) throws IOException {
+        game = new Game();
+        switchToMainScreen(ae);
+    }
+
+    @FXML
+    private void handleSelectTeam(ActionEvent ae) throws IOException {
+        Button button = (Button) ae.getSource();
+        selectedTeam = new Team(button.getText(), new ArrayList<>());
+        List<Pokemon> selectedTeamList = selectedTeam.read();
+        teamViewer.setText("Team name: " + button.getText()+"\nPokémon:\n--------\n");
+        selectedTeamList.stream().forEach((mon) -> teamViewer.appendText(mon.getName()+"\n"));
+    }
+
     private Button createTeamButton(Team team) {
         Button button = new Button(team.getName());
         button.wrapTextProperty().setValue(true);
         button.setStyle("-fx-text-alignment: center;");
         button.setCursor(Cursor.HAND);
-        // button.setOnAction((event) -> );
+        button.setOnAction((event) -> {
+            try {
+                handleSelectTeam(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         button.setMaxWidth(Double.MAX_VALUE);
         button.setMaxHeight(Double.MAX_VALUE);
         return button;
@@ -142,4 +208,6 @@ public class PokemonShowdownController {
             alert.showAndWait();
         }
     }
+
+    
 }

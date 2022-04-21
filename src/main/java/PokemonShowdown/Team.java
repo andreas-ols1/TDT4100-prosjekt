@@ -59,8 +59,10 @@ public class Team implements IFileHandling {
         return name;
     }
 
-
-    // private String getFilename()
+    public List<Pokemon> getMons() {
+        return mons;
+    }
+    
 
     public static void main(String[] args) throws IOException {
         // System.out.println(System.getProperty("user.dir"));

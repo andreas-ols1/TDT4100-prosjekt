@@ -20,6 +20,12 @@ public class Game {
         getRandomTeam().stream().forEach((mon) -> opponentTeam.add(new Pokemon(mon))); 
         activeOpponentMon = opponentTeam.get(0);
     }
+
+    public Game() {
+        getRandomTeam().stream().forEach((mon) -> playerTeam.add(new Pokemon(mon)));
+        getRandomTeam().stream().forEach((mon) -> opponentTeam.add(new Pokemon(mon)));
+        activeOpponentMon = opponentTeam.get(0);
+    }
     
     private void setActiveMon(int index) {
         activeMon = playerTeam.get(index);
