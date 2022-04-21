@@ -130,6 +130,7 @@ public class PokemonShowdownController {
 
     @FXML
     private void handleNewGame(ActionEvent ae) throws IOException {
+        if (selectedTeam == null) showWarning("team");
         game = new Game(selectedTeam.getMons());
         switchToMainScreen(ae);
     }
@@ -199,6 +200,12 @@ public class PokemonShowdownController {
             alert.setTitle("Few Pokémon");
             alert.setHeaderText("Not enough Pokémon");
             alert.setContentText("You must select 4 Pokémon for your team.");
+            alert.showAndWait();
+        } else if (type.equals("team")) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("No team selected");
+            alert.setHeaderText("No team selected");
+            alert.setContentText("You must either select a team, or choose the option to play with a random team");
             alert.showAndWait();
         } else {
             Alert alert = new Alert(AlertType.ERROR);
