@@ -15,8 +15,8 @@ public class Game {
     "nidoking","arcanine","alakazam","machamp","golem","slowbro","gengar","gyarados","aerodactyl","snorlax",
     "articuno","zapdos","moltres","dragonite","mewtwo","mew","mega-rayquaza","amoonguss");
 
-    public Game(List<String> playerTeam) {
-        playerTeam.stream().forEach((mon) -> this.playerTeam.add(new Pokemon(mon)));
+    public Game(List<Pokemon> playerTeam) {
+        playerTeam.stream().forEach((mon) -> this.playerTeam.add(mon));
         getRandomTeam().stream().forEach((mon) -> opponentTeam.add(new Pokemon(mon))); 
         activeOpponentMon = opponentTeam.get(0);
     }
