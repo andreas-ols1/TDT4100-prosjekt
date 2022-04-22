@@ -111,17 +111,8 @@ public class PokemonShowdownController {
     }
 
     @FXML
-    public void switchToStartScreen(ActionEvent ae) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("PokemonShowdownStartGUI.fxml"));
-        stage = (Stage)((Node) ae.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
-    public void switchToMainScreen(ActionEvent ae) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("PokemonShowdownMainView.fxml"));
+    public void switchScreen(ActionEvent ae, String file) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(file));
         stage = (Stage)((Node) ae.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -132,13 +123,13 @@ public class PokemonShowdownController {
     private void handleNewGame(ActionEvent ae) throws IOException {
         if (selectedTeam == null) showWarning("team");
         game = new Game(selectedTeam.getMons());
-        switchToMainScreen(ae);
+        switchScreen(ae,"PokemonShowdownMainView.fxml");
     }
 
     @FXML
     private void handleRandomGame(ActionEvent ae) throws IOException {
         game = new Game();
-        switchToMainScreen(ae);
+        switchScreen(ae,"PokemonShowdownMainView.fxml");
     }
 
     @FXML
