@@ -149,7 +149,7 @@ public class Pokemon {
 
     private void setPokemonDetails(String name, List<String> types, int maxHp, int attack, int defence, int speed, Collection<String> moves) {
         this.name = name;
-        types.stream().forEach((type) -> this.types.add(new Type(type)));
+        types.stream().forEach(type -> this.types.add(new Type(type)));
         this.maxHp = maxHp;
         hp = maxHp;
         this.attack = attack;
@@ -157,7 +157,7 @@ public class Pokemon {
         this.defence = defence;
         this.speed = speed;
         orgSpeed = speed;
-        moves.stream().forEach((move) -> this.moves.add(new Move(move)));
+        moves.stream().forEach(move -> this.moves.add(new Move(move)));
     }
 
     public void attack(Pokemon mon, int moveIndex) {

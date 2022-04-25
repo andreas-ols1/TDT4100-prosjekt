@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 public class Game {
     
@@ -27,19 +28,18 @@ public class Game {
         activeOpponentMon = opponentTeam.get(0);
     }
     
-    private void setActiveMon(int index) {
+    public void setActiveMon(int index) {
         activeMon = playerTeam.get(index);
     }
 
     public List<String> getRandomTeam() {
         List<String> team = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        IntStream.range(0, 4).forEach(i -> {
             String mon = validPokemon.get(new Random().nextInt(validPokemon.size()));
             while (team.contains(mon)) {
                 mon = validPokemon.get(new Random().nextInt(validPokemon.size()));
             }
-            team.add(mon);
-        }
+            team.add(mon); });
         return team;
     }
 
