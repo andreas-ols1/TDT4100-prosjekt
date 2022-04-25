@@ -21,6 +21,17 @@
     <RowConstraints maxHeight="344.0000061035156" minHeight="10.0" prefHeight="235.20004882812498" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
+      <ImageView fitHeight="465.0" fitWidth="754.0" pickOnBounds="true" visible="false">
+         <image>
+            <Image url="@background%20(2).png" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="images" prefHeight="200.0" prefWidth="200.0" visible="false">
+         <children>
+            <ImageView fx:id="opponentMon" fitHeight="150.0" fitWidth="200.0" layoutX="467.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerMon" fitHeight="150.0" fitWidth="200.0" layoutX="95.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
       <SplitPane dividerPositions="0.14723661485319517" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" GridPane.columnIndex="1">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -32,7 +43,7 @@
                   </Text>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="245.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="392.0" prefWidth="312.0">
                <children>
                   <GridPane fx:id="playerTeamView" layoutX="14.0" layoutY="14.0" prefHeight="359.0" prefWidth="214.0">
                     <columnConstraints>
@@ -83,10 +94,5 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <ImageView fitHeight="461.0" fitWidth="754.0" pickOnBounds="true">
-         <image>
-            <Image url="@background%20(2).png" />
-         </image>
-      </ImageView>
    </children>
 </GridPane>
