@@ -13,26 +13,22 @@
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PokemonShowdown.BattleController">
   <columnConstraints>
+    <ColumnConstraints />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="754.3999633789062" minWidth="10.0" prefWidth="754.3999633789062" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="492.79998779296875" minWidth="10.0" prefWidth="245.60003662109375" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="492.79998779296875" minWidth="10.0" prefWidth="245.60003662109375" />
   </columnConstraints>
   <rowConstraints>
+    <RowConstraints />
     <RowConstraints maxHeight="574.4000305175781" minHeight="10.0" prefHeight="465.599951171875" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="344.0000061035156" minHeight="10.0" prefHeight="235.20004882812498" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="344.0000061035156" minHeight="10.0" prefHeight="235.20004882812498" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <ImageView fitHeight="465.0" fitWidth="754.0" pickOnBounds="true" visible="false">
+      <ImageView fitHeight="465.0" fitWidth="754.0" pickOnBounds="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <image>
             <Image url="@background%20(2).png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="images" prefHeight="200.0" prefWidth="200.0" visible="false">
-         <children>
-            <ImageView fx:id="opponentMon" fitHeight="150.0" fitWidth="200.0" layoutX="467.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="playerMon" fitHeight="150.0" fitWidth="200.0" layoutX="95.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true" />
-         </children>
-      </AnchorPane>
-      <SplitPane dividerPositions="0.14723661485319517" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" GridPane.columnIndex="1">
+      <SplitPane dividerPositions="0.14723661485319517" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
@@ -60,7 +56,7 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.21061643835616442" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" GridPane.rowIndex="1">
+      <SplitPane dividerPositions="0.21061643835616442" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
@@ -94,5 +90,11 @@
             </AnchorPane>
         </items>
       </SplitPane>
+      <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <ImageView fx:id="opponentMon" fitHeight="150.0" fitWidth="200.0" layoutX="488.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="playerMon" fitHeight="162.0" fitWidth="200.0" layoutX="99.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
    </children>
 </GridPane>
