@@ -1,15 +1,29 @@
 package PokemonShowdown;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.stream.IntStream;
+
+import javax.imageio.ImageIO;
+import javax.swing.text.Element;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 public class BattleController {
+    
+    private Game game;
+    private final String frontSpritePath = "./src/target/classes/PokemonShowdown/frontSprites";
+    private final String backSpritePath = "PokemonShowdown/backSprites";
     
     @FXML
     private GridPane playerTeamView,attacks;
@@ -17,7 +31,11 @@ public class BattleController {
     @FXML
     private TextArea opponentTeam;
 
-    private Game game;
+    @FXML
+    private ImageView playerMon, opponentMon; 
+
+    @FXML
+    private AnchorPane images;
 
     @FXML
     private void initialize() {
@@ -31,11 +49,40 @@ public class BattleController {
     
 
     @FXML
-    private void handleSelectMon(ActionEvent ae) {
+    private void handleSelectMon(ActionEvent ae) throws IOException {
         Button button = (Button)ae.getSource();
         game.setActiveMon((int)GridPane.getRowIndex(button));
         System.out.println(game.getActiveMon());
         setMoveButtons();
+        System.out.println(getBackSprite());
+        // playerMon.setImage((new Image(getBackSprite())));
+        // File file = new File(getBackSprite());
+        Image image = new Image(getBackSprite());
+        // System.out.println(image.getWidth());
+        // System.out.println(image.getHeight());
+        playerMon.setImage(image);
+        // playerMon.toFront();
+        // playerMon.setCache(true);
+        // BufferedImage img = ImageIO.read(new File(getBackSprite()));
+        // playerMon.setImage(img);
+        // playerMon.setImage(new Image("file:"+getBackSprite()));
+        // try {
+        //     String imgPath = getClass().getClassLoader().getResource("PokemonShowdown/"+getBackSprite()).toURI().toString();
+        //     System.out.println(imgPath);
+        //     Image img = new Image(imgPath);
+        //     playerMon.setImage(img);
+        // } catch (URISyntaxException e) {
+        //     e.printStackTrace();
+        // }
+    }
+
+    private String getBackSprite() {
+        return backSpritePath + "/" + game.getActiveMon().getName() +"Back.png";
+        // return "backSprites/" +game.getActiveMon().getName() +"Back.png";
+    }
+
+    private String getFrontSprite() {
+        return frontSpritePath + "/" + game.getActiveOpponentMon().getName() + "Front.gif";
     }
 
 
@@ -61,7 +108,13 @@ public class BattleController {
         button.setCursor(Cursor.HAND);
         button.setMaxWidth(Double.MAX_VALUE);
         button.setMaxHeight(Double.MAX_VALUE);
-        button.setOnAction((event) -> handleSelectMon(event));
+        button.setOnAction((event) -> {
+            try {
+                handleSelectMon(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         return button;
     }
 
@@ -73,7 +126,13 @@ public class BattleController {
         button.setCursor(Cursor.HAND);
         button.setMaxWidth(Double.MAX_VALUE);
         button.setMaxHeight(Double.MAX_VALUE);
-        button.setOnAction((event) -> handleSelectMon(event));
+        button.setOnAction((event) -> {
+            try {
+                handleSelectMon(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         return button;
     }
 
