@@ -1,14 +1,7 @@
 package PokemonShowdown;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.stream.IntStream;
-
-import javax.imageio.ImageIO;
-import javax.swing.text.Element;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -16,13 +9,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 public class BattleController {
     
     private Game game;
-    private final String frontSpritePath = "./src/target/classes/PokemonShowdown/frontSprites";
+    private final String frontSpritePath = "PokemonShowdown/frontSprites";
     private final String backSpritePath = "PokemonShowdown/backSprites";
     
     @FXML
@@ -34,12 +26,11 @@ public class BattleController {
     @FXML
     private ImageView playerMon, opponentMon; 
 
-    @FXML
-    private AnchorPane images;
+  
+
 
     @FXML
-    private void initialize() {
-        System.out.println("arash er dum");      
+    private void initialize() {      
         game = PokemonShowdownController.gameTransferring;
         System.out.println(game);
         initializeGame(game);
@@ -55,34 +46,16 @@ public class BattleController {
         System.out.println(game.getActiveMon());
         setMoveButtons();
         System.out.println(getBackSprite());
-        // playerMon.setImage((new Image(getBackSprite())));
-        // File file = new File(getBackSprite());
-        Image image = new Image(getBackSprite());
-        // System.out.println(image.getWidth());
-        // System.out.println(image.getHeight());
-        playerMon.setImage(image);
-        // playerMon.toFront();
-        // playerMon.setCache(true);
-        // BufferedImage img = ImageIO.read(new File(getBackSprite()));
-        // playerMon.setImage(img);
-        // playerMon.setImage(new Image("file:"+getBackSprite()));
-        // try {
-        //     String imgPath = getClass().getClassLoader().getResource("PokemonShowdown/"+getBackSprite()).toURI().toString();
-        //     System.out.println(imgPath);
-        //     Image img = new Image(imgPath);
-        //     playerMon.setImage(img);
-        // } catch (URISyntaxException e) {
-        //     e.printStackTrace();
-        // }
+        playerMon.setImage(new Image(getBackSprite()));
     }
 
     private String getBackSprite() {
-        return backSpritePath + "/" + game.getActiveMon().getName() +"Back.png";
+        return "/" + backSpritePath + "/" + game.getActiveMon().getName() +"Back.gif";
         // return "backSprites/" +game.getActiveMon().getName() +"Back.png";
     }
 
     private String getFrontSprite() {
-        return frontSpritePath + "/" + game.getActiveOpponentMon().getName() + "Front.gif";
+        return "/" + frontSpritePath + "/" + game.getActiveOpponentMon().getName() + "Front.gif";
     }
 
 
