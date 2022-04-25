@@ -32,17 +32,17 @@ public class PokemonShowdownController {
     private final static String filePath = "./src/main/resources/PokemonShowdown/teams";
     private final static int teamSize = 4;
     private Team selectedTeam;
-    private Game game;
+    public static Game gameTransferring;
 
     @FXML
     private Button charizard,venusaur,blastoise,pikachu,nidoking,arcanine,alakazam,machamp,golem,slowbro,gengar,gyarados,aerodactyl,
-    snorlax,articuno,zapdos,moltres,dragonite,mewtwo,mew,megarayquaza,amoonguss,deselectlast,createteam, playRandomTeam, playSelectedTeam;
+    snorlax,articuno,zapdos,moltres,dragonite,mewtwo,mew,megarayquaza,amoonguss,deselectlast,createteam, playRandomTeam,playSelectedTeam;
 
     @FXML
     private TextField teamName;
 
     @FXML
-    private GridPane teamList;
+    private GridPane teamList, playerTeamView;
 
     @FXML
     private TextArea teamViewer;
@@ -122,13 +122,16 @@ public class PokemonShowdownController {
     @FXML
     private void handleNewGame(ActionEvent ae) throws IOException {
         if (selectedTeam == null) showWarning("team");
-        game = new Game(selectedTeam.getMons());
+        gameTransferring= new Game(selectedTeam.getMons());
+        System.out.println(selectedTeam.getMons());
+        System.out.println(gameTransferring.getPlayerTeam());
         switchScreen(ae,"PokemonShowdownMainView.fxml");
     }
 
     @FXML
     private void handleRandomGame(ActionEvent ae) throws IOException {
-        game = new Game();
+        gameTransferring= new Game();
+        System.out.println(gameTransferring.getPlayerTeam());
         switchScreen(ae,"PokemonShowdownMainView.fxml");
     }
 
@@ -137,6 +140,7 @@ public class PokemonShowdownController {
         Button button = (Button) ae.getSource();
         selectedTeam = new Team(button.getText(), new ArrayList<>());
         List<Pokemon> selectedTeamList = selectedTeam.read();
+        selectedTeam.addMons(selectedTeamList);
         teamViewer.setText("Team name: " + button.getText()+"\nPokémon:\n--------\n");
         selectedTeamList.stream().forEach((mon) -> teamViewer.appendText(mon.getName()+"\n"));
     }
@@ -206,6 +210,4 @@ public class PokemonShowdownController {
             alert.showAndWait();
         }
     }
-
-    
 }

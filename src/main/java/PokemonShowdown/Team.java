@@ -62,6 +62,10 @@ public class Team implements IFileHandling {
     public List<Pokemon> getMons() {
         return mons;
     }
+
+    public void addMons(List<Pokemon> mons) {
+        mons.stream().forEach((mon) -> this.mons.add(mon));
+    }
     
 
     public static void main(String[] args) throws IOException {
