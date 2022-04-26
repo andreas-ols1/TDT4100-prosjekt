@@ -1,20 +1,19 @@
 package PokemonShowdown;
 
-import java.io.Console;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.security.KeyStore.TrustedCertificateEntry;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -22,6 +21,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.Node;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
 
 public class BattleController {
     
@@ -46,7 +49,13 @@ public class BattleController {
     private ProgressBar playerMonHealthBar, opponentMonHealthBar;
     
     @FXML
-    private Label playerMonHealthPercentage,opponentMonHealthPercentage,playerMonName,opponentMonName;
+    private Label playerMonHealthPercentage,opponentMonHealthPercentage,playerMonName,opponentMonName,endScreenTitle;
+
+    @FXML
+    private Pane endScreen;
+
+    @FXML
+    private Button backToMenu;
 
     @FXML
     private void initialize() {      
@@ -84,6 +93,20 @@ public class BattleController {
         turn(moveIndex);
     }
 
+    @FXML
+    public void switchScreen(ActionEvent ae, String file) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(file));
+        Stage stage = (Stage)((Node) ae.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void handleBackToMenu(ActionEvent ae) throws IOException {
+        switchScreen(ae, "PokemonShowdownStartGUI.fxml");
+    }
+
     private void turn(int moveIndex) {
         if (game.getActiveMon().getSpeed() > game.getActiveOpponentMon().getSpeed()) {
             game.getActiveMon().attack(game.getActiveOpponentMon(), moveIndex);
@@ -95,6 +118,7 @@ public class BattleController {
             if (game.getActiveOpponentMon().isDead()) {
                 System.out.println(game.getActiveOpponentMon().getName() + " fainted.");
                 updateMonStatus();
+                if (gameEnded()) endScreen();
             }
             else {    
                 game.getActiveOpponentMon().attack(game.getActiveMon(), ThreadLocalRandom.current().nextInt(4));
@@ -129,10 +153,12 @@ public class BattleController {
                 if (game.getActiveOpponentMon().isDead()) {
                     System.out.println(game.getActiveOpponentMon().getName() + " fainted.");
                     updateMonStatus();
+                    if (gameEnded()) endScreen();
                 }
                 else {    
                     game.getActiveOpponentMon().attack(game.getActiveMon(), ThreadLocalRandom.current().nextInt(4));
                     updateMonStatus();
+                    if (gameEnded()) endScreen();
                 }
             }
             else {
@@ -145,10 +171,12 @@ public class BattleController {
                 if (game.getActiveMon().isDead()) {
                     System.out.println(game.getActiveMon().getName() + " fainted.");
                     updateMonStatus();
+                    if (gameEnded()) endScreen();
                 }
                 else {    
                     game.getActiveMon().attack(game.getActiveOpponentMon(), moveIndex);
                     updateMonStatus();
+                    if (gameEnded()) endScreen();
                 }
             }
         }
@@ -238,6 +266,14 @@ public class BattleController {
         button.setMaxHeight(Double.MAX_VALUE);
         button.setOnAction((ae) -> handleMove(ae));
         return button;
+    }
+
+    private void endScreen() {
+        pokemonButtonList.stream().forEach(button -> button.setDisable(true));
+        attackButtonList.stream().forEach(button -> button.setDisable(true));
+        if (game.getActiveMon().isDead()) endScreenTitle.setText("You lost :(");
+        else endScreenTitle.setText("You won!");
+        endScreen.setVisible(true);
     }
 
     private boolean gameEnded() {
