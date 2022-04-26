@@ -34,11 +34,17 @@ public class Game {
     }
 
     public void setActiveOpponentMon() {
-        Pokemon mon = opponentTeam.get(ThreadLocalRandom.current().nextInt(4));
-        while (mon.isDead()) {
-            mon = opponentTeam.get(ThreadLocalRandom.current().nextInt(4));
+        int count = 0;
+        for (Pokemon mon : getOpponentTeam()) {
+            if (mon.isDead()) count ++;
         }
-        activeOpponentMon = mon;
+        if (count < 4) {
+            Pokemon mon = opponentTeam.get(ThreadLocalRandom.current().nextInt(4));
+            while (mon.isDead()) {
+                mon = opponentTeam.get(ThreadLocalRandom.current().nextInt(4));
+            }
+            activeOpponentMon = mon;
+        }
     }
 
     public List<String> getRandomTeam() {
