@@ -123,6 +123,7 @@ public class BattleController {
             else {    
                 game.getActiveOpponentMon().attack(game.getActiveMon(), ThreadLocalRandom.current().nextInt(4));
                 updateMonStatus();
+                if (gameEnded()) endScreen();
             }
         }
         else if (game.getActiveMon().getSpeed() < game.getActiveOpponentMon().getSpeed()) {
@@ -135,10 +136,12 @@ public class BattleController {
             if (game.getActiveMon().isDead()) {
                 System.out.println(game.getActiveMon().getName() + " fainted.");
                 updateMonStatus();
+                if (gameEnded()) endScreen();
             }
             else {    
                 game.getActiveMon().attack(game.getActiveOpponentMon(), moveIndex);
                 updateMonStatus();
+                if (gameEnded()) endScreen();
             }
         }
         else {
