@@ -60,7 +60,7 @@ public class Pokemon {
     }
 
     private void setPokemonToVenusaur() {
-        setPokemonDetails("venusaur", Arrays.asList("grass","poison"), 332, 231, 267, 227, Arrays.asList("sludge bomb","earthquake","swords dance","solar beam"));
+        setPokemonDetails("venusaur", Arrays.asList("grass","poison"), 332, 231, 267, 227, Arrays.asList("sludge bomb","earthquake","swords dance","giga drain"));
     }
  
     private void setPokemonToCharizard() {
@@ -84,7 +84,7 @@ public class Pokemon {
     }
     
     private void setPokemonToAlakazam() {
-        setPokemonDetails("alakazam", Arrays.asList("psychic", "none"), 282, 337, 257, 307, Arrays.asList("psychic","thunderbolt","ice beam","recover"));
+        setPokemonDetails("alakazam", Arrays.asList("psychic", "none"), 282, 337, 257, 307, Arrays.asList("psychic","shadow ball","thunderbolt","recover"));
     }
 
     private void setPokemonToMachamp() {
@@ -104,7 +104,7 @@ public class Pokemon {
     }
 
     private void setPokemonToGyarados() {
-        setPokemonDetails("gyarados", Arrays.asList("water", "flying"), 362, 317, 267, 229, Arrays.asList("hydro pump", "dragon pulse", "ice beam", "thunderbolt"));
+        setPokemonDetails("gyarados", Arrays.asList("water", "flying"), 362, 317, 267, 229, Arrays.asList("hydro pump", "dragon pulse", "dragon dance", "thunderbolt"));
     }
 
     private void setPokemonToAerodactyl() {
@@ -128,7 +128,7 @@ public class Pokemon {
     }
 
     private void setPokemonToDragonite() {
-        setPokemonDetails("dragonite", Arrays.asList("dragon", "flying"), 354, 335, 267, 227, Arrays.asList("dragon pulse", "flamethrower", "roost", "thunderbolt"));
+        setPokemonDetails("dragonite", Arrays.asList("dragon", "flying"), 354, 335, 267, 227, Arrays.asList("dragon pulse", "flamethrower", "roost", "dragon dance"));
     }
 
     private void setPokemonToMewtwo() {

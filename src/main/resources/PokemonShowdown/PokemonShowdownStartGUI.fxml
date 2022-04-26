@@ -14,8 +14,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PokemonShowdown.PokemonShowdownController">
    <children>
-      <Button fx:id="playRandomTeam" alignment="CENTER" layoutX="761.0" layoutY="368.0" mnemonicParsing="false" onAction="#handleRandomGame" prefHeight="53.0" prefWidth="158.0" text="Play with random team" />
-      <Button fx:id="createteam" layoutX="51.0" layoutY="622.0" mnemonicParsing="false" onAction="#handleCreateTeam" prefHeight="53.0" prefWidth="275.0" text="Create team" />
+      <Button fx:id="playRandomTeam" alignment="CENTER" layoutX="761.0" layoutY="368.0" mnemonicParsing="false" onAction="#handleRandomGame" prefHeight="53.0" prefWidth="158.0" style="-fx-cursor: hand;" text="Play with random team" />
+      <Button fx:id="createteam" layoutX="51.0" layoutY="622.0" mnemonicParsing="false" onAction="#handleCreateTeam" prefHeight="53.0" prefWidth="275.0" style="-fx-cursor: hand;" text="Create team" />
       <TextField fx:id="teamName" layoutX="104.0" layoutY="84.0" onKeyPressed="#handleEnter" />
       <Label layoutX="144.0" layoutY="61.0" prefHeight="17.0" prefWidth="91.0" text="Team name:" />
       <Label layoutX="131.0" layoutY="136.0" text="Choose 4 pokémon:" />
@@ -38,33 +38,33 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="charizard" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Charizard" />
-            <Button fx:id="venusaur" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Venusaur" GridPane.columnIndex="1" />
-            <Button fx:id="blastoise" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Blastoise" GridPane.rowIndex="1" />
-            <Button fx:id="pikachu" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Pikachu" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="nidoking" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Nidoking" GridPane.rowIndex="2" />
-            <Button fx:id="arcanine" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Arcanine" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="alakazam" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Alakazam" GridPane.rowIndex="3" />
-            <Button fx:id="machamp" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Machamp" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button fx:id="golem" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Golem" GridPane.rowIndex="4" />
-            <Button fx:id="slowbro" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Slowbro" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Button fx:id="gengar" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Gengar" GridPane.rowIndex="5" />
-            <Button fx:id="gyarados" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Gyarados" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Button fx:id="aerodactyl" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Aerodactyl" GridPane.rowIndex="6" />
-            <Button fx:id="snorlax" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Snorlax" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Button fx:id="articuno" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Articuno" GridPane.rowIndex="7" />
-            <Button fx:id="zapdos" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Zapdos" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <Button fx:id="moltres" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Moltres" GridPane.rowIndex="8" />
-            <Button fx:id="dragonite" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Dragonite" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <Button fx:id="mewtwo" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Mewtwo" GridPane.rowIndex="9" />
-            <Button fx:id="mew" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Mew" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-            <Button fx:id="rayquaza" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Rayquaza" GridPane.rowIndex="10" />
-            <Button fx:id="amoonguss" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" text="Amoonguss" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            <Button fx:id="charizard" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Charizard" />
+            <Button fx:id="venusaur" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Venusaur" GridPane.columnIndex="1" />
+            <Button fx:id="blastoise" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Blastoise" GridPane.rowIndex="1" />
+            <Button fx:id="pikachu" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Pikachu" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="nidoking" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Nidoking" GridPane.rowIndex="2" />
+            <Button fx:id="arcanine" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Arcanine" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="alakazam" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Alakazam" GridPane.rowIndex="3" />
+            <Button fx:id="machamp" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Machamp" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="golem" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Golem" GridPane.rowIndex="4" />
+            <Button fx:id="slowbro" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Slowbro" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button fx:id="gengar" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Gengar" GridPane.rowIndex="5" />
+            <Button fx:id="gyarados" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Gyarados" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button fx:id="aerodactyl" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Aerodactyl" GridPane.rowIndex="6" />
+            <Button fx:id="snorlax" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Snorlax" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Button fx:id="articuno" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Articuno" GridPane.rowIndex="7" />
+            <Button fx:id="zapdos" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Zapdos" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Button fx:id="moltres" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Moltres" GridPane.rowIndex="8" />
+            <Button fx:id="dragonite" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Dragonite" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Button fx:id="mewtwo" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Mewtwo" GridPane.rowIndex="9" />
+            <Button fx:id="mew" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Mew" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <Button fx:id="rayquaza" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Rayquaza" GridPane.rowIndex="10" />
+            <Button fx:id="amoonguss" mnemonicParsing="false" onAction="#addTeamMember" prefHeight="27.0" prefWidth="137.0" style="-fx-cursor: hand;" text="Amoonguss" GridPane.columnIndex="1" GridPane.rowIndex="10" />
          </children>
       </GridPane>
       <Label layoutX="522.0" layoutY="144.0" text="Saved teams:" />
-      <Button fx:id="deselectlast" layoutX="146.0" layoutY="574.0" mnemonicParsing="false" onAction="#deselectLast" text="Deselect last" />
-      <Button fx:id="playSelectedTeam" layoutX="761.0" layoutY="287.0" mnemonicParsing="false" onAction="#handleNewGame" prefHeight="53.0" prefWidth="158.0" text="Play with selected team" />
+      <Button fx:id="deselectlast" layoutX="146.0" layoutY="574.0" mnemonicParsing="false" onAction="#deselectLast" style="-fx-cursor: hand;" text="Deselect last" />
+      <Button fx:id="playSelectedTeam" layoutX="761.0" layoutY="287.0" mnemonicParsing="false" onAction="#handleNewGame" prefHeight="53.0" prefWidth="158.0" style="-fx-cursor: hand;" text="Play with selected team" />
       <GridPane fx:id="teamList" layoutX="443.0" layoutY="177.0" prefHeight="487.0" prefWidth="225.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

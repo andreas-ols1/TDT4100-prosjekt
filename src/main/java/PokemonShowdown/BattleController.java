@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -47,7 +48,7 @@ public class BattleController {
     private GridPane playerTeamView,attacks;
 
     @FXML
-    private TextArea opponentTeam, console;
+    private TextArea console;
 
     @FXML
     private ImageView playerMon, opponentMon;
@@ -65,6 +66,9 @@ public class BattleController {
     private Button backToMenu;
 
     @FXML
+    private Tooltip playerMonTooltip,opponentMonTooltip;
+
+    @FXML
     private void initialize() {      
         game = PokemonShowdownController.gameTransferring;
         System.out.println(game);
@@ -74,10 +78,10 @@ public class BattleController {
         opponentMonHealthBar.setProgress(1);
         opponentMonHealthPercentage.setText("100%");
         opponentMonName.setText(game.getActiveOpponentMon().getName().substring(0,1).toUpperCase() + game.getActiveOpponentMon().getName().substring(1));
+        setOpponentMonTooltip();
         this.ps = new PrintStream(new Console(console));
         System.setOut(ps);
         System.out.println(game);
-
     }
 
     @FXML
@@ -88,6 +92,7 @@ public class BattleController {
             if (!game.getActiveMon().isDead()) {
                 game.setActiveMon(activeMonButtonIndex);
                 setMoveButtons();
+                setPlayerMonTooltip();
                 playerMon.setImage(new Image(getBackSprite()));
                 playerMonName.setText(game.getActiveMon().getName().substring(0,1).toUpperCase() + game.getActiveMon().getName().substring(1));
                 playerMonHealthBar.setVisible(true); 
@@ -104,6 +109,7 @@ public class BattleController {
             else {
                 game.setActiveMon(activeMonButtonIndex);
                 setMoveButtons();
+                setPlayerMonTooltip();
                 playerMon.setImage(new Image(getBackSprite()));
                 playerMonName.setText(game.getActiveMon().getName().substring(0,1).toUpperCase() + game.getActiveMon().getName().substring(1));
                 playerMonHealthBar.setVisible(true); 
@@ -114,6 +120,7 @@ public class BattleController {
         else {
             game.setActiveMon(activeMonButtonIndex);
             setMoveButtons();
+            setPlayerMonTooltip();
             playerMon.setImage(new Image(getBackSprite()));
             playerMonName.setText(game.getActiveMon().getName().substring(0,1).toUpperCase() + game.getActiveMon().getName().substring(1));
             playerMonHealthBar.setVisible(true); 
@@ -142,6 +149,27 @@ public class BattleController {
     @FXML
     public void handleBackToMenu(ActionEvent ae) throws IOException {
         switchScreen(ae, "PokemonShowdownStartGUI.fxml");
+    }
+
+
+    private void setPlayerMonTooltip() {
+        playerMonTooltip.setShowDelay(Duration.ZERO);
+        playerMonTooltip.setText("Name: " + game.getActiveMon().getName() +
+            "\nTypes: " + game.getActiveMon().getTypes() +
+            "\nHP: " + game.getActiveMon().getHp() +
+            "\nAttack: " + game.getActiveMon().getAttack() +
+            "\nDefence: " + game.getActiveMon().getDefence() +
+            "\nSpeed: " + game.getActiveMon().getSpeed());
+    }
+
+    private void setOpponentMonTooltip() {
+        opponentMonTooltip.setShowDelay(Duration.ZERO);
+        opponentMonTooltip.setText("Name: " + game.getActiveOpponentMon().getName() +
+            "\nTypes: " + game.getActiveOpponentMon().getTypes() +
+            "\nHP: " + game.getActiveOpponentMon().getHp() +
+            "\nAttack: " + game.getActiveOpponentMon().getAttack() +
+            "\nDefence: " + game.getActiveOpponentMon().getDefence() +
+            "\nSpeed: " + game.getActiveOpponentMon().getSpeed());
     }
 
     private void turn(int moveIndex) {
@@ -233,8 +261,10 @@ public class BattleController {
     
     private void updateMonStatus() {
         updateHealthBars();
+        setPlayerMonTooltip();
         if (game.getActiveOpponentMon().isDead()) {
             game.setActiveOpponentMon();
+            setOpponentMonTooltip();
             opponentMon.setImage(new Image(getFrontSprite()));
             opponentMonName.setText(game.getActiveOpponentMon().getName().substring(0,1).toUpperCase() + game.getActiveOpponentMon().getName().substring(1));
             opponentMonHealthBar.setVisible(true); 
@@ -275,9 +305,6 @@ public class BattleController {
 
     private void initializeGame(Game game) {
         IntStream.range(0,4).forEach(i -> playerTeamView.add(createPokemonButton(game,i), 0, i));
-        opponentTeam.setText("");
-        IntStream.range(0,3).forEach(i -> opponentTeam.appendText(game.getOpponentTeam().get(i).getName().substring(0,1).toUpperCase() + game.getOpponentTeam().get(i).getName().substring(1) + ", "));
-        opponentTeam.appendText(game.getOpponentTeam().get(3).getName().substring(0,1).toUpperCase() + game.getOpponentTeam().get(3).getName().substring(1));
     }
     
     private Button createPokemonButton(Game game, int monIndex) {
@@ -302,6 +329,14 @@ public class BattleController {
     private Button createMoveButton(Pokemon mon, int index) {
         String moveName = this.game.getActiveMon().getMove(index).getName();
         Button button = new Button(moveName.substring(0, 1).toUpperCase() + moveName.substring(1));
+        Tooltip tooltip = new Tooltip("Base damage: " + mon.getMove(index).getDamage() + 
+        "\nAccuracy: " + mon.getMove(index).getAccuracy() +
+        "\nType: " + mon.getMove(index).getType().getName() + 
+        "\nAttack boost: " + mon.getMove(index).getAttackBoost() +
+        "\nSpeed boost: " + mon.getMove(index).getSpeedBoost() +
+        "\nHeal: " + mon.getMove(index).getHeal());
+        tooltip.setShowDelay(Duration.ZERO);
+        button.setTooltip(tooltip);
         attackButtonList.add(button);
         button.wrapTextProperty().setValue(true);
         button.setStyle("-fx-text-alignment: center;");
