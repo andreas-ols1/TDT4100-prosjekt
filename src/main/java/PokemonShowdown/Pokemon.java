@@ -177,7 +177,7 @@ public class Pokemon {
                     if (crit) System.out.println("It's a crit!");
                     System.out.println("");
                 }
-                else System.out.println(getName() + "tried to use" + getMove(moveIndex) + ", but" + target.getName() + "\nis immune to " + getMove(moveIndex).getName() + ", so the attack did no damage!\n");
+                else System.out.println(getName() + " tried to use " + getMove(moveIndex).getName() + ",\nbut " + target.getName() + " is immune to " + getMove(moveIndex).getName() + ",\nso the attack did no damage!\n");
             }
             else {
                 heal(moveIndex);
@@ -209,7 +209,7 @@ public class Pokemon {
             attackBoost += getMove(moveIndex).getAttackBoost();
             attack = (int)(orgAttack * attackBoost);
         }
-        else System.out.println("Attack boost maxes out at x4, and can't go below 0.5");
+        else System.out.println("Attack boost maxes out at x4, and\ncan't go below x0.5");
     }
 
     private void speedBoost(int moveIndex) {
@@ -217,7 +217,7 @@ public class Pokemon {
             speedBoost += getMove(moveIndex).getSpeedBoost();
             speed = (int)(orgSpeed * speedBoost);
         }
-        else System.out.println("Speed boost maxes out at x4, and can't go below 0.5");
+        else System.out.println("Speed boost maxes out at x4, and\ncan't go below x0.5");
     }
 
     public void revertStatChanges() {
