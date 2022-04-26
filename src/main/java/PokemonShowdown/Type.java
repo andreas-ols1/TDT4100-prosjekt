@@ -127,10 +127,7 @@ public class Type {
 
     @Override
     public String toString() {
-        return "Name: " + name + 
-        "\nStrong against: " + strongAgainst +
-        "\nWeak against: " + weakAgainst +
-        "\nImmune: " + immune;
+        return name;
     }   
 
     public static void main(String[] args) {
