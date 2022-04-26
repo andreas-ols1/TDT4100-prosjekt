@@ -36,7 +36,7 @@ public class PokemonShowdownController {
 
     @FXML
     private Button charizard,venusaur,blastoise,pikachu,nidoking,arcanine,alakazam,machamp,golem,slowbro,gengar,gyarados,aerodactyl,
-    snorlax,articuno,zapdos,moltres,dragonite,mewtwo,mew,megarayquaza,amoonguss,deselectlast,createteam, playRandomTeam,playSelectedTeam;
+    snorlax,articuno,zapdos,moltres,dragonite,mewtwo,mew,rayquaza,amoonguss,deselectlast,createteam,playRandomTeam,playSelectedTeam;
 
     @FXML
     private TextField teamName;

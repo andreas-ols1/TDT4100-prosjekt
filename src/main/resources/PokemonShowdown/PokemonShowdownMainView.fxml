@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
@@ -11,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PokemonShowdown.BattleController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PokemonShowdown.BattleController">
   <columnConstraints>
     <ColumnConstraints />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="754.3999633789062" minWidth="10.0" prefWidth="754.3999633789062" />
@@ -85,7 +87,7 @@
                         <Font size="30.0" />
                      </font>
                   </Text>
-                  <TextArea fx:id="opponentTeam" layoutX="22.0" layoutY="115.0" prefHeight="48.0" prefWidth="493.0" />
+                  <TextArea fx:id="opponentTeam" editable="false" layoutX="22.0" layoutY="115.0" prefHeight="48.0" prefWidth="493.0" />
                </children>
             </AnchorPane>
         </items>
@@ -94,7 +96,22 @@
          <children>
             <ImageView fx:id="opponentMon" fitHeight="150.0" fitWidth="200.0" layoutX="488.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="playerMon" fitHeight="162.0" fitWidth="200.0" layoutX="99.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true" />
+            <ProgressBar fx:id="playerMonHealthBar" layoutX="99.0" layoutY="215.0" prefWidth="200.0" progress="0.0" visible="false" />
+            <ProgressBar fx:id="opponentMonHealthBar" layoutX="488.0" layoutY="41.0" prefWidth="200.0" progress="0.0" />
+            <Label fx:id="playerMonHealthPercentage" layoutX="299.0" layoutY="216.0" />
+            <Label fx:id="opponentMonHealthPercentage" layoutX="458.0" layoutY="42.0" text="100%" textAlignment="RIGHT" />
+            <Label fx:id="playerMonName" layoutX="183.0" layoutY="195.0" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="opponentMonName" layoutX="572.0" layoutY="21.0" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
+      <TextArea fx:id="console" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
    </children>
 </GridPane>
