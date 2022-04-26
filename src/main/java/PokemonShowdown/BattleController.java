@@ -76,7 +76,7 @@ public class BattleController {
         opponentMon.setImage(new Image(getFrontSprite()));
         opponentMonHealthBar.setStyle("-fx-accent: green;");
         opponentMonHealthBar.setProgress(1);
-        opponentMonHealthPercentage.setText("100%");
+        opponentMonHealthPercentage.setText("100.00%");
         opponentMonName.setText(game.getActiveOpponentMon().getName().substring(0,1).toUpperCase() + game.getActiveOpponentMon().getName().substring(1));
         setOpponentMonTooltip();
         this.ps = new PrintStream(new Console(console));
@@ -284,9 +284,9 @@ public class BattleController {
         if (opponentMonHealthNum <= 0.1) opponentMonHealthBar.setStyle("-fx-accent: red;");
         else opponentMonHealthBar.setStyle("-fx-accent: green;");
         playerMonHealthBar.setProgress(playerMonHealthNum);
-        playerMonHealthPercentage.setText((int)(playerMonHealthNum*100) + "%");
+        playerMonHealthPercentage.setText(String.format("%.2f", playerMonHealthNum*100) + "%");
         opponentMonHealthBar.setProgress(opponentMonHealthNum);
-        opponentMonHealthPercentage.setText((int)(opponentMonHealthNum*100) + "%");
+        opponentMonHealthPercentage.setText(String.format("%.2f", opponentMonHealthNum*100) + "%");
     }
 
     private String getBackSprite() {
