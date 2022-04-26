@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.SplitPane?>
@@ -9,11 +10,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PokemonShowdown.BattleController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PokemonShowdown.BattleController">
   <columnConstraints>
     <ColumnConstraints />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="754.3999633789062" minWidth="10.0" prefWidth="754.3999633789062" />
@@ -110,6 +112,16 @@
                   <Font size="14.0" />
                </font>
             </Label>
+            <Pane fx:id="endScreen" layoutX="454.0" layoutY="237.0" prefHeight="210.0" prefWidth="267.0" style="-fx-background-color: white;" visible="false">
+               <children>
+                  <Label fx:id="endScreenTitle" alignment="CENTER" layoutX="103.0" layoutY="46.0" text="Label" textAlignment="CENTER">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="backToMenu" layoutX="75.0" layoutY="117.0" mnemonicParsing="false" onAction="#handleBackToMenu" text="Back to main menu" />
+               </children>
+            </Pane>
          </children>
       </AnchorPane>
       <TextArea fx:id="console" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
