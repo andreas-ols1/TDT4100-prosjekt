@@ -35,6 +35,7 @@ public class BattleController {
     private int activeMonButtonIndex;
     private List<Button> pokemonButtonList = new ArrayList<>();
     private List<Button> attackButtonList = new ArrayList<>();
+    private int turnCount;
     
     @FXML
     private GridPane playerTeamView,attacks;
@@ -77,13 +78,42 @@ public class BattleController {
     private void handleSelectMon(ActionEvent ae) throws IOException {
         Button button = (Button)ae.getSource();
         activeMonButtonIndex = (int)GridPane.getRowIndex(button);
-        game.setActiveMon(activeMonButtonIndex);
-        setMoveButtons();
-        playerMon.setImage(new Image(getBackSprite()));
-        playerMonName.setText(game.getActiveMon().getName().substring(0,1).toUpperCase() + game.getActiveMon().getName().substring(1));
-        playerMonHealthBar.setVisible(true); 
-        enableAttackButtons();
-        updateHealthBars();
+        if (game.getActiveMon() != null) {
+            if (!game.getActiveMon().isDead()) {
+                game.setActiveMon(activeMonButtonIndex);
+                setMoveButtons();
+                playerMon.setImage(new Image(getBackSprite()));
+                playerMonName.setText(game.getActiveMon().getName().substring(0,1).toUpperCase() + game.getActiveMon().getName().substring(1));
+                playerMonHealthBar.setVisible(true); 
+                enableAttackButtons();
+                updateHealthBars();
+                if (turnCount != 0) {
+                    turnCount ++;
+                    game.getActiveOpponentMon().attack(game.getActiveMon(), ThreadLocalRandom.current().nextInt(4));
+                    updateMonStatus();
+                    if (gameEnded()) endScreen();
+                }
+            }
+            else {
+                game.setActiveMon(activeMonButtonIndex);
+                setMoveButtons();
+                playerMon.setImage(new Image(getBackSprite()));
+                playerMonName.setText(game.getActiveMon().getName().substring(0,1).toUpperCase() + game.getActiveMon().getName().substring(1));
+                playerMonHealthBar.setVisible(true); 
+                enableAttackButtons();
+                updateHealthBars();
+            }
+        }
+        else {
+            game.setActiveMon(activeMonButtonIndex);
+            setMoveButtons();
+            playerMon.setImage(new Image(getBackSprite()));
+            playerMonName.setText(game.getActiveMon().getName().substring(0,1).toUpperCase() + game.getActiveMon().getName().substring(1));
+            playerMonHealthBar.setVisible(true); 
+            enableAttackButtons();
+            updateHealthBars();
+            turnCount ++;
+        }
     }
 
     @FXML
