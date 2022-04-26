@@ -123,8 +123,6 @@ public class PokemonShowdownController {
     private void handleNewGame(ActionEvent ae) throws IOException {
         if (selectedTeam == null) showWarning("team");
         gameTransferring= new Game(selectedTeam.getMons());
-        System.out.println(selectedTeam.getMons());
-        System.out.println(gameTransferring.getPlayerTeam());
         switchScreen(ae,"PokemonShowdownMainView.fxml");
     }
 
