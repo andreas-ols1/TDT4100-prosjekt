@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.IntStream;
 
 public class Game {
@@ -14,22 +15,30 @@ public class Game {
     private Pokemon activeOpponentMon;
     private final List<String> validPokemon = Arrays.asList("venusaur","charizard","blastoise","pikachu",
     "nidoking","arcanine","alakazam","machamp","golem","slowbro","gengar","gyarados","aerodactyl","snorlax",
-    "articuno","zapdos","moltres","dragonite","mewtwo","mew","mega-rayquaza","amoonguss");
+    "articuno","zapdos","moltres","dragonite","mewtwo","mew","rayquaza","amoonguss");
 
     public Game(List<Pokemon> playerTeam) {
         playerTeam.stream().forEach((mon) -> this.playerTeam.add(mon));
         getRandomTeam().stream().forEach((mon) -> opponentTeam.add(new Pokemon(mon))); 
-        activeOpponentMon = opponentTeam.get(0);
+        activeOpponentMon = opponentTeam.get(ThreadLocalRandom.current().nextInt(4));
     }
 
     public Game() {
         getRandomTeam().stream().forEach((mon) -> playerTeam.add(new Pokemon(mon)));
         getRandomTeam().stream().forEach((mon) -> opponentTeam.add(new Pokemon(mon)));
-        activeOpponentMon = opponentTeam.get(0);
+        activeOpponentMon = opponentTeam.get(ThreadLocalRandom.current().nextInt(4));
     }
     
     public void setActiveMon(int index) {
         activeMon = playerTeam.get(index);
+    }
+
+    public void setActiveOpponentMon() {
+        Pokemon mon = opponentTeam.get(ThreadLocalRandom.current().nextInt(4));
+        while (mon.isDead()) {
+            mon = opponentTeam.get(ThreadLocalRandom.current().nextInt(4));
+        }
+        activeOpponentMon = mon;
     }
 
     public List<String> getRandomTeam() {

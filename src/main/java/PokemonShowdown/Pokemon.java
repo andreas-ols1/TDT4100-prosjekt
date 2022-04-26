@@ -23,7 +23,7 @@ public class Pokemon {
     private double speedBoost = 1;
     private Collection<String> validPokemon = Arrays.asList("venusaur","charizard","blastoise","pikachu",
     "nidoking","arcanine","alakazam","machamp","golem","slowbro","gengar","gyarados","aerodactyl","snorlax",
-    "articuno","zapdos","moltres","dragonite","mewtwo","mew","mega-rayquaza","amoonguss");
+    "articuno","zapdos","moltres","dragonite","mewtwo","mew","rayquaza","amoonguss");
 
     public Pokemon(String name) {
         checkValidPokemon(name);
@@ -48,7 +48,7 @@ public class Pokemon {
             case "dragonite" -> setPokemonToDragonite();
             case "mewtwo" -> setPokemonToMewtwo();
             case "mew" -> setPokemonToMew();
-            case "mega-rayquaza" -> setPokemonToMegaRayquaza();
+            case "rayquaza" -> setPokemonToRayquaza();
             case "amoonguss" -> setPokemonToAmoonguss();
         }
     }
@@ -139,8 +139,8 @@ public class Pokemon {
         setPokemonDetails("mew", Arrays.asList("psychic", "none"), 372, 267, 267, 267, Arrays.asList("psychic", "earthquake", "recover", "swords dance"));
     }
 
-    private void setPokemonToMegaRayquaza() {
-        setPokemonDetails("mega-rayquaza", Arrays.asList("dragon","flying"), 382, 427, 267, 297, Arrays.asList("dragon pulse","dragons ascent","v-create","dragon dance"));
+    private void setPokemonToRayquaza() {
+        setPokemonDetails("rayquaza", Arrays.asList("dragon","flying"), 382, 367, 247, 257, Arrays.asList("dragon pulse","dragons ascent","v-create","dragon dance"));
     }
 
     private void setPokemonToAmoonguss() {
@@ -243,6 +243,10 @@ public class Pokemon {
         return hp;
     }
 
+    public int getMaxHp() {
+        return maxHp;
+    }
+
     public double getSpeedBoost() {
         return speedBoost;
     }
@@ -323,6 +327,10 @@ public class Pokemon {
     public Type getMoveType(int moveIndex) {
         return moves.get(moveIndex).getType();
     }
+
+    public boolean isDead() {
+        return isDead;
+    }
  
     @Override
     public String toString() {
@@ -330,7 +338,11 @@ public class Pokemon {
     }
 
     public static void main(String[] args) {
-
+    Pokemon snorlax = new Pokemon("snorlax");
+    Pokemon charizard = new Pokemon("charizard");
+    System.out.println(charizard.getHp());
+    snorlax.attack(charizard,0);
+    System.out.println(charizard.getHp());
     }
 
 }
