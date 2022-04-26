@@ -12,42 +12,42 @@ public class Move {
     private double heal;
     private double attackBoost;
     private double speedBoost;
-    private Collection<String> validMoves = Arrays.asList("swords dance","recover","hydro pump","slash","flamethrower",
-    "earthquake","solar beam","ice beam","skull bash","thunderbolt","surf","sludge bomb","air slash","cross chop","thunder punch",
-    "ice punch","fire punch","psychic","rock slide","shadow ball","dragon pulse","roost","agility","dragon dance","v-create",
-    "dragons ascent","synthesis","giga drain");
+    private Collection<String> validMoves = Arrays.asList("Swords Dance","Recover","Hydro Pump","Slash","Flamethrower",
+    "Earthquake","Solar Beam","Ice Beam","Skull Bash","Thunderbolt","Surf","Sludge Bomb","Air Slash","Cross Chop","Thunder Punch",
+    "Ice Punch","Fire Punch","Psychic","Rock Slide","Shadow Ball","Dragon Pulse","Roost","Agility","Dragon Dance","V-create",
+    "Dragons Ascent","Synthesis","Giga Drain");
 
     public Move(String name) {
         checkValidMove(name);
-        switch (name.toLowerCase()) {
-            case "slash" -> setMoveAttributes(name, "normal",70, 1,0, 0,0);
-            case "flamethrower" -> setMoveAttributes(name, "fire",95, 1, 0, 0,0);
-            case "earthquake" -> setMoveAttributes(name, "ground",100, 1, 0, 0,0);
-            case "solar beam" -> setMoveAttributes(name, "grass",120, 0.8, 0, 0,0);
-            case "hydro pump" -> setMoveAttributes(name, "water",120, 0.8, 0, 0,0);
-            case "skull bash" -> setMoveAttributes(name, "normal",100, 1, 0, 0,0);
-            case "ice beam" -> setMoveAttributes(name, "ice",90, 1, 0, 0,0);
-            case "swords dance" -> setMoveAttributes(name, "normal",0, 1, 0, 1,0);
-            case "recover" -> setMoveAttributes(name, "normal",0, 1, 0.5, 0,0);
-            case "thunderbolt" -> setMoveAttributes(name, "electric", 95, 1, 0, 0,0);
-            case "surf" -> setMoveAttributes(name, "water", 95, 1, 0, 0,0);
-            case "sludge bomb" -> setMoveAttributes(name, "poison", 90, 1, 0, 0,0);
-            case "air slash" -> setMoveAttributes(name, "flying", 75, 0.95, 0, 0,0);
-            case "cross chop" -> setMoveAttributes(name, "fighting", 100, 0.8, 0, 0,0);
-            case "thunder punch" -> setMoveAttributes(name, "electric", 75, 1, 0, 0,0);
-            case "fire punch" -> setMoveAttributes(name, "fire", 75, 1, 0, 0,0);
-            case "ice punch" -> setMoveAttributes(name, "ice", 75, 1, 0, 0,0);
-            case "psychic" -> setMoveAttributes(name, "psychic", 90, 1, 0, 0,0);
-            case "rock slide" -> setMoveAttributes(name, "rock", 75, 0.9, 0, 0,0);
-            case "shadow ball" -> setMoveAttributes(name, "ghost", 80, 1, 0, 0,0);
-            case "dragon pulse" -> setMoveAttributes(name, "dragon", 85, 1, 0, 0,0);
-            case "roost" -> setMoveAttributes(name, "flying", 0, 1, 0.5, 0,0);
-            case "agility" -> setMoveAttributes(name, "psychic", 0, 1, 0, 0, 1);
-            case "dragon dance" -> setMoveAttributes(name, "dragon", 0, 1, 0, 0.5, 0.5);
-            case "v-create" -> setMoveAttributes(name, "fire", 180, 0.95, 0, -0.5, -0.5);
-            case "dragons ascent" -> setMoveAttributes(name, "flying", 120, 1, 0, 0, 0);
-            case "synthesis" -> setMoveAttributes(name, "grass", 0, 1, 0.5, 0, 0);
-            case "giga drain" -> setMoveAttributes(name, "grass", 75, 1, 0.1, 0, 0);
+        switch (name) {
+            case "Slash" -> setMoveAttributes(name, "Normal",70, 1,0, 0,0);
+            case "Flamethrower" -> setMoveAttributes(name, "Fire",95, 1, 0, 0,0);
+            case "Earthquake" -> setMoveAttributes(name, "Ground",100, 1, 0, 0,0);
+            case "Solar Beam" -> setMoveAttributes(name, "Grass",120, 0.8, 0, 0,0);
+            case "Hydro Pump" -> setMoveAttributes(name, "Water",120, 0.8, 0, 0,0);
+            case "Skull Bash" -> setMoveAttributes(name, "Normal",100, 1, 0, 0,0);
+            case "Ice Beam" -> setMoveAttributes(name, "Ice",90, 1, 0, 0,0);
+            case "Swords Dance" -> setMoveAttributes(name, "Normal",0, 1, 0, 1,0);
+            case "Recover" -> setMoveAttributes(name, "Normal",0, 1, 0.5, 0,0);
+            case "Thunderbolt" -> setMoveAttributes(name, "Electric", 95, 1, 0, 0,0);
+            case "Surf" -> setMoveAttributes(name, "Water", 95, 1, 0, 0,0);
+            case "Sludge Bomb" -> setMoveAttributes(name, "Poison", 90, 1, 0, 0,0);
+            case "Air Slash" -> setMoveAttributes(name, "Flying", 75, 0.95, 0, 0,0);
+            case "Cross Chop" -> setMoveAttributes(name, "Fighting", 100, 0.8, 0, 0,0);
+            case "Thunder Punch" -> setMoveAttributes(name, "Electric", 75, 1, 0, 0,0);
+            case "Fire Punch" -> setMoveAttributes(name, "Fire", 75, 1, 0, 0,0);
+            case "Ice Punch" -> setMoveAttributes(name, "Ice", 75, 1, 0, 0,0);
+            case "Psychic" -> setMoveAttributes(name, "Psychic", 90, 1, 0, 0,0);
+            case "Rock Slide" -> setMoveAttributes(name, "Rock", 75, 0.9, 0, 0,0);
+            case "Shadow Ball" -> setMoveAttributes(name, "Ghost", 80, 1, 0, 0,0);
+            case "Dragon Pulse" -> setMoveAttributes(name, "Dragon", 85, 1, 0, 0,0);
+            case "Roost" -> setMoveAttributes(name, "Flying", 0, 1, 0.5, 0,0);
+            case "Agility" -> setMoveAttributes(name, "Psychic", 0, 1, 0, 0, 1);
+            case "Dragon Dance" -> setMoveAttributes(name, "Dragon", 0, 1, 0, 0.5, 0.5);
+            case "V-create" -> setMoveAttributes(name, "Fire", 180, 0.95, 0, -0.5, -0.5);
+            case "Dragons Ascent" -> setMoveAttributes(name, "Flying", 120, 1, 0, 0, 0);
+            case "Synthesis" -> setMoveAttributes(name, "Grass", 0, 1, 0.5, 0, 0);
+            case "Giga Drain" -> setMoveAttributes(name, "Grass", 75, 1, 0.1, 0, 0);
         }
     }
 
@@ -102,7 +102,8 @@ public class Move {
     }
 
     public static void main(String[] args) {
-
+        Move hp = new Move("Hydro Pump");
+        System.out.println(hp);
     }
 
 }

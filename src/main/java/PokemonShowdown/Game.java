@@ -13,9 +13,9 @@ public class Game {
     private List<Pokemon> opponentTeam = new ArrayList<>();
     private Pokemon activeMon;
     private Pokemon activeOpponentMon;
-    private final List<String> validPokemon = Arrays.asList("venusaur","charizard","blastoise","pikachu",
-    "nidoking","arcanine","alakazam","machamp","golem","slowbro","gengar","gyarados","aerodactyl","snorlax",
-    "articuno","zapdos","moltres","dragonite","mewtwo","mew","rayquaza","amoonguss");
+    private final List<String> validPokemon = Arrays.asList("Venusaur","Charizard","Blastoise","Pikachu",
+    "Nidoking","Arcanine","Alakazam","Machamp","Golem","Slowbro","Gengar","Gyarados","Aerodactyl","Snorlax",
+    "Articuno","Zapdos","Moltres","Dragonite","Mewtwo","Mew","Rayquaza","Amoonguss");
 
     public Game(List<Pokemon> playerTeam) {
         playerTeam.stream().forEach((mon) -> this.playerTeam.add(mon));
@@ -30,7 +30,9 @@ public class Game {
     }
     
     public void setActiveMon(int index) {
+        if (activeMon != null) activeMon.revertStatChanges();
         activeMon = playerTeam.get(index);
+        System.out.println("I choose you, " + activeMon.getName() + "!\n");
     }
 
     public void setActiveOpponentMon() {
@@ -74,16 +76,18 @@ public class Game {
         return activeOpponentMon;
     }
 
+    
+
     @Override
     public String toString() {
-        return "Players team:\n" + playerTeam
-        + "\nActive mon: " + activeMon
-        + "\n\nOpponents team:\n" + opponentTeam
-        + "\nActive opponent mon: " + activeOpponentMon;
+        return "New game\n---------\n" +
+        "Players team:\n" + playerTeam +
+        "\n\nOpponents team:\n" + opponentTeam +
+        "\n---------\n";
     }
 
     public static void main(String[] args) {
-
+        
     }
 
 }

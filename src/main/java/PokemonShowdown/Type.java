@@ -10,27 +10,27 @@ public class Type {
     private Collection<String> strongAgainst = new ArrayList<>();
     private Collection<String> weakAgainst = new ArrayList<>();
     private Collection<String> immune = new ArrayList<>();
-    private Collection<String> validTypes = Arrays.asList("fire","water","grass","ground","normal","ice","electric","poison",
-    "flying","none","rock","fighting","psychic","ghost","dragon");
+    private Collection<String> validTypes = Arrays.asList("Fire","Water","Grass","Ground","Normal","Ice","Electric","Poison",
+    "Flying","None","Rock","Fighting","Psychic","Ghost","Dragon");
 
     public Type(String type) {
         checkValidType(type);
-        switch (type.toLowerCase()) {
-            case "fire" -> setFireType();
-            case "water" -> setWaterType();
-            case "grass" -> setGrassType();
-            case "normal" -> setNormalType();
-            case "ground" -> setGroundType();
-            case "ice" -> setIceType();
-            case "electric" -> setElectricType();
-            case "none" -> setTypeNone();
-            case "poison" -> setPoisonType();
-            case "flying" -> setFlyingType();
-            case "rock" -> setRockType();
-            case "fighting" -> setFightingType();
-            case "psychic" -> setPsychicType();
-            case "ghost" -> setGhostType();
-            case "dragon" -> setDragonType();
+        switch (type) {
+            case "Fire" -> setFireType();
+            case "Water" -> setWaterType();
+            case "Grass" -> setGrassType();
+            case "Normal" -> setNormalType();
+            case "Ground" -> setGroundType();
+            case "Ice" -> setIceType();
+            case "Electric" -> setElectricType();
+            case "None" -> setTypeToNone();
+            case "Poison" -> setPoisonType();
+            case "Flying" -> setFlyingType();
+            case "Rock" -> setRockType();
+            case "Fighting" -> setFightingType();
+            case "Psychic" -> setPsychicType();
+            case "Ghost" -> setGhostType();
+            case "Dragon" -> setDragonType();
         }
 
     }
@@ -40,63 +40,63 @@ public class Type {
     }
 
     private void setFireType() {
-        setTypeAttributes("fire", Arrays.asList("grass","ice"), Arrays.asList("water","fire","rock","dragon"), Arrays.asList());
+        setTypeAttributes("Fire", Arrays.asList("Grass","Ice"), Arrays.asList("Water","Fire","Rock","Dragon"), Arrays.asList());
     }
 
     private void setWaterType() {
-        setTypeAttributes("water", Arrays.asList("fire","ground","rock"), Arrays.asList("grass","water","dragon"), Arrays.asList());
+        setTypeAttributes("Water", Arrays.asList("Fire","Ground","Rock"), Arrays.asList("Grass","Water","Dragon"), Arrays.asList());
     }
 
     private void setGrassType() {
-        setTypeAttributes("grass", Arrays.asList("water","ground","rock"), Arrays.asList("fire","grass","poison","flying","dragon"), Arrays.asList());
+        setTypeAttributes("Grass", Arrays.asList("Water","Ground","Rock"), Arrays.asList("Fire","Grass","Poison","Flying","Dragon"), Arrays.asList());
     }
 
     private void setGroundType() {
-        setTypeAttributes("ground", Arrays.asList("fire","electric","poison","rock"), Arrays.asList("grass"), Arrays.asList("flying"));
+        setTypeAttributes("Ground", Arrays.asList("Fire","Electric","Poison","Rock"), Arrays.asList("Grass"), Arrays.asList("Flying"));
     }
 
     private void setNormalType() {
-        setTypeAttributes("normal", Arrays.asList(), Arrays.asList("rock"), Arrays.asList("ghost"));
+        setTypeAttributes("Normal", Arrays.asList(), Arrays.asList("Rock"), Arrays.asList("Ghost"));
     }
 
     private void setIceType() {
-        setTypeAttributes("ice", Arrays.asList("ground","grass","flying","dragon"), Arrays.asList("fire","water","ice"), Arrays.asList());
+        setTypeAttributes("Ice", Arrays.asList("Ground","Grass","Flying","Dragon"), Arrays.asList("Fire","Water","Ice"), Arrays.asList());
     }
 
     private void setElectricType() {
-        setTypeAttributes("electric", Arrays.asList("water","flying"), Arrays.asList("grass", "electric","dragon"), Arrays.asList("ground"));
+        setTypeAttributes("Electric", Arrays.asList("Water","Flying"), Arrays.asList("Grass", "Electric","Dragon"), Arrays.asList("Ground"));
     }
 
     private void setPoisonType() {
-        setTypeAttributes("poison", Arrays.asList("grass"), Arrays.asList("poison","rock","ghost"), Arrays.asList());
+        setTypeAttributes("Poison", Arrays.asList("Grass"), Arrays.asList("Poison","Rock","Ghost"), Arrays.asList());
     }
 
     private void setFlyingType() {
-        setTypeAttributes("flying", Arrays.asList("grass","fighting"), Arrays.asList("electric","rock"), Arrays.asList());
+        setTypeAttributes("Flying", Arrays.asList("Grass","Fighting"), Arrays.asList("Electric","Rock"), Arrays.asList());
     }
 
     private void setRockType() {
-        setTypeAttributes("rock", Arrays.asList("fire","ice","flying"), Arrays.asList("fighting","ground"), Arrays.asList());
+        setTypeAttributes("Rock", Arrays.asList("Fire","Ice","Flying"), Arrays.asList("Fighting","Ground"), Arrays.asList());
     }
 
     private void setFightingType() {
-        setTypeAttributes("fighting", Arrays.asList("normal","ice","rock"), Arrays.asList("poison","flying","psychic"), Arrays.asList("ghost"));
+        setTypeAttributes("Fighting", Arrays.asList("Normal","Ice","Rock"), Arrays.asList("Poison","Flying","Psychic"), Arrays.asList("Ghost"));
     }
 
     private void setPsychicType() {
-        setTypeAttributes("psychic", Arrays.asList("fighting","poison"), Arrays.asList("psychic"), Arrays.asList());
+        setTypeAttributes("Psychic", Arrays.asList("Fighting","Poison"), Arrays.asList("Psychic"), Arrays.asList());
     }
 
     private void setGhostType() {
-        setTypeAttributes("ghost", Arrays.asList("psychic","ghost"), Arrays.asList(), Arrays.asList("normal"));
+        setTypeAttributes("Ghost", Arrays.asList("Psychic","Ghost"), Arrays.asList(), Arrays.asList("Normal"));
     }
 
     private void setDragonType() {
-        setTypeAttributes("dragon", Arrays.asList("dragon"), Arrays.asList(), Arrays.asList());
+        setTypeAttributes("Dragon", Arrays.asList("Dragon"), Arrays.asList(), Arrays.asList());
     }
 
-    private void setTypeNone() {
-        name = "none";
+    private void setTypeToNone() {
+        name = "None";
     }
 
     private void setTypeAttributes(String name, Collection<String> strongAgainst, Collection<String> weakAgainst, Collection<String> immune) {

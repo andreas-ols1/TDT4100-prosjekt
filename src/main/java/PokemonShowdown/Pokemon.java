@@ -19,11 +19,12 @@ public class Pokemon {
     private int maxHp;
     private int hp;
     private boolean isDead = false;
+    private boolean crit;
     private double attackBoost = 1;
     private double speedBoost = 1;
-    private Collection<String> validPokemon = Arrays.asList("venusaur","charizard","blastoise","pikachu",
-    "nidoking","arcanine","alakazam","machamp","golem","slowbro","gengar","gyarados","aerodactyl","snorlax",
-    "articuno","zapdos","moltres","dragonite","mewtwo","mew","rayquaza","amoonguss");
+    private final List<String> validPokemon = Arrays.asList("Venusaur","Charizard","Blastoise","Pikachu",
+    "Nidoking","Arcanine","Alakazam","Machamp","Golem","Slowbro","Gengar","Gyarados","Aerodactyl","Snorlax",
+    "Articuno","Zapdos","Moltres","Dragonite","Mewtwo","Mew","Rayquaza","Amoonguss");
 
     public Pokemon(String name) {
         checkValidPokemon(name);
@@ -60,91 +61,91 @@ public class Pokemon {
     }
 
     private void setPokemonToVenusaur() {
-        setPokemonDetails("venusaur", Arrays.asList("grass","poison"), 332, 231, 267, 227, Arrays.asList("sludge bomb","earthquake","swords dance","giga drain"));
+        setPokemonDetails("Venusaur", Arrays.asList("Grass","Poison"), 332, 231, 267, 227, Arrays.asList("Sludge Bomb","Earthquake","Swords Dance","Giga Drain"));
     }
  
     private void setPokemonToCharizard() {
-        setPokemonDetails("charizard", Arrays.asList("fire","flying"), 328, 285, 237, 267,Arrays.asList("flamethrower","earthquake","swords dance","air slash"));
+        setPokemonDetails("Charizard", Arrays.asList("Fire","Flying"), 328, 285, 237, 267,Arrays.asList("Flamethrower","Earthquake","Swords Dance","Air Slash"));
     }
 
     private void setPokemonToBlastoise() {
-        setPokemonDetails("blastoise", Arrays.asList("water","none"), 330, 237, 277, 223, Arrays.asList("hydro pump","recover","skull bash","ice beam"));  
+        setPokemonDetails("Blastoise", Arrays.asList("Water","None"), 330, 237, 277, 223, Arrays.asList("Hydro Pump","Recover","Skull Bash","Ice Beam"));  
     }
 
     private void setPokemonToPikachu() {
-        setPokemonDetails("pikachu", Arrays.asList("electric","none"), 274, 299, 167, 247, Arrays.asList("slash","thunderbolt","swords dance","surf"));
+        setPokemonDetails("Pikachu", Arrays.asList("Electric","None"), 274, 299, 167, 247, Arrays.asList("Slash","Thunderbolt","Swords Dance","Surf"));
     }
 
     private void setPokemonToNidoking() {
-        setPokemonDetails("nidoking", Arrays.asList("poison", "ground"), 334, 271, 221, 237, Arrays.asList("earthquake","sludge bomb","surf","swords dance"));
+        setPokemonDetails("Nidoking", Arrays.asList("Poison", "Ground"), 334, 271, 221, 237, Arrays.asList("Earthquake","Sludge Bomb","Surf","Swords Dance"));
     }
 
     private void setPokemonToArcanine() {
-        setPokemonDetails("arcanine", Arrays.asList("fire", "none"), 352, 287, 227, 257, Arrays.asList("flamethrower","recover","earthquake","skull bash"));
+        setPokemonDetails("Arcanine", Arrays.asList("Fire", "None"), 352, 287, 227, 257, Arrays.asList("Flamethrower","Recover","Earthquake","Skull Bash"));
     }
     
     private void setPokemonToAlakazam() {
-        setPokemonDetails("alakazam", Arrays.asList("psychic", "none"), 282, 337, 257, 307, Arrays.asList("psychic","shadow ball","thunderbolt","recover"));
+        setPokemonDetails("Alakazam", Arrays.asList("Psychic", "None"), 282, 337, 257, 307, Arrays.asList("Psychic","Shadow Ball","Thunderbolt","Recover"));
     }
 
     private void setPokemonToMachamp() {
-        setPokemonDetails("machamp", Arrays.asList("fighting", "none"), 352, 327, 237, 177, Arrays.asList("cross chop","thunder punch","ice punch","fire punch"));
+        setPokemonDetails("Machamp", Arrays.asList("Fighting", "None"), 352, 327, 237, 177, Arrays.asList("Cross Chop","Thunder Punch","Ice Punch","Fire Punch"));
     }
 
     private void setPokemonToGolem() {
-        setPokemonDetails("golem", Arrays.asList("rock", "ground"), 332, 307, 327, 157, Arrays.asList("earthquake","rock slide","skull bash","swords dance")); 
+        setPokemonDetails("Golem", Arrays.asList("Rock", "Ground"), 332, 307, 327, 157, Arrays.asList("Earthquake","Rock Slide","Skull Bash","Swords Dance")); 
     }
 
     private void setPokemonToSlowbro() {
-        setPokemonDetails("slowbro", Arrays.asList("water", "psychic"), 362, 287, 267, 127, Arrays.asList("surf", "psychic", "recover", "ice beam"));
+        setPokemonDetails("Slowbro", Arrays.asList("Water", "Psychic"), 362, 287, 267, 127, Arrays.asList("Surf","Psychic","Recover","Ice Beam"));
     }
 
     private void setPokemonToGengar() {
-        setPokemonDetails("gengar", Arrays.asList("ghost", "poison"), 292, 327, 217, 287, Arrays.asList("shadow ball", "psychic", "sludge bomb", "thunderbolt"));
+        setPokemonDetails("Gengar", Arrays.asList("Ghost", "Poison"), 292, 327, 217, 287, Arrays.asList("Shadow Ball","Psychic","Sludge Bomb","Thunderbolt"));
     }
 
     private void setPokemonToGyarados() {
-        setPokemonDetails("gyarados", Arrays.asList("water", "flying"), 362, 317, 267, 229, Arrays.asList("hydro pump", "dragon pulse", "dragon dance", "thunderbolt"));
+        setPokemonDetails("Gyarados", Arrays.asList("Water", "Flying"), 362, 317, 267, 229, Arrays.asList("Hydro Pump","Dragon Pulse","Dragon Dance","Thunderbolt"));
     }
 
     private void setPokemonToAerodactyl() {
-        setPokemonDetails("aerodactyl", Arrays.asList("rock", "flying"), 332, 277, 217, 327, Arrays.asList("rock slide", "air slash", "earthquake", "swords dance"));
+        setPokemonDetails("Aerodactyl", Arrays.asList("Rock", "Flying"), 332, 277, 217, 327, Arrays.asList("Rock Slide","Air Slash","Earthquake","Swords Dance"));
     }
     
     private void setPokemonToSnorlax() {
-        setPokemonDetails("snorlax", Arrays.asList("normal", "none"), 492, 256, 287, 127, Arrays.asList("skull bash", "ice punch", "earthquake", "fire punch"));
+        setPokemonDetails("Snorlax", Arrays.asList("Normal", "None"), 492, 256, 287, 127, Arrays.asList("Skull Bash","Ice Punch","Earthquake","Fire Punch"));
     }
 
     private void setPokemonToArticuno() {
-        setPokemonDetails("articuno", Arrays.asList("ice", "flying"), 352, 257, 317, 237, Arrays.asList("ice beam", "air slash", "slash", "roost"));
+        setPokemonDetails("Articuno", Arrays.asList("Ice", "Flying"), 352, 257, 317, 237, Arrays.asList("Ice Beam","Air Slash","Slash","Roost"));
     }
 
     private void setPokemonToZapdos() {
-        setPokemonDetails("zapdos", Arrays.asList("electric", "flying"), 352, 317, 247, 267, Arrays.asList("thunderbolt", "air slash", "slash", "roost"));
+        setPokemonDetails("Zapdos", Arrays.asList("Electric", "Flying"), 352, 317, 247, 267, Arrays.asList("Thunderbolt","Air Slash","Slash","Roost"));
     }
 
     private void setPokemonToMoltres() {
-        setPokemonDetails("moltres", Arrays.asList("fire", "flying"), 352, 247, 317, 247, Arrays.asList("flamethrower", "air slash", "slash", "roost"));
+        setPokemonDetails("Moltres", Arrays.asList("Fire", "Flying"), 352, 247, 317, 247, Arrays.asList("Flamethrower","Air Slash","Slash","Roost"));
     }
 
     private void setPokemonToDragonite() {
-        setPokemonDetails("dragonite", Arrays.asList("dragon", "flying"), 354, 335, 267, 227, Arrays.asList("dragon pulse", "flamethrower", "roost", "dragon dance"));
+        setPokemonDetails("Dragonite", Arrays.asList("Dragon", "Flying"), 354, 335, 267, 227, Arrays.asList("Dragon Pulse","Flamethrower","Roost","Dragon Dance"));
     }
 
     private void setPokemonToMewtwo() {
-        setPokemonDetails("mewtwo", Arrays.asList("psychic", "none"), 384, 247, 375, 327, Arrays.asList("psychic", "ice beam", "shadow ball", "recover"));
+        setPokemonDetails("Mewtwo", Arrays.asList("Psychic", "None"), 384, 247, 375, 327, Arrays.asList("Psychic","Ice Beam","Shadow Ball","Recover"));
     }
 
     private void setPokemonToMew() {
-        setPokemonDetails("mew", Arrays.asList("psychic", "none"), 372, 267, 267, 267, Arrays.asList("psychic", "earthquake", "recover", "swords dance"));
+        setPokemonDetails("Mew", Arrays.asList("Psychic", "None"), 372, 267, 267, 267, Arrays.asList("Psychic","Earthquake","Recover","Swords Dance"));
     }
 
     private void setPokemonToRayquaza() {
-        setPokemonDetails("rayquaza", Arrays.asList("dragon","flying"), 382, 367, 247, 257, Arrays.asList("dragon pulse","dragons ascent","v-create","dragon dance"));
+        setPokemonDetails("Rayquaza", Arrays.asList("Dragon","Flying"), 382, 367, 247, 257, Arrays.asList("Dragon Pulse","Dragons Ascent","V-create","Dragon Dance"));
     }
 
     private void setPokemonToAmoonguss() {
-        setPokemonDetails("amoonguss", Arrays.asList("grass","poison"), 400, 327, 227, 127, Arrays.asList("giga drain","sludge bomb","synthesis","solar beam"));
+        setPokemonDetails("Amoonguss", Arrays.asList("Grass","Poison"), 400, 327, 227, 127, Arrays.asList("Giga Drain","Sludge Bomb","Synthesis","Solar Beam"));
     }
 
     private void setPokemonDetails(String name, List<String> types, int maxHp, int attack, int defence, int speed, Collection<String> moves) {
@@ -160,31 +161,32 @@ public class Pokemon {
         moves.stream().forEach(move -> this.moves.add(new Move(move)));
     }
 
-    public void attack(Pokemon mon, int moveIndex) {
-        double effectiveness = getEffectiveness(mon, moveIndex);
+    public void attack(Pokemon target, int moveIndex) {
+        double effectiveness = getEffectiveness(target, moveIndex);
         double stab = getStab(moveIndex);
-        String monName = getName().substring(0,1).toUpperCase() + getName().substring(1);
-        String moveName = getMove(moveIndex).getName().substring(0, 1).toUpperCase() + getMove(moveIndex).getName().substring(1);
-        String targetName = mon.getName().substring(0,1).toUpperCase() + mon.getName().substring(1);
         if (checkIfHit(moveIndex)) {
             if (!(getMove(moveIndex).getDamage() == 0)) {
-                if (!checkImmunity(mon, moveIndex)) {
-                    mon.takeDamage(calculateDamage(mon, moveIndex, effectiveness, stab));
+                if (!checkImmunity(target, moveIndex)) {
+                    target.takeDamage(calculateDamage(target, moveIndex, effectiveness, stab));
                     heal(moveIndex);
                     speedBoost(moveIndex);
                     attackBoost(moveIndex);
-                    System.out.println(monName + " used " + moveName + " on " + targetName);
+                    System.out.println(getName() + " used " + getMove(moveIndex).getName() + " on " + target.getName());
+                    if (getEffectiveness(target, moveIndex) > 1) System.out.println("It's super effective!");
+                    if (getEffectiveness(target, moveIndex) < 1) System.out.println("It was not very effective...");
+                    if (crit) System.out.println("It's a crit!");
+                    System.out.println("");
                 }
-                else System.out.println(targetName + " is immune to " + moveName);
+                else System.out.println(getName() + "tried to use" + getMove(moveIndex) + ", but" + target.getName() + "\nis immune to " + getMove(moveIndex).getName() + ", so the attack did no damage!\n");
             }
             else {
                 heal(moveIndex);
                 speedBoost(moveIndex);
                 attackBoost(moveIndex);
-                System.out.println(monName + " used " + moveName);
+                System.out.println(getName()+ " used " + getMove(moveIndex).getName() + "\n");
             }
         } 
-        else System.out.println(monName + " missed " + moveName);
+        else System.out.println(getName() + " missed " + getMove(moveIndex).getName() + "\n");
     }
 
     private int calculateDamage(Pokemon mon, int moveIndex, double effectiveness, double stab) {
@@ -216,6 +218,13 @@ public class Pokemon {
             speed = (int)(orgSpeed * speedBoost);
         }
         else System.out.println("Speed boost maxes out at x4, and can't go below 0.5");
+    }
+
+    public void revertStatChanges() {
+        attack = orgAttack;
+        speed = orgSpeed;
+        attackBoost = 1;
+        speedBoost = 1;
     }
 
     public String getName() {
@@ -281,9 +290,10 @@ public class Pokemon {
 
     private double criticalHit() {
         if (ThreadLocalRandom.current().nextDouble(0,1) < 0.0625) {
-            System.out.println("Its a crit!");
+            crit = true;
             return 1.95;
         }
+        crit = false;
         return 1;
     }
 
