@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PokemonShowdown.BattleController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PokemonShowdown.BattleController">
   <columnConstraints>
     <ColumnConstraints />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="754.3999633789062" minWidth="10.0" prefWidth="754.3999633789062" />
@@ -113,18 +113,21 @@
                   <Tooltip fx:id="opponentMonTooltip" text="Empty Tooltip" />
                </tooltip>
             </Label>
-            <Pane fx:id="endScreen" layoutX="454.0" layoutY="237.0" prefHeight="210.0" prefWidth="267.0" style="-fx-background-color: white;" visible="false">
+            <Pane fx:id="endScreen" layoutX="211.0" layoutY="124.0" prefHeight="218.0" prefWidth="361.0" style="-fx-background-color: white;" visible="false">
                <children>
-                  <Label fx:id="endScreenTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="51.0" prefHeight="38.0" prefWidth="200.0" text="Label" textAlignment="CENTER">
+                  <Label fx:id="endScreenTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="37.0" prefHeight="54.0" prefWidth="256.0" text="Label" textAlignment="CENTER">
                      <font>
-                        <Font size="26.0" />
+                        <Font size="37.0" />
                      </font>
                   </Label>
-                  <Button fx:id="backToMenu" layoutX="75.0" layoutY="117.0" mnemonicParsing="false" onAction="#handleBackToMenu" style="-fx-cursor: hand;" text="Back to main menu" />
+                  <Button fx:id="backToMenu" layoutX="95.0" layoutY="115.0" mnemonicParsing="false" onAction="#handleBackToMenu" prefHeight="48.0" prefWidth="173.0" style="-fx-cursor: hand;" text="Back to main menu">
+                     <font>
+                        <Font size="17.0" />
+                     </font></Button>
                </children>
             </Pane>
          </children>
       </AnchorPane>
-      <TextArea fx:id="console" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <TextArea fx:id="console" editable="false" prefHeight="236.0" prefWidth="311.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
    </children>
 </GridPane>
