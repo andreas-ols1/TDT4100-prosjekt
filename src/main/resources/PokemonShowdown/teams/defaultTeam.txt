@@ -1,4 +1,4 @@
-charizard
-mewtwo
-snorlax
-gyarados
+Charizard
+Mewtwo
+Snorlax
+Gyarados

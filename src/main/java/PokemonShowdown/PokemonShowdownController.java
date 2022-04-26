@@ -65,7 +65,7 @@ public class PokemonShowdownController {
     private void addTeamMember(ActionEvent ae){
         if (team.size() < teamSize) {
             Button button = (Button) ae.getSource();
-            team.add(new Pokemon(button.getText().toLowerCase()));
+            team.add(new Pokemon(button.getText()));
             selectedPokemonButtons.add(button);
             button.setDisable(true);
         }
