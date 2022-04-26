@@ -114,7 +114,7 @@
             </Label>
             <Pane fx:id="endScreen" layoutX="454.0" layoutY="237.0" prefHeight="210.0" prefWidth="267.0" style="-fx-background-color: white;" visible="false">
                <children>
-                  <Label fx:id="endScreenTitle" alignment="CENTER" layoutX="103.0" layoutY="46.0" text="Label" textAlignment="CENTER">
+                  <Label fx:id="endScreenTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="51.0" prefHeight="38.0" prefWidth="200.0" text="Label" textAlignment="CENTER">
                      <font>
                         <Font size="26.0" />
                      </font>
