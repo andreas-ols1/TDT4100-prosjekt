@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PokemonShowdown.BattleController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PokemonShowdown.BattleController">
   <columnConstraints>
     <ColumnConstraints />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="754.3999633789062" minWidth="10.0" prefWidth="754.3999633789062" />
@@ -84,12 +85,6 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                   </GridPane>
-                  <Text layoutX="14.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Opponents team">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Text>
-                  <TextArea fx:id="opponentTeam" editable="false" layoutX="22.0" layoutY="115.0" prefHeight="48.0" prefWidth="493.0" />
                </children>
             </AnchorPane>
         </items>
@@ -106,11 +101,17 @@
                <font>
                   <Font size="14.0" />
                </font>
+               <tooltip>
+                  <Tooltip fx:id="playerMonTooltip" />
+               </tooltip>
             </Label>
             <Label fx:id="opponentMonName" layoutX="572.0" layoutY="21.0" textAlignment="CENTER">
                <font>
                   <Font size="14.0" />
                </font>
+               <tooltip>
+                  <Tooltip fx:id="opponentMonTooltip" text="Empty Tooltip" />
+               </tooltip>
             </Label>
             <Pane fx:id="endScreen" layoutX="454.0" layoutY="237.0" prefHeight="210.0" prefWidth="267.0" style="-fx-background-color: white;" visible="false">
                <children>
@@ -119,7 +120,7 @@
                         <Font size="26.0" />
                      </font>
                   </Label>
-                  <Button fx:id="backToMenu" layoutX="75.0" layoutY="117.0" mnemonicParsing="false" onAction="#handleBackToMenu" text="Back to main menu" />
+                  <Button fx:id="backToMenu" layoutX="75.0" layoutY="117.0" mnemonicParsing="false" onAction="#handleBackToMenu" style="-fx-cursor: hand;" text="Back to main menu" />
                </children>
             </Pane>
          </children>
