@@ -163,6 +163,9 @@ public class Pokemon {
     public void attack(Pokemon mon, int moveIndex) {
         double effectiveness = getEffectiveness(mon, moveIndex);
         double stab = getStab(moveIndex);
+        String monName = getName().substring(0,1).toUpperCase() + getName().substring(1);
+        String moveName = getMove(moveIndex).getName().substring(0, 1).toUpperCase() + getMove(moveIndex).getName().substring(1);
+        String targetName = mon.getName().substring(0,1).toUpperCase() + mon.getName().substring(1);
         if (checkIfHit(moveIndex)) {
             if (!(getMove(moveIndex).getDamage() == 0)) {
                 if (!checkImmunity(mon, moveIndex)) {
@@ -170,18 +173,18 @@ public class Pokemon {
                     heal(moveIndex);
                     speedBoost(moveIndex);
                     attackBoost(moveIndex);
-                    System.out.println(getName() + " used " + getMove(moveIndex).getName() + " on " + mon);
+                    System.out.println(monName + " used " + moveName + " on " + targetName);
                 }
-                else System.out.println(mon.getName() + " is immune to " + getMove(moveIndex).getName());
+                else System.out.println(targetName + " is immune to " + moveName);
             }
             else {
                 heal(moveIndex);
                 speedBoost(moveIndex);
                 attackBoost(moveIndex);
-                System.out.println(getName() + " used " + getMove(moveIndex).getName());
+                System.out.println(monName + " used " + moveName);
             }
         } 
-        else System.out.println(getName() + " missed " + getMove(moveIndex).getName());
+        else System.out.println(monName + " missed " + moveName);
     }
 
     private int calculateDamage(Pokemon mon, int moveIndex, double effectiveness, double stab) {

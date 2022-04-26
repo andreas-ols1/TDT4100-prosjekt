@@ -5,9 +5,14 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,6 +29,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.Node;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.scene.Scene;
 
 public class BattleController {
@@ -35,6 +41,7 @@ public class BattleController {
     private int activeMonButtonIndex;
     private List<Button> pokemonButtonList = new ArrayList<>();
     private List<Button> attackButtonList = new ArrayList<>();
+    private int turnCount;
     
     @FXML
     private GridPane playerTeamView,attacks;
@@ -77,13 +84,43 @@ public class BattleController {
     private void handleSelectMon(ActionEvent ae) throws IOException {
         Button button = (Button)ae.getSource();
         activeMonButtonIndex = (int)GridPane.getRowIndex(button);
-        game.setActiveMon(activeMonButtonIndex);
-        setMoveButtons();
-        playerMon.setImage(new Image(getBackSprite()));
-        playerMonName.setText(game.getActiveMon().getName().substring(0,1).toUpperCase() + game.getActiveMon().getName().substring(1));
-        playerMonHealthBar.setVisible(true); 
-        enableAttackButtons();
-        updateHealthBars();
+        if (game.getActiveMon() != null) {
+            if (!game.getActiveMon().isDead()) {
+                game.setActiveMon(activeMonButtonIndex);
+                setMoveButtons();
+                playerMon.setImage(new Image(getBackSprite()));
+                playerMonName.setText(game.getActiveMon().getName().substring(0,1).toUpperCase() + game.getActiveMon().getName().substring(1));
+                playerMonHealthBar.setVisible(true); 
+                enableAttackButtons();
+                updateHealthBars();
+                if (turnCount != 0) {
+                    turnCount ++;
+                    game.getActiveOpponentMon().attack(game.getActiveMon(), ThreadLocalRandom.current().nextInt(4));
+                    animateOpponentMon();
+                    updateMonStatus();
+                    if (gameEnded()) endScreen();
+                }
+            }
+            else {
+                game.setActiveMon(activeMonButtonIndex);
+                setMoveButtons();
+                playerMon.setImage(new Image(getBackSprite()));
+                playerMonName.setText(game.getActiveMon().getName().substring(0,1).toUpperCase() + game.getActiveMon().getName().substring(1));
+                playerMonHealthBar.setVisible(true); 
+                enableAttackButtons();
+                updateHealthBars();
+            }
+        }
+        else {
+            game.setActiveMon(activeMonButtonIndex);
+            setMoveButtons();
+            playerMon.setImage(new Image(getBackSprite()));
+            playerMonName.setText(game.getActiveMon().getName().substring(0,1).toUpperCase() + game.getActiveMon().getName().substring(1));
+            playerMonHealthBar.setVisible(true); 
+            enableAttackButtons();
+            updateHealthBars();
+            turnCount ++;
+        }
     }
 
     @FXML
@@ -108,19 +145,22 @@ public class BattleController {
     }
 
     private void turn(int moveIndex) {
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
         if (game.getActiveMon().getSpeed() > game.getActiveOpponentMon().getSpeed()) {
             game.getActiveMon().attack(game.getActiveOpponentMon(), moveIndex);
-            // try {
-            //     TimeUnit.SECONDS.sleep(2);
-            // } catch (InterruptedException e) {
-            //     e.printStackTrace();
-            // }
+            animatePlayerMon();
             if (game.getActiveOpponentMon().isDead()) {
                 System.out.println(game.getActiveOpponentMon().getName() + " fainted.");
                 updateMonStatus();
                 if (gameEnded()) endScreen();
             }
-            else {    
+            else {   
+                executorService.schedule(new Runnable() {
+                    @Override
+                    public void run() {
+                        animateOpponentMon();
+                    }
+                }, 1, TimeUnit.SECONDS);
                 game.getActiveOpponentMon().attack(game.getActiveMon(), ThreadLocalRandom.current().nextInt(4));
                 updateMonStatus();
                 if (gameEnded()) endScreen();
@@ -128,17 +168,19 @@ public class BattleController {
         }
         else if (game.getActiveMon().getSpeed() < game.getActiveOpponentMon().getSpeed()) {
             game.getActiveOpponentMon().attack(game.getActiveMon(), ThreadLocalRandom.current().nextInt(4));
-            // try {
-            //     TimeUnit.SECONDS.sleep(2);
-            // } catch (InterruptedException e) {
-            //     e.printStackTrace();
-            // }
+            animateOpponentMon();
             if (game.getActiveMon().isDead()) {
                 System.out.println(game.getActiveMon().getName() + " fainted.");
                 updateMonStatus();
                 if (gameEnded()) endScreen();
             }
             else {    
+                executorService.schedule(new Runnable() {
+                    @Override
+                    public void run() {
+                        animatePlayerMon();
+                    }
+                }, 1, TimeUnit.SECONDS);
                 game.getActiveMon().attack(game.getActiveOpponentMon(), moveIndex);
                 updateMonStatus();
                 if (gameEnded()) endScreen();
@@ -148,17 +190,19 @@ public class BattleController {
             Double rand = ThreadLocalRandom.current().nextDouble(1);
             if (rand <= 0.5) {
                 game.getActiveMon().attack(game.getActiveOpponentMon(), moveIndex);
-                // try {
-                //     TimeUnit.SECONDS.sleep(2);
-                // } catch (InterruptedException e) {
-                //     e.printStackTrace();
-                // }
+                animatePlayerMon();
                 if (game.getActiveOpponentMon().isDead()) {
                     System.out.println(game.getActiveOpponentMon().getName() + " fainted.");
                     updateMonStatus();
                     if (gameEnded()) endScreen();
                 }
                 else {    
+                    executorService.schedule(new Runnable() {
+                        @Override
+                        public void run() {
+                            animateOpponentMon();
+                        }
+                    }, 1, TimeUnit.SECONDS);
                     game.getActiveOpponentMon().attack(game.getActiveMon(), ThreadLocalRandom.current().nextInt(4));
                     updateMonStatus();
                     if (gameEnded()) endScreen();
@@ -166,17 +210,19 @@ public class BattleController {
             }
             else {
                 game.getActiveOpponentMon().attack(game.getActiveMon(), ThreadLocalRandom.current().nextInt(4));
-                // try {
-                //     TimeUnit.SECONDS.sleep(2);
-                // } catch (InterruptedException e) {
-                //     e.printStackTrace();
-                // }
+                animateOpponentMon();
                 if (game.getActiveMon().isDead()) {
                     System.out.println(game.getActiveMon().getName() + " fainted.");
                     updateMonStatus();
                     if (gameEnded()) endScreen();
                 }
                 else {    
+                    executorService.schedule(new Runnable() {
+                        @Override
+                        public void run() {
+                            animatePlayerMon();
+                        }
+                    }, 1, TimeUnit.SECONDS);
                     game.getActiveMon().attack(game.getActiveOpponentMon(), moveIndex);
                     updateMonStatus();
                     if (gameEnded()) endScreen();
@@ -187,11 +233,6 @@ public class BattleController {
     
     private void updateMonStatus() {
         updateHealthBars();
-        // try {
-        //     TimeUnit.SECONDS.sleep(2);
-        // } catch (InterruptedException e) {
-        //     e.printStackTrace();
-        // }
         if (game.getActiveOpponentMon().isDead()) {
             game.setActiveOpponentMon();
             opponentMon.setImage(new Image(getFrontSprite()));
@@ -300,6 +341,24 @@ public class BattleController {
 
     private void enableAttackButtons() {
         attackButtonList.stream().forEach(button -> button.setDisable(false));
+    }
+
+    private void animatePlayerMon() {
+        TranslateTransition translate = new TranslateTransition(Duration.millis(100), playerMon);
+        translate.setByX(300);
+        translate.setByY(-100);
+        translate.setAutoReverse(true);
+        translate.setCycleCount(2);
+        translate.play();
+    }
+
+    private void animateOpponentMon() {
+        TranslateTransition translate = new TranslateTransition(Duration.millis(150), opponentMon);
+        translate.setByX(-300);
+        translate.setByY(100);
+        translate.setAutoReverse(true);
+        translate.setCycleCount(2);
+        translate.play();
     }
 
 
