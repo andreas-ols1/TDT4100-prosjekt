@@ -138,6 +138,15 @@ public class BattleController {
         Button button = (Button)ae.getSource();
         int moveIndex = (int)GridPane.getColumnIndex(button);
         turn(moveIndex);
+        attackButtonList.stream().forEach(btn -> {
+            TranslateTransition transition = new TranslateTransition();
+		    transition.setDuration(Duration.millis(1000));
+		    transition.setNode(btn);
+		    transition.setAutoReverse(false);
+		    btn.setDisable(true);
+		    transition.setOnFinished(evt -> btn.setDisable(false));
+		    transition.play();
+        });
     }
 
     @FXML
