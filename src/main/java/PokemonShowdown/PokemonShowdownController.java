@@ -167,7 +167,7 @@ public class PokemonShowdownController {
 
     private void getTeamsFromFile() {
         File dir = new File(filePath);
-        String [] teams = dir.list();
+        String[] teams = dir.list();
         List<String> teamNames = new ArrayList<>();
         Arrays.stream(teams)
         .map((str)-> str.split("\\.")[0]).
