@@ -25,7 +25,7 @@ public class TeamTest {
     }
 
     private String teamAsString() {
-        return "Snorlax\nGyarados\nSlowbro\nPikachu\n";
+        return "Snorlax\r\nGyarados\r\nSlowbro\r\nPikachu\r\n";
     }
 
     @Test
@@ -37,10 +37,6 @@ public class TeamTest {
 
         String actual = new String(os.toByteArray());
         String expected = teamAsString();
-
-        for (int i = 0; i < expected.length(); i++) {
-            System.out.println(actual.charAt(i) == expected.charAt(i));
-        }
 
         assertEquals(expected, actual);
     }
