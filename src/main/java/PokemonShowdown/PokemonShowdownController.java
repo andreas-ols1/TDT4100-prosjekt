@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
 import javafx.event.ActionEvent;
@@ -28,7 +29,7 @@ import java.io.File;
 public class PokemonShowdownController {
     
     private List<Pokemon> team = new ArrayList<>();
-    private List<Button> selectedPokemonButtons = new ArrayList<>();
+    private List<Button> selectedPokemonButtons= new ArrayList<>();
     private final static String filePath = "./src/main/resources/PokemonShowdown/teams";
     private final static int teamSize = 4;
     private Team selectedTeam;
@@ -86,7 +87,8 @@ public class PokemonShowdownController {
 
     @FXML
     private void handleCreateTeam() throws IOException {
-        if (team.size() == teamSize && teamName.getLength() > 0) {
+        if (!checkValidTeamName(teamName.getText())) showWarning("invalid name");
+        else if (team.size() == teamSize && teamName.getLength() > 0) {
             Team tmp = new Team(teamName.getText(),team);
             selectedPokemonButtons.stream().forEach((button) -> button.setDisable(false));
             team.clear();
@@ -99,7 +101,7 @@ public class PokemonShowdownController {
         } 
         else if (teamName.getLength() == 0) showWarning("no name");
         else if (team.size() < teamSize) showWarning("pokemon");
-        else if (teamName.getText().contains("/")) showWarning("invalid name");
+        
     }
 
     @FXML
@@ -180,6 +182,11 @@ public class PokemonShowdownController {
         }
     }
 
+
+    private boolean checkValidTeamName(String name) {
+        return Pattern.matches("[a-zA-Z0-9]+", name);
+    } 
+
     private void showWarning(String type) {
         if (type.equals("no name")) {
             Alert alert = new Alert(AlertType.WARNING);
@@ -190,8 +197,8 @@ public class PokemonShowdownController {
         } else if (type.equals("invalid name")) {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Invalid team name");
-            alert.setHeaderText("Team name cannot contain /");
-            alert.setContentText("Please use a name without /.");
+            alert.setHeaderText("Team can only contain alphanumeric characters");
+            alert.setContentText("Please use characters a-z, A-Z and 0-9.");
             alert.showAndWait();
         } else if (type.equals("pokemon")) {
             Alert alert = new Alert(AlertType.WARNING);

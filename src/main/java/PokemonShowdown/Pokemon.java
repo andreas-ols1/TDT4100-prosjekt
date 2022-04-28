@@ -191,13 +191,13 @@ public class Pokemon {
 
     private int calculateDamage(Pokemon mon, int moveIndex, double effectiveness, double stab) {
         double randomness = ThreadLocalRandom.current().nextDouble(0.85,1);
-        double moveBaseDamage = this.getMoves().get(moveIndex).getDamage();
+        double moveBaseDamage = this.getMove(moveIndex).getDamage();
         double attackPerOpponentsDefence = (double)this.getAttack()/mon.getDefence();
         return (int)Math.floor(((0.84*moveBaseDamage*attackPerOpponentsDefence)+2)*stab*effectiveness*randomness*criticalHit());
     }
 
     private void heal(int moveIndex) {
-        double healPercentage = getMoves().get(moveIndex).getHeal();
+        double healPercentage = getMove(moveIndex).getHeal();
         if (hp + healPercentage * maxHp < maxHp) {
             hp += healPercentage * maxHp;
         }
@@ -207,7 +207,7 @@ public class Pokemon {
     private void attackBoost(int moveIndex) {
         if ((attackBoost + getMove(moveIndex).getAttackBoost() <= 4) && (attackBoost + getMove(moveIndex).getAttackBoost() > 0)) {
             attackBoost += getMove(moveIndex).getAttackBoost();
-            attack = (int)(orgAttack * attackBoost);
+            attack = (int) Math.floor(orgAttack * attackBoost);
         }
         else System.out.println("Attack boost maxes out at x4, and\ncan't go below x0.5");
     }
@@ -215,7 +215,7 @@ public class Pokemon {
     private void speedBoost(int moveIndex) {
         if ((speedBoost + getMove(moveIndex).getSpeedBoost() <= 4) && (speedBoost + getMove(moveIndex).getSpeedBoost() > 0)) {
             speedBoost += getMove(moveIndex).getSpeedBoost();
-            speed = (int)(orgSpeed * speedBoost);
+            speed = (int) Math.floor(orgSpeed * speedBoost);
         }
         else System.out.println("Speed boost maxes out at x4, and\ncan't go below x0.5");
     }
@@ -243,6 +243,10 @@ public class Pokemon {
         return attack;
     }
 
+    public int getOrgAttack() {
+        return orgAttack;
+    }
+
     public int getDefence() {
         return defence;
     }
@@ -251,9 +255,17 @@ public class Pokemon {
         return speed;
     }
 
+    public int getOrgSpeed() {
+        return orgSpeed;
+    }
+
     public int getHp() {
         return hp;
     }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    } 
 
     public int getMaxHp() {
         return maxHp;
@@ -284,7 +296,7 @@ public class Pokemon {
     }
 
     private boolean checkIfHit(int moveIndex) {
-        if (ThreadLocalRandom.current().nextDouble(0,1) > getMoves().get(moveIndex).getAccuracy()) return false;
+        if (ThreadLocalRandom.current().nextDouble(0,1) > getMove(moveIndex).getAccuracy()) return false;
         return true;
     }
 
@@ -318,12 +330,12 @@ public class Pokemon {
         && getMoveType(moveIndex).checkIfWeakAgainst(mon.getTypes().get(0))))) {
             return 1;
         }
-        if (getMoves().get(moveIndex).getType().checkIfStrongAgainst(mon.getTypes().get(0)) 
-        || getMoves().get(moveIndex).getType().checkIfStrongAgainst(mon.getTypes().get(1))) {
+        if (getMoveType(moveIndex).checkIfStrongAgainst(mon.getTypes().get(0)) 
+        || getMoveType(moveIndex).checkIfStrongAgainst(mon.getTypes().get(1))) {
             return 2;
         }
-        if (getMoves().get(moveIndex).getType().checkIfWeakAgainst(mon.getTypes().get(0)) 
-        || getMoves().get(moveIndex).getType().checkIfWeakAgainst(mon.getTypes().get(1))) {
+        if (getMoveType(moveIndex).checkIfWeakAgainst(mon.getTypes().get(0)) 
+        || getMoveType(moveIndex).checkIfWeakAgainst(mon.getTypes().get(1))) {
             return 0.5;
         }
         return 1;
