@@ -76,7 +76,17 @@ public class Game {
         return activeOpponentMon;
     }
 
-    
+    public boolean gameEnded() {
+        int playerCount = 0;
+        int opponentCount = 0;
+        for (Pokemon mon : this.getPlayerTeam()) {
+            if(mon.isDead()) playerCount ++;
+        }
+        for (Pokemon mon : this.getOpponentTeam()) {
+            if(mon.isDead()) opponentCount ++;
+        }
+        return (playerCount == 4 || opponentCount == 4);
+    }
 
     @Override
     public String toString() {
