@@ -1,5 +1,6 @@
 package PokemonShowdown;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,28 +20,29 @@ public class TypeTest {
     }
 
     @Test
-    @DisplayName("Sjekker konstruktør")
+    @DisplayName("Test constructor")
     public void testConstructor() {
         assertThrows(IllegalArgumentException.class, () -> new Type("Halaisiken"),
-         "Sjekker om unntak blir utløst når ugyldig type blir oppgitt i konstruktøren");
+        "Test if exception is thrown when instantiating a nonexistent type");
+        assertEquals("Fighting",new Type("Fighting").getName());
     }
 
     @Test
-    @DisplayName("Sjekke styrker")
+    @DisplayName("Test strength")
     public void testCheckIfStrongAgainst() {
         assertTrue(type.checkIfStrongAgainst(new Type("Fire")));
         assertFalse(type.checkIfStrongAgainst(new Type("Water")));
     }
 
     @Test
-    @DisplayName("Sjekke svakheter")
+    @DisplayName("Test weakness")
     public void testCheckIfWeakAgainst() {
         assertTrue(type.checkIfWeakAgainst(new Type("Grass")));
         assertFalse(type.checkIfWeakAgainst(new Type("Ghost")));
     }
 
     @Test
-    @DisplayName("Sjekker immunitet")
+    @DisplayName("Test immunity")
     public void testCheckIfImmune() {
         assertTrue(type.checkIfImmune(new Type("Flying")));
         assertFalse(type.checkIfImmune(new Type("Ghost")));
