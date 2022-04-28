@@ -18,12 +18,12 @@ public class MoveTest {
     
 
     @Test
-    @DisplayName("Sjekker konstruktøren")
+    @DisplayName("Test constructor")
     public void testConstructor() {
         assertThrows(IllegalArgumentException.class, () -> new Move("Hyper Beam"),
-        "Sjekker at man ikke kan opprette moves som ikke finnes");
+        "Cannot instantiate a move which is not implemented");
         assertThrows(IllegalArgumentException.class, () -> new Move("SOLAR BEAM"),
-         "Sjekker case-sensitivitet");
+         "Test case sensitivity");
         assertEquals("Slash", move.getName());
         assertEquals(70, move.getDamage());
         assertEquals(1, move.getAccuracy());
