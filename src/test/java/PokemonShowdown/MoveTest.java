@@ -1,7 +1,6 @@
 package PokemonShowdown;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -10,9 +9,7 @@ import org.junit.jupiter.api.Test;
 
 public class MoveTest {
 
-
     private Move move; 
-
 
     @BeforeEach
     public void setup() {
@@ -25,7 +22,8 @@ public class MoveTest {
     public void testConstructor() {
         assertThrows(IllegalArgumentException.class, () -> new Move("Hyper Beam"),
         "Sjekker at man ikke kan opprette moves som ikke finnes");
-        assertThrows(IllegalArgumentException.class, () -> new Move("SOLAR BEAM"));
+        assertThrows(IllegalArgumentException.class, () -> new Move("SOLAR BEAM"),
+         "Sjekker case-sensitivitet");
         assertEquals("Slash", move.getName());
         assertEquals(70, move.getDamage());
         assertEquals(1, move.getAccuracy());
