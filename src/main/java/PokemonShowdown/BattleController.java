@@ -315,7 +315,6 @@ public class BattleController {
 
     private String getBackSprite() {
         return "/" + backSpritePath + "/" + game.getActiveMon().getName() +"Back.gif";
-        // return "backSprites/" +game.getActiveMon().getName() +"Back.png";
     }
 
     private String getFrontSprite() {
@@ -323,8 +322,7 @@ public class BattleController {
     }
 
     private void setMoveButtons() {
-        IntStream.range(0, 4).forEach(i -> attacks.add(createMoveButton(game.getActiveMon(), i), i, 0));
-         
+        IntStream.range(0, 4).forEach(i -> attacks.add(createMoveButton(game.getActiveMon(), i), i, 0));     
     }
 
     private void initializeGame(Game game) {
