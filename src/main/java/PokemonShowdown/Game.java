@@ -49,7 +49,7 @@ public class Game {
         }
     }
 
-    public List<String> getRandomTeam() {
+    private List<String> getRandomTeam() {
         List<String> team = new ArrayList<>();
         IntStream.range(0, 4).forEach(i -> {
             String mon = validPokemon.get(new Random().nextInt(validPokemon.size()));
@@ -74,6 +74,10 @@ public class Game {
     
     public Pokemon getActiveOpponentMon() {
         return activeOpponentMon;
+    }
+
+    public List<String> getValidPokemon() {
+        return validPokemon;
     }
 
     public boolean gameEnded() {

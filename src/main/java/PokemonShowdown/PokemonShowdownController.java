@@ -96,11 +96,10 @@ public class PokemonShowdownController {
                 teamList.add(createTeamButton(tmp),0, checkButtonPosition());
             } 
             tmp.write();
-        } else if (teamName.getLength() == 0) {
-            showWarning("name");
-        } else if (team.size() < teamSize) {
-            showWarning("pokemon");
         } 
+        else if (teamName.getLength() == 0) showWarning("no name");
+        else if (team.size() < teamSize) showWarning("pokemon");
+        else if (teamName.getText().contains("/")) showWarning("invalid name");
     }
 
     @FXML
@@ -182,11 +181,17 @@ public class PokemonShowdownController {
     }
 
     private void showWarning(String type) {
-        if (type.equals("name")) {
+        if (type.equals("no name")) {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("No team name");
             alert.setHeaderText("No team name entered");
             alert.setContentText("You need to enter a name for your team.");
+            alert.showAndWait();
+        } else if (type.equals("invalid name")) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Invalid team name");
+            alert.setHeaderText("Team name cannot contain /");
+            alert.setContentText("Please use a name without /.");
             alert.showAndWait();
         } else if (type.equals("pokemon")) {
             Alert alert = new Alert(AlertType.WARNING);

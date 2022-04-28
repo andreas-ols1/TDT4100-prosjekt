@@ -344,6 +344,10 @@ public class Pokemon {
     public boolean isDead() {
         return isDead;
     }
+
+    public void setIsDead(Boolean bool) {
+        isDead = bool;
+    }
  
     @Override
     public String toString() {
