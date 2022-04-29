@@ -8,9 +8,9 @@ public class Type {
     
     private String name;
     private Collection<String> strongAgainst = new ArrayList<>();
-    private Collection<String> weakAgainst = new ArrayList<>();
     private Collection<String> immune = new ArrayList<>();
-    private Collection<String> validTypes = Arrays.asList("Fire","Water","Grass","Ground","Normal","Ice","Electric","Poison",
+    private Collection<String> weakAgainst  = new ArrayList<>();
+    private final Collection<String> validTypes = Arrays.asList("Fire","Water","Grass","Ground","Normal","Ice","Electric","Poison",
     "Flying","None","Rock","Fighting","Psychic","Ghost","Dragon");
 
     public Type(String type) {
@@ -128,10 +128,5 @@ public class Type {
     @Override
     public String toString() {
         return name;
-    }   
-
-    public static void main(String[] args) {
-   
     }
-
 }

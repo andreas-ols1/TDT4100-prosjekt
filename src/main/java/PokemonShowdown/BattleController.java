@@ -36,13 +36,11 @@ import javafx.scene.Scene;
 public class BattleController {
     
     private Game game;
-    private final String frontSpritePath = "PokemonShowdown/frontSprites";
-    private final String backSpritePath = "PokemonShowdown/backSprites";
+    private final String frontSpritePath = "PokemonShowdown/frontSprites", backSpritePath = "PokemonShowdown/backSprites";
     private PrintStream ps;
-    private int activeMonButtonIndex;
+    private int activeMonButtonIndex, turnCount;
     private List<Button> pokemonButtonList = new ArrayList<>();
     private List<Button> attackButtonList = new ArrayList<>();
-    private int turnCount;
     
     @FXML
     private GridPane playerTeamView,attacks;
@@ -87,8 +85,8 @@ public class BattleController {
     private void handleSelectMon(ActionEvent ae) throws IOException {
         Button button = (Button)ae.getSource();
         activeMonButtonIndex = (int)GridPane.getRowIndex(button);
-        if (game.getActiveMon() != game.getPlayerTeam().get(activeMonButtonIndex)) {
-            if (game.getActiveMon() != null) {
+        if (game.getActiveMon() != game.getPlayerTeam().get(activeMonButtonIndex)) { // Ensures that you can't swap to the already active pokemon.
+            if (game.getActiveMon() != null) { // Checks if it's the beginning of the game, where an active pokemon hasn't yet been selected.
                 if (!game.getActiveMon().isDead()) {
                     game.setActiveMon(activeMonButtonIndex);
                     setMoveButtons();
@@ -98,7 +96,7 @@ public class BattleController {
                     playerMonHealthBar.setVisible(true); 
                     enableAttackButtons();
                     updateHealthBars();
-                    if (turnCount != 0) {
+                    if (turnCount != 0) { // Ensures that the opponent attacks after you switch out a pokemon that hasn't been eliminated.
                         turnCount ++;
                         game.getActiveOpponentMon().attack(game.getActiveMon(), ThreadLocalRandom.current().nextInt(4));
                         animateOpponentMon();
@@ -106,7 +104,7 @@ public class BattleController {
                         update();
                     }
                 }
-                else {
+                else {  // Ensures a "free switch". If the pokemon being switched out has just been eliminated, the pokemon replacing it should not be attacked that turn.
                     game.setActiveMon(activeMonButtonIndex);
                     setMoveButtons();
                     setPlayerMonTooltip();
@@ -117,7 +115,7 @@ public class BattleController {
                     updateHealthBars();
                 }
             }
-            else {
+            else { // Set active pokemon in the beginning of a game
                 game.setActiveMon(activeMonButtonIndex);
                 setMoveButtons();
                 setPlayerMonTooltip();
@@ -137,6 +135,8 @@ public class BattleController {
         int moveIndex = (int)GridPane.getColumnIndex(button);
         turn(moveIndex);
         attackButtonList.stream().forEach(btn -> {
+            //  Disable buttons for a set amount of time. This fixes a bug that occured when spamming an attack button, where the sprite of the active pokemoon would travel off screen.
+            //  Source: https://www.reddit.com/r/javahelp/comments/filnbu/javafx_disabling_a_button_for_a_certain_amount_of/
             TranslateTransition transition = new TranslateTransition();
 		    transition.setDuration(Duration.millis(900));
 		    transition.setNode(btn);
@@ -148,7 +148,6 @@ public class BattleController {
         });
     }
 
-    @FXML
     public void switchScreen(ActionEvent ae, String file) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(file));
         Stage stage = (Stage)((Node) ae.getSource()).getScene().getWindow();
@@ -184,34 +183,34 @@ public class BattleController {
     }
 
     private void turn(int moveIndex) {
-        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-        if (game.getActiveMon().getSpeed() > game.getActiveOpponentMon().getSpeed()) {
-            game.getActiveMon().attack(game.getActiveOpponentMon(), moveIndex);
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor(); 
+        if (game.getActiveMon().getSpeed() > game.getActiveOpponentMon().getSpeed()) { // Checks player's active pokemons speed stat is higher than opponent's active pokemons speed stat.
+            game.getActiveMon().attack(game.getActiveOpponentMon(), moveIndex);         // Fastest pokemon attacks first.
             animatePlayerMon();
-            if (game.getActiveOpponentMon().isDead()) {
+            if (game.getActiveOpponentMon().isDead()) { // Checks if the player's pokemon killed the opponent active pokemon.
                 System.out.println(game.getActiveOpponentMon().getName() + " fainted.\n");
                 update();
             }
-            else {   
-                executorService.schedule(new Runnable() {
+            else {    // Opponent attacks.
+                executorService.schedule(new Runnable() { // Delay animation.
                     @Override
                     public void run() {
                         animateOpponentMon();
                     }
                 }, 500, TimeUnit.MILLISECONDS);
                 game.getActiveOpponentMon().attack(game.getActiveMon(), ThreadLocalRandom.current().nextInt(4));
-                if (game.getActiveMon().isDead()) System.out.println(game.getActiveMon().getName() + " fainted.\n");
+                if (game.getActiveMon().isDead()) System.out.println(game.getActiveMon().getName() + " fainted.\n"); // Checks if opponent's pokemon killed player's active pokemon.
                 update();
             }
         }
-        else if (game.getActiveMon().getSpeed() < game.getActiveOpponentMon().getSpeed()) {
+        else if (game.getActiveMon().getSpeed() < game.getActiveOpponentMon().getSpeed()) { //Checks if opponent's active pokemons speed stat is higher than player's active pokemons speed stat.
             game.getActiveOpponentMon().attack(game.getActiveMon(), ThreadLocalRandom.current().nextInt(4));
             animateOpponentMon();
             if (game.getActiveMon().isDead()) {
                 System.out.println(game.getActiveMon().getName() + " fainted.\n");
                 update();
             }
-            else {    
+            else {    // Player attacks.
                 executorService.schedule(new Runnable() {
                     @Override
                     public void run() {
@@ -223,8 +222,8 @@ public class BattleController {
                 update();
             }
         }
-        else {
-            Double rand = ThreadLocalRandom.current().nextDouble(1);
+        else { // Player and opponent active pokemon has equal speed stat. Who attacks first is random.
+            Double rand = ThreadLocalRandom.current().nextDouble(1); 
             if (rand <= 0.5) {
                 game.getActiveMon().attack(game.getActiveOpponentMon(), moveIndex);
                 animatePlayerMon();
@@ -394,6 +393,8 @@ public class BattleController {
     }
 
 
+    // Code for showing terminal output in application - shows player what happens during turns.
+    // Source: https://localcoder.org/javafx-redirect-console-output-to-textarea-that-is-created-in-scenebuilder
     public class Console extends OutputStream {
 
         private TextArea console;

@@ -111,7 +111,6 @@ public class PokemonShowdownController {
         }
     }
 
-    @FXML
     public void switchScreen(ActionEvent ae, String file) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(file));
         stage = (Stage)((Node) ae.getSource()).getScene().getWindow();

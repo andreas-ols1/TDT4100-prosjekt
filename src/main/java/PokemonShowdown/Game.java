@@ -1,7 +1,6 @@
 package PokemonShowdown;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -9,13 +8,9 @@ import java.util.stream.IntStream;
 
 public class Game {
     
-    private List<Pokemon> playerTeam = new ArrayList<>();
+    private List<Pokemon> playerTeam = new ArrayList<>(); 
     private List<Pokemon> opponentTeam = new ArrayList<>();
-    private Pokemon activeMon;
-    private Pokemon activeOpponentMon;
-    private final List<String> validPokemon = Arrays.asList("Venusaur","Charizard","Blastoise","Pikachu",
-    "Nidoking","Arcanine","Alakazam","Machamp","Golem","Slowbro","Gengar","Gyarados","Aerodactyl","Snorlax",
-    "Articuno","Zapdos","Moltres","Dragonite","Mewtwo","Mew","Rayquaza","Amoonguss");
+    private Pokemon activeMon, activeOpponentMon;
 
     public Game(List<Pokemon> playerTeam) {
         playerTeam.stream().forEach((mon) -> this.playerTeam.add(mon));
@@ -52,9 +47,9 @@ public class Game {
     private List<String> getRandomTeam() {
         List<String> team = new ArrayList<>();
         IntStream.range(0, 4).forEach(i -> {
-            String mon = validPokemon.get(new Random().nextInt(validPokemon.size()));
+            String mon = Pokemon.validPokemon.get(new Random().nextInt(Pokemon.validPokemon.size()));
             while (team.contains(mon)) {
-                mon = validPokemon.get(new Random().nextInt(validPokemon.size()));
+                mon = Pokemon.validPokemon.get(new Random().nextInt(Pokemon.validPokemon.size()));
             }
             team.add(mon); });
         return team;
@@ -76,10 +71,6 @@ public class Game {
         return activeOpponentMon;
     }
 
-    public List<String> getValidPokemon() {
-        return validPokemon;
-    }
-
     public boolean gameEnded() {
         int playerCount = 0;
         int opponentCount = 0;
@@ -99,9 +90,4 @@ public class Game {
         "\n\nOpponents team:\n" + opponentTeam +
         "\n---------\n";
     }
-
-    public static void main(String[] args) {
-        
-    }
-
 }

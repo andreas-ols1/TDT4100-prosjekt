@@ -21,7 +21,6 @@ public class Team implements IFileHandling {
         mons.stream().forEach((mon) -> this.mons.add(mon));
     }
 
-
     @Override
 	public List<Pokemon> read(InputStream is) {
 		try (Scanner sc = new Scanner(is)) {
@@ -62,7 +61,6 @@ public class Team implements IFileHandling {
         }
 	}
 
-
     public String getName() {
         return name;
     }
@@ -74,16 +72,4 @@ public class Team implements IFileHandling {
     public void addMons(List<Pokemon> mons) {
         mons.stream().forEach((mon) -> this.mons.add(mon));
     }
-    
-
-    public static void main(String[] args) throws IOException {
-
-    }
-
-
-	
-
-
-	
-    
 }
