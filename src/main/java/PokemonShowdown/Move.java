@@ -8,11 +8,8 @@ public class Move {
     private String name;
     private Type type;
     private int damage;
-    private double accuracy;
-    private double heal;
-    private double attackBoost;
-    private double speedBoost;
-    private Collection<String> validMoves = Arrays.asList("Swords Dance","Recover","Hydro Pump","Slash","Flamethrower",
+    private double accuracy, heal, attackBoost, speedBoost;
+    private final Collection<String> validMoves = Arrays.asList("Swords Dance","Recover","Hydro Pump","Slash","Flamethrower",
     "Earthquake","Solar Beam","Ice Beam","Skull Bash","Thunderbolt","Surf","Sludge Bomb","Air Slash","Cross Chop","Thunder Punch",
     "Ice Punch","Fire Punch","Psychic","Rock Slide","Shadow Ball","Dragon Pulse","Roost","Agility","Dragon Dance","V-create",
     "Dragons Ascent","Synthesis","Giga Drain");
@@ -93,17 +90,8 @@ public class Move {
         return speedBoost;
     }
 
+    @Override
     public String toString() {
-        return "Name: " + name + 
-        ", Type: " + type.getName() + 
-        ", Base damage: " + damage + "\n" +
-        ", Attack boost: " + attackBoost + 
-        ", Heal: " + heal + "\n";
+        return name;
     }
-
-    public static void main(String[] args) {
-        Move hp = new Move("Hydro Pump");
-        System.out.println(hp);
-    }
-
 }

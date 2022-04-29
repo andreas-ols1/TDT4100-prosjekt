@@ -56,7 +56,7 @@ public class GameTest {
         });
         assertEquals(game.getActiveMon(),null);
         
-        game.getOpponentTeam().stream().forEach(mon -> assertTrue(game.getValidPokemon().contains(mon.getName())));
+        game.getOpponentTeam().stream().forEach(mon -> assertTrue(Pokemon.validPokemon.contains(mon.getName())));
         Set<Pokemon> opponentTeamSet = new HashSet<>(game.getOpponentTeam());
         assertEquals(opponentTeamSet.size(),game.getOpponentTeam().size());
         assertTrue(game.getOpponentTeam().contains(game.getActiveOpponentMon()));
@@ -65,12 +65,12 @@ public class GameTest {
     @Test
     @DisplayName("Test constructor without input argument")
     public void testGameConstructorWithoutInputArgument() {
-        game.getOpponentTeam().stream().forEach(mon -> assertTrue(game.getValidPokemon().contains(mon.getName())));
+        game.getOpponentTeam().stream().forEach(mon -> assertTrue(Pokemon.validPokemon.contains(mon.getName())));
         Set<Pokemon> opponentTeamSet = new HashSet<>(game.getOpponentTeam());
         assertEquals(opponentTeamSet.size(),game.getOpponentTeam().size());
         assertTrue(game.getOpponentTeam().contains(game.getActiveOpponentMon()));
         
-        game.getPlayerTeam().stream().forEach(mon -> assertTrue(game.getValidPokemon().contains(mon.getName())));
+        game.getPlayerTeam().stream().forEach(mon -> assertTrue(Pokemon.validPokemon.contains(mon.getName())));
         Set<Pokemon> playerTeamSet = new HashSet<>(game.getPlayerTeam());
         assertEquals(playerTeamSet.size(),game.getPlayerTeam().size());
         assertEquals(game.getActiveMon(),null);
