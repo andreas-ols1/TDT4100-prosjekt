@@ -148,7 +148,7 @@ public class BattleController {
         });
     }
 
-    public void switchScreen(ActionEvent ae, String file) throws IOException {
+    private void switchScreen(ActionEvent ae, String file) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(file));
         Stage stage = (Stage)((Node) ae.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -157,7 +157,7 @@ public class BattleController {
     }
 
     @FXML
-    public void handleBackToMenu(ActionEvent ae) throws IOException {
+    private void handleBackToMenu(ActionEvent ae) throws IOException {
         switchScreen(ae, "PokemonShowdownStartGUI.fxml");
     }
 
@@ -392,7 +392,6 @@ public class BattleController {
         System.out.println("----------\n");
     }
 
-
     // Code for showing terminal output in application - shows player what happens during turns.
     // Source: https://localcoder.org/javafx-redirect-console-output-to-textarea-that-is-created-in-scenebuilder
     public class Console extends OutputStream {
@@ -408,9 +407,8 @@ public class BattleController {
         }
 
         @Override
-        public void write(int b) throws IOException {
-            appendText(String.valueOf((char)b));
+        public void write(int i) throws IOException {
+            appendText(String.valueOf((char)i));
         }
     }
-
 }
