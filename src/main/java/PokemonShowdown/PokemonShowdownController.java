@@ -30,6 +30,7 @@ public class PokemonShowdownController {
     
     private List<Pokemon> team = new ArrayList<>();
     private List<Button> selectedPokemonButtons= new ArrayList<>();
+    private List<String> teamNameList = new ArrayList<>();
     private final static String filePath = "./src/main/resources/PokemonShowdown/teams";
     private final static int teamSize = 4;
     private Team selectedTeam;
@@ -70,8 +71,6 @@ public class PokemonShowdownController {
             selectedPokemonButtons.add(button);
             button.setDisable(true);
         }
-        System.out.println(selectedPokemonButtons);
-        System.out.println(team);
     }
 
     @FXML
@@ -81,21 +80,20 @@ public class PokemonShowdownController {
             selectedPokemonButtons.remove(selectedPokemonButtons.size()-1);
             team.remove(team.size()-1);
         }
-        System.out.println(selectedPokemonButtons);
-        System.out.println(team);
     }
 
     @FXML
     private void handleCreateTeam() throws IOException {
-        if (!checkValidTeamName(teamName.getText())) showWarning("invalid name");
+        String name = teamName.getText();
+        if (!checkValidTeamName(name)) showWarning("invalid name");
         else if (team.size() == teamSize && teamName.getLength() > 0) {
-            Team tmp = new Team(teamName.getText(),team);
+            Team tmp = new Team(name,team);
             selectedPokemonButtons.stream().forEach((button) -> button.setDisable(false));
             team.clear();
             selectedPokemonButtons.clear();
             teamName.clear();
             if (checkButtonPosition()<10 && checkButtonPosition()>=-1) {
-                teamList.add(createTeamButton(tmp),0, checkButtonPosition());
+                if (!teamNameList.contains(name)) teamList.add(createTeamButton(tmp),0, checkButtonPosition());
             } 
             tmp.write();
         } 
@@ -111,7 +109,7 @@ public class PokemonShowdownController {
         }
     }
 
-    public void switchScreen(ActionEvent ae, String file) throws IOException {
+    private void switchScreen(ActionEvent ae, String file) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(file));
         stage = (Stage)((Node) ae.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -157,6 +155,7 @@ public class PokemonShowdownController {
         });
         button.setMaxWidth(Double.MAX_VALUE);
         button.setMaxHeight(Double.MAX_VALUE);
+        teamNameList.add(button.getText());
         return button;
     }
 
