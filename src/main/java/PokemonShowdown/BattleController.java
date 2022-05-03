@@ -77,9 +77,9 @@ public class BattleController {
         if (PokemonShowdownController.name.toLowerCase().contains("kevin") 
         || PokemonShowdownController.name.toLowerCase().contains("lauren")) {
             game.setLastOpponentMon("Kevin Lauren");
-            setMedia("streetsa.mp3");
+            game.setActiveOpponentMon();
         }
-        else setMedia("battleTheme.mp3");
+        setMedia("battleTheme.mp3");
         battleThemePlayer = new MediaPlayer(battleTheme);
         battleThemePlayer.setOnEndOfMedia(new Runnable() {
             public void run() {
@@ -94,6 +94,7 @@ public class BattleController {
         opponentMonHealthPercentage.setText("100.00%");
         opponentMonName.setText(game.getActiveOpponentMon().getName());
         setOpponentMonTooltip();
+        easterEggMusic("Kevin Lauren", "streetsa.mp3");
         ps = new PrintStream(new Console(console));
         System.setOut(ps);
         System.out.println(game);
@@ -105,6 +106,19 @@ public class BattleController {
                 getClass().getClassLoader().getResource(mediaPath + media).toURI().toString());
         } catch (URISyntaxException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void easterEggMusic(String name, String music) {
+        if (game.getActiveOpponentMon().getName().equals(name)) {
+            playMusic(music);
+            if (name.equals("Amoonguss")) {
+                battleThemePlayer.setOnEndOfMedia(new Runnable() {
+                    public void run() {
+                        battleThemePlayer.seek(Duration.ZERO);
+                    }
+                });
+            }
         }
     }
 
@@ -295,10 +309,16 @@ public class BattleController {
     }
     
     private void updateMonStatus() {
+        Boolean lauren = game.getActiveOpponentMon().getName().equals("Kevin Lauren");
+        Boolean amoonguss = game.getActiveOpponentMon().getName().equals("Amoonguss");
         updateHealthBars();
         setPlayerMonTooltip();
         if (game.getActiveOpponentMon().isDead()) {
             game.setActiveOpponentMon();
+            easterEggMusic("Kevin Lauren", "streetsa.mp3");
+            if (lauren) playMusic("battleTheme.mp3");
+            easterEggMusic("Amoonguss", "amogus.mp3");
+            if (amoonguss) playMusic("battleTheme.mp3");
             setOpponentMonTooltip();
             opponentMon.setImage(new Image(getFrontSprite()));
             opponentMonName.setText(game.getActiveOpponentMon().getName());
@@ -404,6 +424,11 @@ public class BattleController {
             e.printStackTrace();
         }
         battleThemePlayer = new MediaPlayer(battleTheme);
+        battleThemePlayer.setOnEndOfMedia(new Runnable() {
+            public void run() {
+                battleThemePlayer.seek(Duration.ZERO);
+            }
+        });
         battleThemePlayer.play();
     }
 
