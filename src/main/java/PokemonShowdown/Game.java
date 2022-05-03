@@ -71,6 +71,11 @@ public class Game {
         return activeOpponentMon;
     }
 
+    public void setLastOpponentMon(String name) {
+        opponentTeam.remove(3);
+        opponentTeam.add(new Pokemon(name));
+    }
+
     public boolean gameEnded() {
         int playerCount = 0;
         int opponentCount = 0;

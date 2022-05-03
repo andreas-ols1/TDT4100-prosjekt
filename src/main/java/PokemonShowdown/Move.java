@@ -12,7 +12,7 @@ public class Move {
     private final Collection<String> validMoves = Arrays.asList("Swords Dance","Recover","Hydro Pump","Slash","Flamethrower",
     "Earthquake","Solar Beam","Ice Beam","Skull Bash","Thunderbolt","Surf","Sludge Bomb","Air Slash","Cross Chop","Thunder Punch",
     "Ice Punch","Fire Punch","Psychic","Rock Slide","Shadow Ball","Dragon Pulse","Roost","Agility","Dragon Dance","V-create",
-    "Dragons Ascent","Synthesis","Giga Drain");
+    "Dragons Ascent","Synthesis","Giga Drain","Ring mandem","Jacke sykebil","Trench warfare","Jeg gætter trynet ditt bro");
 
     public Move(String name) {
         checkValidMove(name);
@@ -45,6 +45,10 @@ public class Move {
             case "Dragons Ascent" -> setMoveAttributes(name, "Flying", 120, 1, 0, 0, 0);
             case "Synthesis" -> setMoveAttributes(name, "Grass", 0, 1, 0.5, 0, 0);
             case "Giga Drain" -> setMoveAttributes(name, "Grass", 75, 1, 0.1, 0, 0);
+            case "Ring mandem" -> setMoveAttributes(name, "Fighting", 0, 1, 0, 3, 0);
+            case "Jacke sykebil" -> setMoveAttributes(name, "Normal", 0, 1, 1, 0, 0);
+            case "Trench warfare" -> setMoveAttributes(name, "Fighting", 150, 1, 0, 0, 0);
+            case "Jeg gætter trynet ditt bro" -> setMoveAttributes(name, "Dark", 120, 0.8, 0, 0, 0);
         }
     }
 

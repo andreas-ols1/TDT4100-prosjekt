@@ -11,7 +11,7 @@ public class Type {
     private Collection<String> immune = new ArrayList<>();
     private Collection<String> weakAgainst  = new ArrayList<>();
     private final Collection<String> validTypes = Arrays.asList("Fire","Water","Grass","Ground","Normal","Ice","Electric","Poison",
-    "Flying","None","Rock","Fighting","Psychic","Ghost","Dragon");
+    "Flying","None","Rock","Fighting","Psychic","Ghost","Dragon","Dark");
 
     public Type(String type) {
         checkValidType(type);
@@ -31,6 +31,7 @@ public class Type {
             case "Psychic" -> setPsychicType();
             case "Ghost" -> setGhostType();
             case "Dragon" -> setDragonType();
+            case "Dark" -> setDarkType();
         }
 
     }
@@ -80,11 +81,11 @@ public class Type {
     }
 
     private void setFightingType() {
-        setTypeAttributes("Fighting", Arrays.asList("Normal","Ice","Rock"), Arrays.asList("Poison","Flying","Psychic"), Arrays.asList("Ghost"));
+        setTypeAttributes("Fighting", Arrays.asList("Normal","Ice","Rock","Dark"), Arrays.asList("Poison","Flying","Psychic"), Arrays.asList("Ghost"));
     }
 
     private void setPsychicType() {
-        setTypeAttributes("Psychic", Arrays.asList("Fighting","Poison"), Arrays.asList("Psychic"), Arrays.asList());
+        setTypeAttributes("Psychic", Arrays.asList("Fighting","Poison"), Arrays.asList("Psychic"), Arrays.asList("Dark"));
     }
 
     private void setGhostType() {
@@ -97,6 +98,10 @@ public class Type {
 
     private void setTypeToNone() {
         name = "None";
+    }
+
+    private void setDarkType() {
+        setTypeAttributes("Dark", Arrays.asList("Psychic","Ghost"), Arrays.asList("Dark","Fighting"), Arrays.asList());
     }
 
     private void setTypeAttributes(String name, Collection<String> strongAgainst, Collection<String> weakAgainst, Collection<String> immune) {

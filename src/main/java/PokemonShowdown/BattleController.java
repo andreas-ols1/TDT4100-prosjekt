@@ -74,6 +74,19 @@ public class BattleController {
     @FXML
     private void initialize() {      
         game = PokemonShowdownController.gameTransferring;
+        if (PokemonShowdownController.name.toLowerCase().contains("kevin") 
+        || PokemonShowdownController.name.toLowerCase().contains("lauren")) {
+            game.setLastOpponentMon("Kevin Lauren");
+            setMedia("streetsa.mp3");
+        }
+        else setMedia("battleTheme.mp3");
+        battleThemePlayer = new MediaPlayer(battleTheme);
+        battleThemePlayer.setOnEndOfMedia(new Runnable() {
+            public void run() {
+                battleThemePlayer.seek(Duration.ZERO);
+            }
+        });
+        battleThemePlayer.play();
         initializeGame(game);
         opponentMon.setImage(new Image(getFrontSprite()));
         opponentMonHealthBar.setStyle("-fx-accent: green;");
@@ -84,18 +97,6 @@ public class BattleController {
         ps = new PrintStream(new Console(console));
         System.setOut(ps);
         System.out.println(game);
-        int ran = ThreadLocalRandom.current().nextInt(20);
-        if (ran == 19) {
-            setMedia("wierdBattleTheme.mp3");
-        }
-        else setMedia("battleTheme.mp3");
-        battleThemePlayer = new MediaPlayer(battleTheme);
-        battleThemePlayer.setOnEndOfMedia(new Runnable() {
-            public void run() {
-                battleThemePlayer.seek(Duration.ZERO);
-            }
-        });
-        battleThemePlayer.play();
     }
 
     private void setMedia(String media) {
@@ -328,6 +329,9 @@ public class BattleController {
     }
 
     private String getFrontSprite() {
+        if (game.getActiveOpponentMon().getName().equals("Kevin Lauren")) {
+            return "/" + frontSpritePath + "/" + "lauren.png";
+        }
         return "/" + frontSpritePath + "/" + game.getActiveOpponentMon().getName() + "Front.gif";
     }
 
