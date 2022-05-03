@@ -48,7 +48,7 @@ public class Game {
         List<String> team = new ArrayList<>();
         IntStream.range(0, 4).forEach(i -> {
             String mon = Pokemon.validPokemon.get(new Random().nextInt(Pokemon.validPokemon.size()));
-            while (team.contains(mon)) {
+            while (team.contains(mon) || mon.equals("Kevin Lauren")) {
                 mon = Pokemon.validPokemon.get(new Random().nextInt(Pokemon.validPokemon.size()));
             }
             team.add(mon); });
