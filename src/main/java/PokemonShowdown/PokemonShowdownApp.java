@@ -10,6 +10,7 @@ public class PokemonShowdownApp extends Application {
     public void start(final Stage primaryStage) throws Exception {
         primaryStage.setTitle("Pokémon Showdown");
         primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("PokemonShowdownStartGUI.fxml"))));
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
