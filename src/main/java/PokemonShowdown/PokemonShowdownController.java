@@ -1,6 +1,7 @@
 package PokemonShowdown;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,8 +22,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.Node;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 
@@ -35,6 +39,8 @@ public class PokemonShowdownController {
     private final static int teamSize = 4;
     private Team selectedTeam;
     public static Game gameTransferring;
+    private Media mainTheme;
+    private MediaPlayer mainThemePlayer;
 
     @FXML
     private Button charizard,venusaur,blastoise,pikachu,nidoking,arcanine,alakazam,machamp,golem,slowbro,gengar,gyarados,aerodactyl,
@@ -61,6 +67,20 @@ public class PokemonShowdownController {
     @FXML
     private void initialize() {
         getTeamsFromFile();
+        try {
+            mainTheme = new Media(
+                getClass().getClassLoader().getResource("PokemonShowdown/sound/mainTheme.mp3").toURI().toString());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        
+        mainThemePlayer = new MediaPlayer(mainTheme);
+        mainThemePlayer.setOnEndOfMedia(new Runnable() {
+            public void run() {
+                mainThemePlayer.seek(Duration.ZERO);
+            }
+        });
+        mainThemePlayer.play();
     }
     
     @FXML
@@ -114,7 +134,9 @@ public class PokemonShowdownController {
         stage = (Stage)((Node) ae.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
+        mainThemePlayer.stop();
     }
 
     @FXML

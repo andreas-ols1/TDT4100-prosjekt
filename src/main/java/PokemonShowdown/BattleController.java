@@ -3,6 +3,7 @@ package PokemonShowdown;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +29,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -36,11 +39,13 @@ import javafx.scene.Scene;
 public class BattleController {
     
     private Game game;
-    private final String frontSpritePath = "PokemonShowdown/frontSprites", backSpritePath = "PokemonShowdown/backSprites";
+    private final String frontSpritePath = "PokemonShowdown/frontSprites", backSpritePath = "PokemonShowdown/backSprites", mediaPath = "PokemonShowdown/sound/";
     private PrintStream ps;
     private int activeMonButtonIndex, turnCount;
     private List<Button> pokemonButtonList = new ArrayList<>();
     private List<Button> attackButtonList = new ArrayList<>();
+    private Media battleTheme;
+    private MediaPlayer battleThemePlayer;
     
     @FXML
     private GridPane playerTeamView,attacks;
@@ -79,6 +84,27 @@ public class BattleController {
         ps = new PrintStream(new Console(console));
         System.setOut(ps);
         System.out.println(game);
+        int ran = ThreadLocalRandom.current().nextInt(20);
+        if (ran == 19) {
+            setMedia("wierdBattleTheme.mp3");
+        }
+        else setMedia("battleTheme.mp3");
+        battleThemePlayer = new MediaPlayer(battleTheme);
+        battleThemePlayer.setOnEndOfMedia(new Runnable() {
+            public void run() {
+                battleThemePlayer.seek(Duration.ZERO);
+            }
+        });
+        battleThemePlayer.play();
+    }
+
+    private void setMedia(String media) {
+        try {
+            battleTheme = new Media(
+                getClass().getClassLoader().getResource(mediaPath + media).toURI().toString());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -153,7 +179,9 @@ public class BattleController {
         Stage stage = (Stage)((Node) ae.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
+        battleThemePlayer.stop();
     }
 
     @FXML
@@ -352,9 +380,27 @@ public class BattleController {
     private void endScreen() {
         pokemonButtonList.stream().forEach(button -> button.setDisable(true));
         attackButtonList.stream().forEach(button -> button.setDisable(true));
-        if (game.getActiveMon().isDead()) endScreenTitle.setText("You lost :(");
-        else endScreenTitle.setText("You won!");
+        if (game.getActiveMon().isDead()) {
+            endScreenTitle.setText("You lost :(");
+            playMusic("gameOver.mp3");
+        }
+        else {
+            endScreenTitle.setText("You won!");
+            playMusic("victoryTheme.mp3");
+        }
         endScreen.setVisible(true);
+    }
+
+    private void playMusic(String media) {
+        battleThemePlayer.stop();
+        try {
+            battleTheme = new Media(
+                getClass().getClassLoader().getResource(mediaPath + media).toURI().toString());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        battleThemePlayer = new MediaPlayer(battleTheme);
+        battleThemePlayer.play();
     }
 
     private void disableMoveButtons() {
