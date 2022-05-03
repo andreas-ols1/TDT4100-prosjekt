@@ -39,6 +39,7 @@ public class PokemonShowdownController {
     private final static int teamSize = 4;
     private Team selectedTeam;
     public static Game gameTransferring;
+    public static String name;
     private Media mainTheme;
     private MediaPlayer mainThemePlayer;
 
@@ -142,12 +143,14 @@ public class PokemonShowdownController {
     @FXML
     private void handleNewGame(ActionEvent ae) throws IOException {
         if (selectedTeam == null) showWarning("team");
+        name = selectedTeam.getName();
         gameTransferring= new Game(selectedTeam.getMons());
         switchScreen(ae,"PokemonShowdownMainView.fxml");
     }
 
     @FXML
     private void handleRandomGame(ActionEvent ae) throws IOException {
+        name = "random";
         gameTransferring= new Game();
         System.out.println(gameTransferring.getPlayerTeam());
         switchScreen(ae,"PokemonShowdownMainView.fxml");

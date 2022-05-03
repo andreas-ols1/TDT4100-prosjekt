@@ -16,7 +16,7 @@ public class Pokemon {
     private double attackBoost = 1, speedBoost = 1;
     public final static List<String> validPokemon = Arrays.asList("Venusaur","Charizard","Blastoise","Pikachu",
     "Nidoking","Arcanine","Alakazam","Machamp","Golem","Slowbro","Gengar","Gyarados","Aerodactyl","Snorlax",
-    "Articuno","Zapdos","Moltres","Dragonite","Mewtwo","Mew","Rayquaza","Amoonguss");
+    "Articuno","Zapdos","Moltres","Dragonite","Mewtwo","Mew","Rayquaza","Amoonguss","Kevin Lauren");
 
     public Pokemon(String name) {
         checkValidPokemon(name);
@@ -43,6 +43,7 @@ public class Pokemon {
             case "mew" -> setPokemonToMew();
             case "rayquaza" -> setPokemonToRayquaza();
             case "amoonguss" -> setPokemonToAmoonguss();
+            case "kevin lauren" -> setPokemonToLauren();
         }
     }
 
@@ -138,6 +139,10 @@ public class Pokemon {
 
     private void setPokemonToAmoonguss() {
         setPokemonDetails("Amoonguss", Arrays.asList("Grass","Poison"), 400, 327, 227, 127, Arrays.asList("Giga Drain","Sludge Bomb","Synthesis","Solar Beam"));
+    }
+
+    private void setPokemonToLauren() {
+        setPokemonDetails("Kevin Lauren", Arrays.asList("Fighting","Dark"), 400, 400, 400, 400, Arrays.asList("Ring mandem","Jacke sykebil","Trench warfare","Jeg gætter trynet ditt bro"));
     }
 
     private void setPokemonDetails(String name, List<String> types, int maxHp, int attack, int defence, int speed, Collection<String> moves) {
