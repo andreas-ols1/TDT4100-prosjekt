@@ -95,6 +95,7 @@ public class BattleController {
         opponentMonName.setText(game.getActiveOpponentMon().getName());
         setOpponentMonTooltip();
         easterEggMusic("Kevin Lauren", "streetsa.mp3");
+        easterEggMusic("Amoonguss", "amogus.mp3");
         ps = new PrintStream(new Console(console));
         System.setOut(ps);
         System.out.println(game);
@@ -318,7 +319,7 @@ public class BattleController {
             easterEggMusic("Kevin Lauren", "streetsa.mp3");
             if (lauren) playMusic("battleTheme.mp3");
             easterEggMusic("Amoonguss", "amogus.mp3");
-            if (amoonguss) playMusic("battleTheme.mp3");
+            if (amoonguss && !game.getActiveOpponentMon().getName().equals("Kevin Lauren")) playMusic("battleTheme.mp3");
             setOpponentMonTooltip();
             opponentMon.setImage(new Image(getFrontSprite()));
             opponentMonName.setText(game.getActiveOpponentMon().getName());
