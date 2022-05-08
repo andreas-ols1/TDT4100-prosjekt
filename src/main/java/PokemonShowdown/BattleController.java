@@ -86,6 +86,7 @@ public class BattleController {
                 battleThemePlayer.seek(Duration.ZERO);
             }
         });
+        battleThemePlayer.setVolume(PokemonShowdownController.volume);
         battleThemePlayer.play();
         initializeGame(game);
         opponentMon.setImage(new Image(getFrontSprite()));
@@ -113,6 +114,7 @@ public class BattleController {
     private void easterEggMusic(String name, String music) {
         if (game.getActiveOpponentMon().getName().equals(name)) {
             playMusic(music);
+            if (name.equals("Kevin Lauren")) battleThemePlayer.setVolume(1);
             if (name.equals("Amoonguss")) {
                 battleThemePlayer.setOnEndOfMedia(new Runnable() {
                     public void run() {
@@ -418,18 +420,14 @@ public class BattleController {
 
     private void playMusic(String media) {
         battleThemePlayer.stop();
-        try {
-            battleTheme = new Media(
-                getClass().getClassLoader().getResource(mediaPath + media).toURI().toString());
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
+        setMedia(media);
         battleThemePlayer = new MediaPlayer(battleTheme);
         battleThemePlayer.setOnEndOfMedia(new Runnable() {
             public void run() {
                 battleThemePlayer.seek(Duration.ZERO);
             }
         });
+        battleThemePlayer.setVolume(PokemonShowdownController.volume);
         battleThemePlayer.play();
     }
 

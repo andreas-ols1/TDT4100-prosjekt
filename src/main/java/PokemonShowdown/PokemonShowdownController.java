@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -40,6 +43,7 @@ public class PokemonShowdownController {
     private Team selectedTeam;
     public static Game gameTransferring;
     public static String name;
+    public static double volume = 0.5;
     private Media mainTheme;
     private MediaPlayer mainThemePlayer;
 
@@ -65,6 +69,8 @@ public class PokemonShowdownController {
     @FXML
     private Parent root;
 
+    @FXML private Slider volumeSlider;
+
     @FXML
     private void initialize() {
         getTeamsFromFile();
@@ -81,7 +87,16 @@ public class PokemonShowdownController {
                 mainThemePlayer.seek(Duration.ZERO);
             }
         });
+        mainThemePlayer.setVolume(volume);
+        volumeSlider.setValue(volume);
         mainThemePlayer.play();
+        volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                mainThemePlayer.setVolume((double) newValue);
+                volume = (double)newValue;
+            }
+        });
     }
     
     @FXML
