@@ -18,12 +18,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -36,6 +39,8 @@ import java.io.File;
 public class PokemonShowdownController {
     
     private List<Pokemon> team = new ArrayList<>();
+    private List<String> teamAsStrings = new ArrayList<>();
+    private List<Button> allMonButtons = new ArrayList<>();
     private List<Button> selectedPokemonButtons= new ArrayList<>();
     private List<String> teamNameList = new ArrayList<>();
     private final static String filePath = "./src/main/resources/PokemonShowdown/teams";
@@ -52,10 +57,13 @@ public class PokemonShowdownController {
     snorlax,articuno,zapdos,moltres,dragonite,mewtwo,mew,rayquaza,amoonguss,deselectlast,createteam,playRandomTeam,playSelectedTeam;
 
     @FXML
-    private TextField teamName;
+    private TextField teamName, searchBar;
 
     @FXML
-    private GridPane teamList, playerTeamView;
+    private AnchorPane monsPane;
+
+    @FXML
+    private GridPane teamList, playerTeamView, monsGridPane;
 
     @FXML
     private TextArea teamViewer;
@@ -74,6 +82,7 @@ public class PokemonShowdownController {
     @FXML
     private void initialize() {
         getTeamsFromFile();
+        createPokemonButtons(Pokemon.validPokemon);
         try {
             mainTheme = new Media(
                 getClass().getClassLoader().getResource("PokemonShowdown/sound/mainTheme.mp3").toURI().toString());
@@ -104,6 +113,7 @@ public class PokemonShowdownController {
         if (team.size() < teamSize) {
             Button button = (Button) ae.getSource();
             team.add(new Pokemon(button.getText()));
+            teamAsStrings.add(button.getText());
             selectedPokemonButtons.add(button);
             button.setDisable(true);
         }
@@ -115,6 +125,7 @@ public class PokemonShowdownController {
             selectedPokemonButtons.get(selectedPokemonButtons.size()-1).setDisable(false);
             selectedPokemonButtons.remove(selectedPokemonButtons.size()-1);
             team.remove(team.size()-1);
+            teamAsStrings.remove(teamAsStrings.size()-1);
         }
     }
 
@@ -126,6 +137,7 @@ public class PokemonShowdownController {
             Team tmp = new Team(name,team);
             selectedPokemonButtons.stream().forEach((button) -> button.setDisable(false));
             team.clear();
+            teamAsStrings.clear();
             selectedPokemonButtons.clear();
             teamName.clear();
             if (checkButtonPosition()<10 && checkButtonPosition()>=-1) {
@@ -167,7 +179,6 @@ public class PokemonShowdownController {
     private void handleRandomGame(ActionEvent ae) throws IOException {
         name = "random";
         gameTransferring= new Game();
-        System.out.println(gameTransferring.getPlayerTeam());
         switchScreen(ae,"PokemonShowdownMainView.fxml");
     }
 
@@ -179,6 +190,61 @@ public class PokemonShowdownController {
         selectedTeam.addMons(selectedTeamList);
         teamViewer.setText("Team name: " + button.getText()+"\nPokémon:\n--------\n");
         selectedTeamList.stream().forEach((mon) -> teamViewer.appendText(mon.getName()+"\n"));
+    }
+
+    @FXML
+    private void handleSearch() {
+        monsPane.getChildren().clear();
+        monsGridPane.getChildren().clear();
+        IntStream.range(0, Pokemon.validPokemon.size()).forEach(i -> {
+            if (!Pokemon.validPokemon.get(i).equals("Kevin Lauren") 
+            && Pokemon.validPokemon.get(i).toLowerCase().startsWith(searchBar.getText().toLowerCase())) {
+                Button button = new Button(Pokemon.validPokemon.get(i));
+                if (teamAsStrings.contains(button.getText())) button.setDisable(true);
+                swapSelectedButton(button);
+                button.wrapTextProperty().setValue(true);
+                button.setStyle("-fx-text-alignment: center;");
+                button.setCursor(Cursor.HAND);
+                button.setOnAction((event) -> addTeamMember(event));
+                button.setMaxWidth(Double.MAX_VALUE);
+                button.setMaxHeight(Double.MAX_VALUE);
+                monsGridPane.add(button, 0, i);
+            }
+        });
+        ScrollPane scrollPane = new ScrollPane(monsGridPane);
+        scrollPane.setMaxHeight(360);
+        scrollPane.setMaxWidth(200);
+        scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
+        monsPane.getChildren().add(scrollPane);
+    }
+
+    private void swapSelectedButton(Button button) {
+        IntStream.range(0, selectedPokemonButtons.size()).forEach(i -> {
+            if (team.get(i).getName().equals(button.getText())) {
+                selectedPokemonButtons.set(i, button);
+            }
+        });
+    }
+
+    private void createPokemonButtons(List<String> mons) {
+        IntStream.range(0, mons.size()).forEach(i -> {
+            if (!mons.get(i).equals("Kevin Lauren")) {
+                Button button = new Button(mons.get(i));
+                button.wrapTextProperty().setValue(true);
+                button.setStyle("-fx-text-alignment: center;");
+                button.setCursor(Cursor.HAND);
+                button.setOnAction((event) -> addTeamMember(event));
+                button.setMaxWidth(Double.MAX_VALUE);
+                button.setMaxHeight(Double.MAX_VALUE);
+                monsGridPane.add(button, 0, i);
+                allMonButtons.add(button);
+            }
+        });
+        ScrollPane scrollPane = new ScrollPane(monsGridPane);
+        scrollPane.setMaxHeight(360);
+        scrollPane.setMaxWidth(200);
+        scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
+        monsPane.getChildren().add(scrollPane);
     }
 
     private Button createTeamButton(Team team) {
