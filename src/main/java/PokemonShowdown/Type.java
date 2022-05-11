@@ -11,7 +11,7 @@ public class Type {
     private Collection<String> immune = new ArrayList<>();
     private Collection<String> weakAgainst  = new ArrayList<>();
     private final Collection<String> validTypes = Arrays.asList("Fire","Water","Grass","Ground","Normal","Ice","Electric","Poison",
-    "Flying","None","Rock","Fighting","Psychic","Ghost","Dragon","Dark");
+    "Flying","None","Rock","Fighting","Psychic","Ghost","Dragon","Dark","Steel","Fairy","Bug");
 
     public Type(String type) {
         checkValidType(type);
@@ -32,6 +32,9 @@ public class Type {
             case "Ghost" -> setGhostType();
             case "Dragon" -> setDragonType();
             case "Dark" -> setDarkType();
+            case "Steel" -> setSteelType();
+            case "Fairy" -> setFairyType();
+            case "Bug" -> setBugType();
         }
 
     }
@@ -41,7 +44,7 @@ public class Type {
     }
 
     private void setFireType() {
-        setTypeAttributes("Fire", Arrays.asList("Grass","Ice"), Arrays.asList("Water","Fire","Rock","Dragon"), Arrays.asList());
+        setTypeAttributes("Fire", Arrays.asList("Grass","Ice","Steel","Bug"), Arrays.asList("Water","Fire","Rock","Dragon"), Arrays.asList());
     }
 
     private void setWaterType() {
@@ -49,51 +52,51 @@ public class Type {
     }
 
     private void setGrassType() {
-        setTypeAttributes("Grass", Arrays.asList("Water","Ground","Rock"), Arrays.asList("Fire","Grass","Poison","Flying","Dragon"), Arrays.asList());
+        setTypeAttributes("Grass", Arrays.asList("Water","Ground","Rock"), Arrays.asList("Fire","Grass","Poison","Flying","Dragon","Steel","Bug"), Arrays.asList());
     }
 
     private void setGroundType() {
-        setTypeAttributes("Ground", Arrays.asList("Fire","Electric","Poison","Rock"), Arrays.asList("Grass"), Arrays.asList("Flying"));
+        setTypeAttributes("Ground", Arrays.asList("Fire","Electric","Poison","Rock","Steel"), Arrays.asList("Grass","Bug"), Arrays.asList("Flying"));
     }
 
     private void setNormalType() {
-        setTypeAttributes("Normal", Arrays.asList(), Arrays.asList("Rock"), Arrays.asList("Ghost"));
+        setTypeAttributes("Normal", Arrays.asList(), Arrays.asList("Rock","Steel"), Arrays.asList("Ghost"));
     }
 
     private void setIceType() {
-        setTypeAttributes("Ice", Arrays.asList("Ground","Grass","Flying","Dragon"), Arrays.asList("Fire","Water","Ice"), Arrays.asList());
+        setTypeAttributes("Ice", Arrays.asList("Ground","Grass","Flying","Dragon"), Arrays.asList("Fire","Water","Ice","Steel"), Arrays.asList());
     }
 
     private void setElectricType() {
-        setTypeAttributes("Electric", Arrays.asList("Water","Flying"), Arrays.asList("Grass", "Electric","Dragon"), Arrays.asList("Ground"));
+        setTypeAttributes("Electric", Arrays.asList("Water","Flying"), Arrays.asList("Grass","Electric","Dragon"), Arrays.asList("Ground"));
     }
 
     private void setPoisonType() {
-        setTypeAttributes("Poison", Arrays.asList("Grass"), Arrays.asList("Poison","Rock","Ghost"), Arrays.asList());
+        setTypeAttributes("Poison", Arrays.asList("Grass","Fairy"), Arrays.asList("Poison","Rock","Ghost","Ground"), Arrays.asList("Steel"));
     }
 
     private void setFlyingType() {
-        setTypeAttributes("Flying", Arrays.asList("Grass","Fighting"), Arrays.asList("Electric","Rock"), Arrays.asList());
+        setTypeAttributes("Flying", Arrays.asList("Grass","Fighting","Bug"), Arrays.asList("Electric","Rock","Steel"), Arrays.asList());
     }
 
     private void setRockType() {
-        setTypeAttributes("Rock", Arrays.asList("Fire","Ice","Flying"), Arrays.asList("Fighting","Ground"), Arrays.asList());
+        setTypeAttributes("Rock", Arrays.asList("Fire","Ice","Flying","Bug"), Arrays.asList("Fighting","Ground","Steel"), Arrays.asList());
     }
 
     private void setFightingType() {
-        setTypeAttributes("Fighting", Arrays.asList("Normal","Ice","Rock","Dark"), Arrays.asList("Poison","Flying","Psychic"), Arrays.asList("Ghost"));
+        setTypeAttributes("Fighting", Arrays.asList("Normal","Ice","Rock","Dark","Steel"), Arrays.asList("Poison","Flying","Psychic","Bug","Fairy"), Arrays.asList("Ghost"));
     }
 
     private void setPsychicType() {
-        setTypeAttributes("Psychic", Arrays.asList("Fighting","Poison"), Arrays.asList("Psychic"), Arrays.asList("Dark"));
+        setTypeAttributes("Psychic", Arrays.asList("Fighting","Poison"), Arrays.asList("Psychic","Steel"), Arrays.asList("Dark"));
     }
 
     private void setGhostType() {
-        setTypeAttributes("Ghost", Arrays.asList("Psychic","Ghost"), Arrays.asList(), Arrays.asList("Normal"));
+        setTypeAttributes("Ghost", Arrays.asList("Psychic","Ghost"), Arrays.asList("Dark"), Arrays.asList("Normal"));
     }
 
     private void setDragonType() {
-        setTypeAttributes("Dragon", Arrays.asList("Dragon"), Arrays.asList(), Arrays.asList());
+        setTypeAttributes("Dragon", Arrays.asList("Dragon"), Arrays.asList("Steel"), Arrays.asList("Fairy"));
     }
 
     private void setTypeToNone() {
@@ -101,7 +104,19 @@ public class Type {
     }
 
     private void setDarkType() {
-        setTypeAttributes("Dark", Arrays.asList("Psychic","Ghost"), Arrays.asList("Dark","Fighting"), Arrays.asList());
+        setTypeAttributes("Dark", Arrays.asList("Psychic","Ghost"), Arrays.asList("Dark","Fighting","Fairy"), Arrays.asList());
+    }
+
+    private void setSteelType() {
+        setTypeAttributes("Steel", Arrays.asList("Fairy","Rock","Ice"), Arrays.asList("Fire","Water","Steel","Electric"), Arrays.asList());
+    }
+
+    private void setFairyType() {
+        setTypeAttributes("Fairy", Arrays.asList("Dark","Dragon","Fighting"), Arrays.asList("Steel","Fire","Poison"), Arrays.asList());
+    }
+
+    private void setBugType() {
+        setTypeAttributes("Bug", Arrays.asList("Grass","Psychic","Dark"), Arrays.asList("Steel","Fire","Fighting","Poison","Flying","Ghost","Fairy"), Arrays.asList());
     }
 
     private void setTypeAttributes(String name, Collection<String> strongAgainst, Collection<String> weakAgainst, Collection<String> immune) {

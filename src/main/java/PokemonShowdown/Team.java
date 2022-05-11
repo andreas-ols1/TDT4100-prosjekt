@@ -30,7 +30,13 @@ public class Team implements IFileHandling {
             }
             List<Pokemon> mons = new ArrayList<>();
             names.stream().
-            forEach((name) -> mons.add(new Pokemon(name)));
+            forEach((name) -> {
+                try {
+                    mons.add(new Pokemon(name));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
             return mons;
         }
     }

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -49,7 +50,7 @@ public class GameTest {
 
     @Test
     @DisplayName("Test constructor with input argument")
-    public void testGameConstructorWithInputArgument() {
+    public void testGameConstructorWithInputArgument() throws IOException {
         game = new Game(Arrays.asList(new Pokemon("Charizard"),new Pokemon("Pikachu"),new Pokemon("Venusaur"),new Pokemon("Blastoise")));
         IntStream.range(0,4).forEach(i -> {
             assertEquals(Arrays.asList("Charizard","Pikachu","Venusaur","Blastoise").get(i),game.getPlayerTeam().get(i).getName());

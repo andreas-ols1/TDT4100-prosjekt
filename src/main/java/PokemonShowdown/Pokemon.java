@@ -1,12 +1,15 @@
 package PokemonShowdown;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Pokemon {
+public class Pokemon implements PokemonFileHandling {
     
     private String name;
     private List<Type> types = new ArrayList<>();
@@ -15,36 +18,22 @@ public class Pokemon {
     private boolean isDead = false, crit;
     private double attackBoost = 1, speedBoost = 1;
     public final static List<String> validPokemon = Arrays.asList("Venusaur","Charizard","Blastoise","Pikachu",
-    "Nidoking","Arcanine","Alakazam","Machamp","Golem","Slowbro","Gengar","Gyarados","Aerodactyl","Snorlax",
-    "Articuno","Zapdos","Moltres","Dragonite","Mewtwo","Mew","Rayquaza","Amoonguss","Kevin Lauren");
+    "Nidoqueen","Nidoking","Clefable","Vileplume","Arcanine","Poliwrath","Alakazam","Machamp","Tentacruel","Golem",
+    "Slowbro","Muk","Gengar","Electrode","Exeggutor","Starmie","Gyarados","Lapras","Vaporeon","Jolteon","Flareon",
+    "Omastar","Kabutops","Aerodactyl","Snorlax","Articuno","Zapdos","Moltres","Dragonite","Mewtwo","Mew","Meganium",
+    "Typhlosion","Feraligatr","Crobat","Ampharos","Quagsire","Espeon","Umbreon","Forretress","Steelix","Scizor",
+    "Heracross","Mantine","Skarmory","Houndoom","Kingdra","Smeargle","Blissey","Raikou","Entei","Suicune","Tyranitar",
+    "Lugia","Ho-Oh","Celebi","Rayquaza","Amoonguss","Kevin Lauren");
+    private final static String filepath = "./src/main/resources/PokemonShowdown/mons.txt";
 
-    public Pokemon(String name) {
+    public Pokemon(String name) throws IOException {
         checkValidPokemon(name);
-        switch (name.toLowerCase()) {
-            case "charizard" -> setPokemonToCharizard();
-            case "venusaur" -> setPokemonToVenusaur();
-            case "blastoise" -> setPokemonToBlastoise();
-            case "pikachu" -> setPokemonToPikachu();
-            case "nidoking" -> setPokemonToNidoking();
-            case "arcanine" -> setPokemonToArcanine();
-            case "alakazam" -> setPokemonToAlakazam();
-            case "machamp" -> setPokemonToMachamp();
-            case "golem" -> setPokemonToGolem();
-            case "slowbro" -> setPokemonToSlowbro();
-            case "gengar" -> setPokemonToGengar();
-            case "gyarados" -> setPokemonToGyarados();
-            case "aerodactyl" -> setPokemonToAerodactyl();
-            case "snorlax" -> setPokemonToSnorlax();
-            case "articuno" -> setPokemonToArticuno();
-            case "zapdos" -> setPokemonToZapdos();
-            case "moltres" -> setPokemonToMoltres();
-            case "dragonite" -> setPokemonToDragonite();
-            case "mewtwo" -> setPokemonToMewtwo();
-            case "mew" -> setPokemonToMew();
-            case "rayquaza" -> setPokemonToRayquaza();
-            case "amoonguss" -> setPokemonToAmoonguss();
-            case "kevin lauren" -> setPokemonToLauren();
-        }
+        setPokemon(name);
+    }
+
+    private void setPokemon(String name) throws IOException {
+        List<String> atb = read(name);
+        setPokemonDetails(atb.get(0), Arrays.asList(atb.get(1),atb.get(2)), Integer.valueOf(atb.get(3)), Integer.valueOf(atb.get(4)), Integer.valueOf(atb.get(5)), Integer.valueOf(atb.get(6)), Arrays.asList(atb.get(7),atb.get(8),atb.get(9),atb.get(10)));
     }
 
     private void checkValidPokemon(String name) {
@@ -53,99 +42,7 @@ public class Pokemon {
         }
     }
 
-    private void setPokemonToVenusaur() {
-        setPokemonDetails("Venusaur", Arrays.asList("Grass","Poison"), 332, 231, 267, 227, Arrays.asList("Sludge Bomb","Earthquake","Swords Dance","Giga Drain"));
-    }
- 
-    private void setPokemonToCharizard() {
-        setPokemonDetails("Charizard", Arrays.asList("Fire","Flying"), 328, 285, 237, 267,Arrays.asList("Flamethrower","Earthquake","Swords Dance","Air Slash"));
-    }
-
-    private void setPokemonToBlastoise() {
-        setPokemonDetails("Blastoise", Arrays.asList("Water","None"), 330, 237, 277, 223, Arrays.asList("Hydro Pump","Recover","Skull Bash","Ice Beam"));  
-    }
-
-    private void setPokemonToPikachu() {
-        setPokemonDetails("Pikachu", Arrays.asList("Electric","None"), 274, 299, 167, 247, Arrays.asList("Slash","Thunderbolt","Swords Dance","Surf"));
-    }
-
-    private void setPokemonToNidoking() {
-        setPokemonDetails("Nidoking", Arrays.asList("Poison", "Ground"), 334, 271, 221, 237, Arrays.asList("Earthquake","Sludge Bomb","Surf","Swords Dance"));
-    }
-
-    private void setPokemonToArcanine() {
-        setPokemonDetails("Arcanine", Arrays.asList("Fire", "None"), 352, 287, 227, 257, Arrays.asList("Flamethrower","Recover","Earthquake","Skull Bash"));
-    }
-    
-    private void setPokemonToAlakazam() {
-        setPokemonDetails("Alakazam", Arrays.asList("Psychic", "None"), 282, 337, 257, 307, Arrays.asList("Psychic","Shadow Ball","Thunderbolt","Recover"));
-    }
-
-    private void setPokemonToMachamp() {
-        setPokemonDetails("Machamp", Arrays.asList("Fighting", "None"), 352, 327, 237, 177, Arrays.asList("Cross Chop","Thunder Punch","Ice Punch","Fire Punch"));
-    }
-
-    private void setPokemonToGolem() {
-        setPokemonDetails("Golem", Arrays.asList("Rock", "Ground"), 332, 307, 327, 157, Arrays.asList("Earthquake","Rock Slide","Skull Bash","Swords Dance")); 
-    }
-
-    private void setPokemonToSlowbro() {
-        setPokemonDetails("Slowbro", Arrays.asList("Water", "Psychic"), 362, 287, 267, 127, Arrays.asList("Surf","Psychic","Recover","Ice Beam"));
-    }
-
-    private void setPokemonToGengar() {
-        setPokemonDetails("Gengar", Arrays.asList("Ghost", "Poison"), 292, 327, 217, 287, Arrays.asList("Shadow Ball","Psychic","Sludge Bomb","Thunderbolt"));
-    }
-
-    private void setPokemonToGyarados() {
-        setPokemonDetails("Gyarados", Arrays.asList("Water", "Flying"), 362, 317, 267, 229, Arrays.asList("Hydro Pump","Dragon Pulse","Dragon Dance","Thunderbolt"));
-    }
-
-    private void setPokemonToAerodactyl() {
-        setPokemonDetails("Aerodactyl", Arrays.asList("Rock", "Flying"), 332, 277, 217, 327, Arrays.asList("Rock Slide","Air Slash","Earthquake","Swords Dance"));
-    }
-    
-    private void setPokemonToSnorlax() {
-        setPokemonDetails("Snorlax", Arrays.asList("Normal", "None"), 492, 256, 287, 127, Arrays.asList("Skull Bash","Ice Punch","Earthquake","Fire Punch"));
-    }
-
-    private void setPokemonToArticuno() {
-        setPokemonDetails("Articuno", Arrays.asList("Ice", "Flying"), 352, 257, 317, 237, Arrays.asList("Ice Beam","Air Slash","Slash","Roost"));
-    }
-
-    private void setPokemonToZapdos() {
-        setPokemonDetails("Zapdos", Arrays.asList("Electric", "Flying"), 352, 317, 247, 267, Arrays.asList("Thunderbolt","Air Slash","Slash","Roost"));
-    }
-
-    private void setPokemonToMoltres() {
-        setPokemonDetails("Moltres", Arrays.asList("Fire", "Flying"), 352, 247, 317, 247, Arrays.asList("Flamethrower","Air Slash","Slash","Roost"));
-    }
-
-    private void setPokemonToDragonite() {
-        setPokemonDetails("Dragonite", Arrays.asList("Dragon", "Flying"), 354, 335, 267, 227, Arrays.asList("Dragon Pulse","Flamethrower","Roost","Dragon Dance"));
-    }
-
-    private void setPokemonToMewtwo() {
-        setPokemonDetails("Mewtwo", Arrays.asList("Psychic", "None"), 384, 247, 375, 327, Arrays.asList("Psychic","Ice Beam","Shadow Ball","Recover"));
-    }
-
-    private void setPokemonToMew() {
-        setPokemonDetails("Mew", Arrays.asList("Psychic", "None"), 372, 267, 267, 267, Arrays.asList("Psychic","Earthquake","Recover","Swords Dance"));
-    }
-
-    private void setPokemonToRayquaza() {
-        setPokemonDetails("Rayquaza", Arrays.asList("Dragon","Flying"), 382, 367, 247, 257, Arrays.asList("Dragon Pulse","Dragons Ascent","V-create","Dragon Dance"));
-    }
-
-    private void setPokemonToAmoonguss() {
-        setPokemonDetails("Amoonguss", Arrays.asList("Grass","Poison"), 400, 327, 227, 127, Arrays.asList("Giga Drain","Sludge Bomb","Synthesis","Solar Beam"));
-    }
-
-    private void setPokemonToLauren() {
-        setPokemonDetails("Kevin Lauren", Arrays.asList("Fighting","Dark"), 400, 400, 400, 400, Arrays.asList("Ring mandem","Jacke sykebil","Trench warfare","Jeg gætter trynet ditt bro"));
-    }
-
-    private void setPokemonDetails(String name, List<String> types, int maxHp, int attack, int defence, int speed, Collection<String> moves) {
+    private void setPokemonDetails(String name, List<String> types, int maxHp, int attack, int defence, int speed, List<String> moves) {
         this.name = name;
         types.stream().forEach(type -> this.types.add(new Type(type)));
         this.maxHp = maxHp;
@@ -155,7 +52,13 @@ public class Pokemon {
         this.defence = defence;
         this.speed = speed;
         orgSpeed = speed;
-        moves.stream().forEach(move -> this.moves.add(new Move(move)));
+        moves.stream().forEach(move -> {
+            try {
+                this.moves.add(new Move(move));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public void attack(Pokemon target, int moveIndex) {
@@ -174,7 +77,7 @@ public class Pokemon {
                     if (crit) System.out.println("It's a crit!"); // A critical hit is a random boost to power that has a 1/16 chanse of occuring every time a pokemon uses an attack.
                     System.out.println("");
                 }
-                else System.out.println(getName() + " tried to use " + getMove(moveIndex).getName() + ",\nbut " + target.getName() + " is immune to " + getMove(moveIndex).getName() + ",\nso the attack did no damage!\n");
+                else System.out.println(getName() + " tried to use " + getMove(moveIndex).getName() + ",\nbut " + target.getName() + " is immune to " + getMove(moveIndex).getType().getName() + ",\nso the attack did no damage!\n");
             }
             else {
                 heal(moveIndex);
@@ -357,5 +260,27 @@ public class Pokemon {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public List<String> read(InputStream is, String mon) {
+        try (Scanner sc = new Scanner(is)) {
+            List<String> monAttributes = new ArrayList<>();
+            while (sc.hasNextLine()) {
+                String nextLine = sc.nextLine(); 
+                if (nextLine.startsWith(mon)) {
+                    monAttributes = Arrays.asList(nextLine.split(";"));
+                }
+            }
+            return monAttributes;
+        }
+    }
+
+    @Override
+    public List<String> read(String mon) throws IOException {
+        String path = filepath;
+        try (var is = new FileInputStream(path)) {
+            return read(is, mon);
+        }
     }
 }

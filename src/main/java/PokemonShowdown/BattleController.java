@@ -72,7 +72,7 @@ public class BattleController {
     private Tooltip playerMonTooltip,opponentMonTooltip;
 
     @FXML
-    private void initialize() {      
+    private void initialize() throws IOException {      
         game = PokemonShowdownController.gameTransferring;
         if (PokemonShowdownController.name.toLowerCase().contains("kevin") 
         || PokemonShowdownController.name.toLowerCase().contains("lauren")) {
