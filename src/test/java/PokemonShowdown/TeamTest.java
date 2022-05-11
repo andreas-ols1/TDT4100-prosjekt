@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 public class TeamTest {
     
-	private Team getTeam() {
+	private Team getTeam() throws IOException {
         return new Team("test", Arrays.asList(
         new Pokemon("Snorlax"),
         new Pokemon("Gyarados"),
@@ -30,7 +30,7 @@ public class TeamTest {
 
     @Test
     @DisplayName("Test write team to file")
-    public void testWrite() {
+    public void testWrite() throws IOException {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         Team team = getTeam();
         team.write(os);
@@ -44,7 +44,7 @@ public class TeamTest {
 
     @Test
     @DisplayName("Test read team from file")
-    public void testRead() throws UnsupportedEncodingException {
+    public void testRead() throws IOException {
         InputStream is = new ByteArrayInputStream(teamAsString().getBytes("UTF-8"));
 
         Team team = new Team("test", new ArrayList<>());

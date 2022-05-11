@@ -1,0 +1,53 @@
+Swords Dance;Normal;0;1.0;0.0;1.0;0.0
+Recover;Normal;0;1.0;0.5;0.0;0.0
+Hydro Pump;Water;120;0.8;0.0;0.0;0.0
+Slash;Normal;70;1.0;0.0;0.0;0.0
+Flamethrower;Fire;95;1.0;0.0;0.0;0.0
+Earthquake;Ground;100;1.0;0.0;0.0;0.0
+Solar Beam;Grass;120;0.8;0.0;0.0;0.0
+Ice Beam;Ice;90;1.0;0.0;0.0;0.0
+Skull Bash;Normal;100;1.0;0.0;0.0;0.0
+Thunderbolt;Electric;95;1.0;0.0;0.0;0.0
+Surf;Water;95;1.0;0.0;0.0;0.0
+Sludge Bomb;Poison;90;1.0;0.0;0.0;0.0
+Air Slash;Flying;75;0.95;0.0;0.0;0.0
+Cross Chop;Fighting;100;0.8;0.0;0.0;0.0
+Thunder Punch;Electric;75;1.0;0.0;0.0;0.0
+Ice Punch;Ice;75;1.0;0.0;0.0;0.0
+Fire Punch;Fire;75;1.0;0.0;0.0;0.0
+Psychic;Psychic;90;1.0;0.0;0.0;0.0
+Rock Slide;Rock;75;0.9;0.0;0.0;0.0
+Shadow Ball;Ghost;80;1.0;0.0;0.0;0.0
+Dragon Pulse;Dragon;85;1.0;0.0;0.0;0.0
+Roost;Flying;0;1.0;0.5;0.0;0.0
+Agility;Psychic;0;1.0;0.0;0.0;1.0
+Dragon Dance;Dragon;0;1.0;0.0;0.5;0.5
+V-create;Fire;180;0.95;0.0;-0.5;-0.5
+Dragons Ascent;Flying;120;1.0;0.0;0.0;0.0
+Synthesis;Grass;0;1.0;0.5;0.0;0.0
+Giga Drain;Grass;75;1.0;0.1;0.0;0.0
+Ring mandem;Fighting;0;1.0;0.0;3.0;0.0
+Jacke sykebil;Normal;0;1.0;1.0;0.0;0.0
+Trench warfare;Fighting;150;1.0;0.0;0.0;0.0
+Jeg gatter trynet ditt bro;Dark;120;0.8;0.0;0.0;0.0
+Fire Blast;Fire;125;0.85;0.0;0.0;0.0
+Focus Blast;Fighting;120;0.7;0.0;0.0;0.0
+Wild Charge;Electric;90;1.0;0.0;0.0;0.0
+Double Edge;Normal;120;1.0;0.0;0.0;0.0
+Crunch;Dark;80;1.0;0.0;0.0;0.0
+Brave Bird;Flying;120;1.0;0.0;0.0;0.0
+Dark Pulse;Dark;80;1.0;0.0;0.0;0.0
+Bug Buzz;Bug;90;1.0;0.0;0.0;0.0
+Flash Cannon;Steel;80;1.0;0.0;0.0;0.0
+X-Scissor;Bug;80;1.0;0.0;0.0;0.0
+Nasty Plot;Dark;0;1.0;0.0;1.0;0.0
+Moonblast;Fairy;95;1.0;0.0;0.0;0.0
+Dazzling Gleam;Fairy;80;1.0;0.0;0.0;0.0
+Extrasensory;Psychic;80;1.0;0.0;0.0;0.0
+Meteor Mash;Steel;85;90.0;0.0;0.0;0.0
+Stone Edge;Rock;100;0.8;0.0;0.0;0.0
+Soft Boiled;Normal;0;1.0;0.5;0.0;0.0
+Waterfall;Water;80;1.0;0.0;0.0;0.0
+Gunk Shot;Poison;120;0.85;0.0;0.0;0.0
+Flare Blitz;Fire;120;1.0;0.0;0.0;0.0
+Shell Smash;Normal;0;1.0;0.0;1.0;1.0

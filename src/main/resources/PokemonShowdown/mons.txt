@@ -1,0 +1,63 @@
+Venusaur;Grass;Poison;332;231;267;227;Sludge Bomb;Earthquake;Swords Dance;Giga Drain
+Charizard;Fire;Flying;328;285;237;267;Flamethrower;Earthquake;Swords Dance;Air Slash
+Blastoise;Water;None;330;237;277;223;Hydro Pump;Recover;Skull Bash;Ice Beam
+Pikachu;Electric;None;274;299;167;247;Slash;Thunderbolt;Swords Dance;Surf
+Nidoqueen;Poison;Ground;352;251;241;219;Earthquake;Sludge Bomb;Ice Beam;Thunderbolt
+Nidoking;Poison;Ground;334;271;221;237;Earthquake;Sludge Bomb;Surf;Swords Dance
+Clefable;Fairy;None;362;257;247;187;Moonblast;Fire Blast;Soft Boiled;Thunderbolt
+Vileplume;Grass;Poison;322;287;247;167;Giga Drain;Sludge Bomb;Synthesis;Solar Beam
+Arcanine;Fire;None;352;287;227;257;Flamethrower;Recover;Earthquake;Skull Bash
+Poliwrath;Water;Fighting;352;257;257;207;Cross Chop;Waterfall;Thunder Punch;Agility
+Alakazam;Psychic;None;282;337;257;307;Psychic;Shadow Ball;Thunderbolt;Recover
+Machamp;Fighting;None;352;327;237;177;Cross Chop;Thunder Punch;Ice Punch;Fire Punch
+Tentacruel;Water;Poison;332;227;307;267;Surf;Sludge Bomb;Recover;Earthquake
+Golem;Rock;Ground;332;307;327;157;Earthquake;Rock Slide;Skull Bash;Swords Dance
+Slowbro;Water;Psychic;362;287;267;127;Surf;Psychic;Recover;Ice Beam
+Muk;Poison;None;382;277;267;167;Gunk Shot;Earthquake;Flamethrower;Ice Punch
+Gengar;Ghost;Poison;292;327;217;287;Shadow Ball;Psychic;Sludge Bomb;Thunderbolt
+Electrode;Electric;None;292;227;227;367;Thunderbolt;Slash;Wild Charge;Agility
+Exeggutor;Grass;Psychic;362;257;317;177;Psychic;Solar Beam;Synthesis;Dragon Pulse
+Starmie;Water;Psychic;292;267;237;297;Hydro Pump;Psychic;Thunderbolt;Ice Beam
+Gyarados;Water;Flying;362;317;267;229;Hydro Pump;Dragon Pulse;Dragon Dance;Thunderbolt
+Lapras;Water;Ice;432;237;257;187;Surf;Thunderbolt;Ice Beam;Recover
+Vaporeon;Water;None;432;287;257;197;Surf;Ice Beam;Nasty Plot;Hydro Pump
+Jolteon;Electric;None;302;287;257;327;Thunderbolt;Agility;Shadow Ball;Extrasensory
+Flareon;Fire;None;302;327;287;197;Flare Blitz;Wild Charge;Swords Dance;Crunch
+Omastar;Rock;Water;312;317;297;177;Shell Smash;Stone Edge;Hydro Pump;Earthquake
+Kabutops;Rock;Water;292;297;277;227;Waterfall;Swords Dance;Agility;Stone Edge
+Aerodactyl;Rock;Flying;332;277;217;327;Rock Slide;Air Slash;Earthquake;Swords Dance
+Snorlax;Normal;None;492;256;287;127;Skull Bash;Ice Punch;Earthquake;Fire Punch
+Articuno;Ice;Flying;352;257;317;237;Ice Beam;Air Slash;Slash;Roost
+Zapdos;Electric;Flying;352;317;247;267;Thunderbolt;Air Slash;Slash;Roost
+Moltres;Fire;Flying;352;247;317;247;Flamethrower;Air Slash;Slash;Roost
+Dragonite;Dragon;Flying;354;335;267;227;Dragon Pulse;Flamethrower;Roost;Dragon Dance
+Mewtwo;Psychic;None;384;247;375;327;Psychic;Ice Beam;Shadow Ball;Recover
+Mew;Psychic;None;372;267;267;267;Psychic;Earthquake;Recover;Swords Dance
+Meganium;Grass;None;332;233;267;227;Giga Drain;Synthesis;Solar Beam;Sludge Bomb
+Typhlosion;Fire;None;328;285;237;267;Fire Blast;Focus Blast;Wild Charge;Double Edge
+Feraligatr;Water;None;342;277;267;223;Hydro Pump;Crunch;Ice Punch;Dragon Dance
+Crobat;Poison;Flying;342;247;227;327;Brave Bird;Roost;Sludge Bomb;Double Edge
+Ampharos;Electric;None;353;297;247;177;Thunderbolt;Dragon Pulse;Earthquake;Flamethrower
+Quagsire;Water;Ground;362;237;237;137;Surf;Earthquake;Recover;Ice Beam
+Espeon;Psychic;None;302;327;257;287;Psychic;Shadow Ball;Thunderbolt;Dark Pulse
+Umbreon;Dark;None;362;197;327;197;Crunch;Recover;Swords Dance;Agility
+Forretress;Bug;Steel;322;216;347;147;Bug Buzz;Flash Cannon;Earthquake;Rock Slide
+Steelix;Steel;Ground;322;237;467;127;Earthquake;Flash Cannon;Rock Slide;Double Edge
+Scizor;Bug;Steel;312;327;267;197;X-Scissor;Flash Cannon;Roost;Swords Dance
+Heracross;Bug;Fighting;332;317;257;237;X-Scissor;Cross Chop;Swords Dance;Agility
+Mantine;Water;Flying;342;227;347;207;Surf;Air Slash;Recover;Ice Beam
+Skarmory;Steel;Flying;302;227;347;207;Flash Cannon;Roost;Brave Bird;Slash
+Houndoom;Dark;Fire;322;287;247;257;Fire Blast;Dark Pulse;Nasty Plot;Solar Beam
+Kingdra;Water;Dragon;322;257;257;237;Hydro Pump;Dragon Pulse;Ice Beam;Dragon Dance
+Smeargle;Normal;None;282;107;157;217;V-create;Dragon Dance;Recover;Double Edge
+Blissey;Normal;None;682;217;337;177;Recover;Double Edge;Dazzling Gleam;Ice Punch
+Raikou;Electric;None;352;297;267;297;Thunderbolt;Extrasensory;Nasty Plot;Dark Pulse
+Entei;Fire;None;402;297;237;267;Fire Blast;Skull Bash;Agility;Extrasensory
+Suicune;Water;None;372;297;247;237;Surf;Ice Beam;Recover;Nasty Plot
+Tyranitar;Rock;Dark;372;335;287;189;Stone Edge;Crunch;Agility;Earthquake
+Lugia;Psychic;Flying;384;247;375;287;Air Slash;Psychic;Roost;Surf
+Ho-Oh;Fire;Flying;384;327;375;247;Fire Blast;Air Slash;Roost;Earthquake
+Celebi;Psychic;Grass;372;267;267;267;Psychic;Synthesis;Solar Beam;Shadow Ball
+Rayquaza;Dragon;Flying;382;367;247;257;Dragon Pulse;Dragons Ascent;V-create;Dragon Dance
+Amoonguss;Grass;Poison;400;327;227;127;Giga Drain;Sludge Bomb;Synthesis;Solar Beam
+Kevin Lauren;Fighting;Dark;400;400;400;400;Ring mandem;Jacke sykebil;Trench warfare;Jeg gatter trynet ditt bro

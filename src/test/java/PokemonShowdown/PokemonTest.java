@@ -3,6 +3,7 @@ package PokemonShowdown;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
@@ -17,7 +18,7 @@ public class PokemonTest {
 
 
     @BeforeEach
-    public void setup() {
+    public void setup() throws IOException {
         charizard = new Pokemon("Charizard");
     }
     
@@ -39,7 +40,7 @@ public class PokemonTest {
 
     @Test
     @DisplayName("Test revertStatChanges")
-    public void testRevertStatChanges() {
+    public void testRevertStatChanges() throws IOException {
         Pokemon gyarados = new Pokemon("Gyarados");
         gyarados.attack(charizard, 2);
         assertEquals(1.5, gyarados.getAttackBoost());
@@ -54,7 +55,7 @@ public class PokemonTest {
 
     @Test
     @DisplayName("Test non-damaging attacks")
-    public void testPassiveAttacks() {
+    public void testPassiveAttacks() throws IOException {
         Pokemon dragonite = new Pokemon("Dragonite");
         IntStream.range(0, 8).forEach(i -> {
             dragonite.attack(charizard, 3);
@@ -79,7 +80,7 @@ public class PokemonTest {
 
     @RepeatedTest(10000)
     @DisplayName("Test attack()")
-    public void testAttack() {
+    public void testAttack() throws IOException {
         Pokemon amoonguss = new Pokemon("Amoonguss");
         assertCorrectDamage(amoonguss, charizard, charizard.getMaxHp(), 0, 1.5, 0.25);
         

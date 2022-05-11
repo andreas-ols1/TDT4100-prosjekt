@@ -40,7 +40,6 @@ public class PokemonShowdownController {
     
     private List<Pokemon> team = new ArrayList<>();
     private List<String> teamAsStrings = new ArrayList<>();
-    private List<Button> allMonButtons = new ArrayList<>();
     private List<Button> selectedPokemonButtons= new ArrayList<>();
     private List<String> teamNameList = new ArrayList<>();
     private final static String filePath = "./src/main/resources/PokemonShowdown/teams";
@@ -109,7 +108,7 @@ public class PokemonShowdownController {
     }
     
     @FXML
-    private void addTeamMember(ActionEvent ae){
+    private void addTeamMember(ActionEvent ae) throws IOException{
         if (team.size() < teamSize) {
             Button button = (Button) ae.getSource();
             team.add(new Pokemon(button.getText()));
@@ -205,7 +204,13 @@ public class PokemonShowdownController {
                 button.wrapTextProperty().setValue(true);
                 button.setStyle("-fx-text-alignment: center;");
                 button.setCursor(Cursor.HAND);
-                button.setOnAction((event) -> addTeamMember(event));
+                button.setOnAction((event) -> {
+                    try {
+                        addTeamMember(event);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
                 button.setMaxWidth(Double.MAX_VALUE);
                 button.setMaxHeight(Double.MAX_VALUE);
                 monsGridPane.add(button, 0, i);
@@ -233,11 +238,16 @@ public class PokemonShowdownController {
                 button.wrapTextProperty().setValue(true);
                 button.setStyle("-fx-text-alignment: center;");
                 button.setCursor(Cursor.HAND);
-                button.setOnAction((event) -> addTeamMember(event));
+                button.setOnAction((event) -> {
+                    try {
+                        addTeamMember(event);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
                 button.setMaxWidth(Double.MAX_VALUE);
                 button.setMaxHeight(Double.MAX_VALUE);
                 monsGridPane.add(button, 0, i);
-                allMonButtons.add(button);
             }
         });
         ScrollPane scrollPane = new ScrollPane(monsGridPane);

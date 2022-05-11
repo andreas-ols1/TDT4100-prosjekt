@@ -1,5 +1,6 @@
 package PokemonShowdown;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -14,13 +15,31 @@ public class Game {
 
     public Game(List<Pokemon> playerTeam) {
         playerTeam.stream().forEach((mon) -> this.playerTeam.add(mon));
-        getRandomTeam().stream().forEach((mon) -> opponentTeam.add(new Pokemon(mon))); 
+        getRandomTeam().stream().forEach((mon) -> {
+            try {
+                opponentTeam.add(new Pokemon(mon));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }); 
         activeOpponentMon = opponentTeam.get(ThreadLocalRandom.current().nextInt(4));
     }
 
     public Game() {
-        getRandomTeam().stream().forEach((mon) -> playerTeam.add(new Pokemon(mon)));
-        getRandomTeam().stream().forEach((mon) -> opponentTeam.add(new Pokemon(mon)));
+        getRandomTeam().stream().forEach((mon) -> {
+            try {
+                playerTeam.add(new Pokemon(mon));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        getRandomTeam().stream().forEach((mon) -> {
+            try {
+                opponentTeam.add(new Pokemon(mon));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         activeOpponentMon = opponentTeam.get(ThreadLocalRandom.current().nextInt(4));
     }
     
@@ -71,7 +90,7 @@ public class Game {
         return activeOpponentMon;
     }
 
-    public void setLastOpponentMon(String name) {
+    public void setLastOpponentMon(String name) throws IOException {
         opponentTeam.remove(3);
         opponentTeam.add(new Pokemon(name));
     }
