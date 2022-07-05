@@ -359,11 +359,23 @@ public class BattleController {
     }
 
     private void setMoveButtons() {
-        IntStream.range(0, 4).forEach(i -> attacks.add(createMoveButton(game.getActiveMon(), i), i, 0));     
+        IntStream.range(0,4).forEach(i -> attacks.add(createMoveButton(game.getActiveMon(), i), i, 0));     
     }
 
     private void initializeGame(Game game) {
-        IntStream.range(0,4).forEach(i -> playerTeamView.add(createPokemonButton(game,i), 0, i));
+        IntStream.range(0,6).forEach(i -> {
+            Button button = createPokemonButton(game,i);
+            playerTeamView.add(button, 0, i);
+            Tooltip tooltip = new Tooltip();
+            tooltip.setShowDelay(Duration.ZERO);
+            tooltip.setText("Name: " + game.getPlayerTeam().get(i).getName() +
+                "\nTypes: " + game.getPlayerTeam().get(i).getTypes() +
+                "\nHP: " + game.getPlayerTeam().get(i).getHp() +
+                "\nAttack: " + game.getPlayerTeam().get(i).getAttack() +
+                "\nDefence: " + game.getPlayerTeam().get(i).getDefence() +
+                "\nSpeed: " + game.getPlayerTeam().get(i).getSpeed());
+            button.setTooltip(tooltip);
+        });
     }
     
     private Button createPokemonButton(Game game, int monIndex) {

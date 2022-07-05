@@ -12,6 +12,7 @@ public class Game {
     private List<Pokemon> playerTeam = new ArrayList<>(); 
     private List<Pokemon> opponentTeam = new ArrayList<>();
     private Pokemon activeMon, activeOpponentMon;
+    private final int teamSize = 6;
 
     public Game(List<Pokemon> playerTeam) {
         playerTeam.stream().forEach((mon) -> this.playerTeam.add(mon));
@@ -22,7 +23,7 @@ public class Game {
                 e.printStackTrace();
             }
         }); 
-        activeOpponentMon = opponentTeam.get(ThreadLocalRandom.current().nextInt(4));
+        activeOpponentMon = opponentTeam.get(ThreadLocalRandom.current().nextInt(teamSize));
     }
 
     public Game() {
@@ -40,7 +41,7 @@ public class Game {
                 e.printStackTrace();
             }
         });
-        activeOpponentMon = opponentTeam.get(ThreadLocalRandom.current().nextInt(4));
+        activeOpponentMon = opponentTeam.get(ThreadLocalRandom.current().nextInt(teamSize));
     }
     
     public void setActiveMon(int index) {
@@ -54,10 +55,10 @@ public class Game {
         for (Pokemon mon : getOpponentTeam()) {
             if (mon.isDead()) count ++;
         }
-        if (count < 4) {
-            Pokemon mon = opponentTeam.get(ThreadLocalRandom.current().nextInt(4));
+        if (count < teamSize) {
+            Pokemon mon = opponentTeam.get(ThreadLocalRandom.current().nextInt(teamSize));
             while (mon.isDead()) {
-                mon = opponentTeam.get(ThreadLocalRandom.current().nextInt(4));
+                mon = opponentTeam.get(ThreadLocalRandom.current().nextInt(teamSize));
             }
             activeOpponentMon = mon;
         }
@@ -65,7 +66,7 @@ public class Game {
 
     private List<String> getRandomTeam() {
         List<String> team = new ArrayList<>();
-        IntStream.range(0, 4).forEach(i -> {
+        IntStream.range(0, teamSize).forEach(i -> {
             String mon = Pokemon.validPokemon.get(new Random().nextInt(Pokemon.validPokemon.size()));
             while (team.contains(mon) || mon.equals("Kevin Lauren")) {
                 mon = Pokemon.validPokemon.get(new Random().nextInt(Pokemon.validPokemon.size()));
@@ -91,7 +92,7 @@ public class Game {
     }
 
     public void setLastOpponentMon(String name) throws IOException {
-        opponentTeam.remove(3);
+        opponentTeam.remove(teamSize-1);
         opponentTeam.add(new Pokemon(name));
     }
 
@@ -104,7 +105,7 @@ public class Game {
         for (Pokemon mon : this.getOpponentTeam()) {
             if(mon.isDead()) opponentCount ++;
         }
-        return (playerCount == 4 || opponentCount == 4);
+        return (playerCount == teamSize || opponentCount == teamSize);
     }
 
     @Override

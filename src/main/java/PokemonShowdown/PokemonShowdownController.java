@@ -43,7 +43,7 @@ public class PokemonShowdownController {
     private List<Button> selectedPokemonButtons= new ArrayList<>();
     private List<String> teamNameList = new ArrayList<>();
     private final static String filePath = "./src/main/resources/PokemonShowdown/teams";
-    private final static int teamSize = 4;
+    private final static int teamSize = 6;
     private Team selectedTeam;
     public static Game gameTransferring;
     public static String name;
