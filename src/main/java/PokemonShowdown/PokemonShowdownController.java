@@ -146,7 +146,7 @@ public class PokemonShowdownController {
             if (checkButtonPosition()<10 && checkButtonPosition()>=-1) {
                 if (!teamNameList.contains(name)) {
                     teamList.add(createTeamButton(tmp),0, checkButtonPosition());
-                    if (!name.equals("defaultTeam")) teamList.add(createDeleteTeamButton(), 1, checkButtonPosition());
+                    teamList.add(createDeleteTeamButton(), 1, checkButtonPosition());
                 };
             } 
             tmp.write();
@@ -324,6 +324,7 @@ public class PokemonShowdownController {
 
     private void getTeamsFromFile() {
         File dir = new File(filePath);
+        if (! dir.exists()) dir.mkdir();
         String[] teams = dir.list();
         List<String> teamNames = new ArrayList<>();
         Arrays.stream(teams)
@@ -333,13 +334,13 @@ public class PokemonShowdownController {
             IntStream.range(0, 10).
             forEach((i) -> {
                 teamList.add(createTeamButton(new Team(teamNames.get(i), new ArrayList<Pokemon>())), 0, i);
-                if (!teamNames.get(i).equals("defaultTeam")) teamList.add(createDeleteTeamButton(), 1, i);
+                teamList.add(createDeleteTeamButton(), 1, i);
             });
         } else {
             IntStream.range(0, teamNames.size()).
             forEach((i) -> {
                 teamList.add( createTeamButton(new Team(teamNames.get(i), new ArrayList<Pokemon>())), 0, i);
-                if (!teamNames.get(i).equals("defaultTeam")) teamList.add(createDeleteTeamButton(), 1, i);
+                teamList.add(createDeleteTeamButton(), 1, i);
             });
         }
     }
