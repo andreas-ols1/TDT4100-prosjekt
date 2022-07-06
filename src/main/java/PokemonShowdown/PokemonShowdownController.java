@@ -2,6 +2,8 @@ package PokemonShowdown;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,6 +26,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -62,7 +66,7 @@ public class PokemonShowdownController {
     private AnchorPane monsPane;
 
     @FXML
-    private GridPane teamList, playerTeamView, monsGridPane;
+    private GridPane teamList, playerTeamView, monsGridPane, deleteButtons;
 
     @FXML
     private TextArea teamViewer;
@@ -140,7 +144,10 @@ public class PokemonShowdownController {
             selectedPokemonButtons.clear();
             teamName.clear();
             if (checkButtonPosition()<10 && checkButtonPosition()>=-1) {
-                if (!teamNameList.contains(name)) teamList.add(createTeamButton(tmp),0, checkButtonPosition());
+                if (!teamNameList.contains(name)) {
+                    teamList.add(createTeamButton(tmp),0, checkButtonPosition());
+                    if (!name.equals("defaultTeam")) teamList.add(createDeleteTeamButton(), 1, checkButtonPosition());
+                };
             } 
             tmp.write();
         } 
@@ -275,6 +282,41 @@ public class PokemonShowdownController {
         return button;
     }
 
+    private ImageView createImageView(String path, int heigth) {
+        ImageView view = new ImageView(new Image(path));
+        view.setFitHeight(heigth);
+        view.setPreserveRatio(true);
+        return view;
+
+    }
+
+    private Button createDeleteTeamButton() {
+        Button button = new Button();
+        button.wrapTextProperty().setValue(true);
+        button.setStyle("-fx-text-alignment: center;");
+        button.setCursor(Cursor.HAND);
+        button.setOnAction((event) -> {
+            try {
+                handleDeleteTeam(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        button.setMaxWidth(Double.MAX_VALUE);
+        button.setMaxHeight(Double.MAX_VALUE);
+        button.setGraphic(createImageView("PokemonShowdown/blackx.png", 20));
+        return button;
+    }
+
+    private void handleDeleteTeam(ActionEvent ae) throws IOException {
+        Button button = (Button) ae.getSource();
+        Files.delete(Paths.get(filePath + "/" + teamNameList.get(GridPane.getRowIndex(button)) + ".txt"));
+        teamList.getChildren().clear();
+        teamNameList.clear();
+        deleteButtons.getChildren().clear();
+        getTeamsFromFile();
+    }
+
     private int checkButtonPosition() {
         File dir = new File(filePath);
         return dir.list().length;
@@ -289,10 +331,16 @@ public class PokemonShowdownController {
         forEach((str) -> teamNames.add(str));
         if (teamNames.size()>10) {
             IntStream.range(0, 10).
-            forEach((i) -> teamList.add(createTeamButton(new Team(teamNames.get(i), new ArrayList<Pokemon>())), 0, i));
+            forEach((i) -> {
+                teamList.add(createTeamButton(new Team(teamNames.get(i), new ArrayList<Pokemon>())), 0, i);
+                if (!teamNames.get(i).equals("defaultTeam")) teamList.add(createDeleteTeamButton(), 1, i);
+            });
         } else {
             IntStream.range(0, teamNames.size()).
-            forEach((i)->teamList.add( createTeamButton(new Team(teamNames.get(i), new ArrayList<Pokemon>())), 0, i));
+            forEach((i) -> {
+                teamList.add( createTeamButton(new Team(teamNames.get(i), new ArrayList<Pokemon>())), 0, i);
+                if (!teamNames.get(i).equals("defaultTeam")) teamList.add(createDeleteTeamButton(), 1, i);
+            });
         }
     }
 

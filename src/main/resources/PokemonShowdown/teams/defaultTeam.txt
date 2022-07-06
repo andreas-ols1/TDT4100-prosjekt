@@ -1,4 +1,6 @@
 Charizard
 Blastoise
 Nidoking
-Alakazam
+Pikachu
+Nidoqueen
+Nidoking
