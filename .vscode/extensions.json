@@ -1,8 +1,9 @@
 {
-    "recommendations": [
-      "vscjava.vscode-java-pack",
-      "MS-vsliveshare.vsliveshare",
-      "bilalekrem.scenebuilderextension"
-    ]
-  }
-  
+  "recommendations": [
+    "vscjava.vscode-java-pack",
+    "MS-vsliveshare.vsliveshare",
+    "bilalekrem.scenebuilderextension",
+    "esbenp.prettier-vscode",
+    "redhat.vscode-xml"
+  ]
+}

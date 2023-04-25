@@ -1,5 +1,10 @@
 {
-    "java.configuration.updateBuildConfiguration": "automatic",
-    "java.debug.settings.forceBuildBeforeLaunch": false,
-    "java.debug.settings.console": "integratedTerminal"
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.debug.settings.forceBuildBeforeLaunch": false,
+  "java.debug.settings.console": "integratedTerminal",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
   }
+}
