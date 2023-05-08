@@ -5,11 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>TDT4100_project</groupId>
-	<artifactId>tdt4100_v2022_prosjekt_boilerplate</artifactId>
+	<artifactId>TDT4100_project</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>tdt4100_v2022_prosjekt_boilerplate</name>
+	<name>TDT4100_project</name>
 
 
 	<dependencies>
